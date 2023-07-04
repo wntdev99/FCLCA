@@ -1,0 +1,71 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/advertising_board/protos/AdvertisingBoard.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position -3.4673825494514043e-06 -3.46739235468109e-06 4.502343333370561
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF ep E-puck {
+  hidden rotation_1 0 1 0 4.773145709593857
+  hidden rotation_2 0 1 0 2.2538943685595965
+  translation 0.19877914627085966 -0.7547285505295342 -6.395304317123075e-05
+  rotation 0.0002933505913629 -9.179517740280445e-05 0.999999952759537 2.5353290671178255
+  controller "obstacle_avoidance_train"
+  supervisor TRUE
+}
+DEF ob0 AdvertisingBoard {
+  translation -0.3 0 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(9)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob1 AdvertisingBoard {
+  translation 0.3 0 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(2)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob2 AdvertisingBoard {
+  translation 0 0.3 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(10)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob3 AdvertisingBoard {
+  translation 0 -0.3 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(3)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}

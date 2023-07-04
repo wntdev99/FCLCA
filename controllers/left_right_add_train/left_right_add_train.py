@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 300
+MAX_EPISODE = 3
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -11,14 +11,20 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
+MODIFY_NUM = 1
 
+import os
 import math
+import datetime
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from dqn_agent import DqnAgent
 from replay_buffer import ReplayBuffer
 from controller import Supervisor
+
+DAY_NUM = str(datetime.date.today())
+
 
 # 1. 초기 세팅
 robot = Supervisor()
@@ -238,7 +244,14 @@ def rotated_point(orientation):
     heading_degrees = np.degrees(heading) + 180
     return heading_degrees
 
-
+def createDirectory(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print("Error: Failed to create the directory.")
+        
+        
 # 3. Train
 for episode_cnt in range(1,max_episodes):
     # 3-1. one experience
@@ -296,6 +309,7 @@ for episode_cnt in range(1,max_episodes):
 
 
 # 4. 결과 저장
+createDirectory(f"data/{DAY_NUM}")
 # 4-1. loss graph
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
@@ -304,7 +318,7 @@ plt.ylim([loss_min-0.01, 100])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")
-plt.savefig('data/_loss.png')
+plt.savefig(f'data/{DAY_NUM}/loss_{MODIFY_NUM}.png')
 plt.cla()
 # 4-2. reward graph
 plt.xlabel('Epoche')
@@ -313,7 +327,7 @@ reward_min = np.min(reward_data)
 reward_max = np.max(reward_data)
 plt.ylim([reward_min-0.01, reward_max+0.01])
 plt.plot(x_data,reward_data,c='blue',label = "reward")
-plt.savefig('data/_reward.png')
+plt.savefig(f'data/{DAY_NUM}/reward_{MODIFY_NUM}.png')
 plt.cla()
 # 4-3. done graph
 done_data = list(range(len(done_storage)))
@@ -321,7 +335,7 @@ plt.xlabel('Epoche')
 plt.ylabel('success')
 plt.ylim([0, 2])
 plt.plot(done_data,done_storage,c='green',label = "done_storage")
-plt.savefig('data/_done.png')
+plt.savefig(f'data/{DAY_NUM}/done_{MODIFY_NUM}.png')
 plt.cla()
 # 4-4. collision graph
 collision_data = list(range(len(collision_storage)))
@@ -329,12 +343,12 @@ plt.xlabel('Epoche')
 plt.ylabel('collision')
 plt.ylim([0, 2])
 plt.plot(collision_data,collision_storage,c='green',label = "collision_storage")
-plt.savefig('data/_collision.png')
+plt.savefig(f'data/{DAY_NUM}/collision_{MODIFY_NUM}.png')
 
 # 5. model save
-agent.q_net.save('loaded_model')
+agent.q_net.save(f'data/{DAY_NUM}/Tensorflow_model_{MODIFY_NUM}')
 original_model = agent.q_net
-loaded_model = tf.keras.models.load_model('loaded_model')
+loaded_model = tf.keras.models.load_model(f'data/{DAY_NUM}/Tensorflow_model_{MODIFY_NUM}')
 # Check if the weights of the two models are the same
 for i, (original_weight, loaded_weight) in enumerate(zip(original_model.weights, loaded_model.weights)):
     tf.debugging.assert_equal(original_weight, loaded_weight,

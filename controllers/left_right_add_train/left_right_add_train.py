@@ -25,7 +25,6 @@ from controller import Supervisor
 
 DAY_NUM = str(datetime.date.today())
 
-
 # 1. 초기 세팅
 robot = Supervisor()
 agent = DqnAgent()
@@ -309,6 +308,7 @@ for episode_cnt in range(1,max_episodes):
 
 
 # 4. 결과 저장
+createDirectory(f"data")
 createDirectory(f"data/{DAY_NUM}")
 # 4-1. loss graph
 x_data = list(range(len(loss_data)))

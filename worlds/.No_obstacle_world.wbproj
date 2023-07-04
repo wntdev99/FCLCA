@@ -5,6 +5,7 @@ sceneTreePerspectives: 000000ff00000001000000030000001c000000c000000000010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 1 "controllers/obstacle_avoidance_train/obstacle_avoidance_train.py" "controllers/reaching_target_train/reaching_target_train.py"
+textFiles: 0 "controllers/left_right_add_train/left_right_add_train.py" "controllers/left_right_add_train/dqn_agent.py"
+globalOptionalRendering: DistanceSensorRays
 consoles: Console:All:All
 renderingDevicePerspectives: e-puck:camera;1;1;0;0

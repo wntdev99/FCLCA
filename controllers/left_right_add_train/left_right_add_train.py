@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 3
+MAX_EPISODE = 300
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -91,10 +91,13 @@ def environment():
     # 2-1-3. perfect_angle get    
     perfect_angle = point_slope(goal)                           
     # 2-1-4. theta get
-    theta = abs(perfect_angle - heading)
-
-    if theta >= 180:
-        theta = 360 - theta
+    #theta = abs(perfect_angle - heading)
+    theta = heading - perfect_angle
+    if abs(theta) > 180:
+        if theta < 0:
+            theta = theta + 360
+        elif theta > 0:
+            theta = theta - 360
     # 2-1-5. radius get ep 
     goal_radius = math.sqrt(pow(goal[0] - ep[0],2) + pow(goal[1] - ep[1],2))
     # 2-1-6. radius get ob
@@ -124,8 +127,7 @@ def Action(action):
 # 2-4. Reward structure
 def Reward(state,next_state):
     total = 0                                                           # reward 변수
-    for i in range(MAX_FRAME):    
-        print(next_state[i * input + 1])                                # 각 프레임에 대해 모두 진행
+    for i in range(MAX_FRAME):                                  # 각 프레임에 대해 모두 진행
         if next_state[i * input] < ARRIVE_STANDARD:
             total += 100
         for j in range(100):
@@ -204,11 +206,11 @@ def point_slope(target):
         if target[0] < ep[0] and target[1] > ep[1]:
             return result
         elif target[0] > ep[0] and target[1] < ep[1]:
-            return -(result + 180)
+            return result + 180
         elif target[0] > ep[0] and target[1] > ep[1]:
-            return -result
+            return result
         elif target[0] < ep[0] and target[1] < ep[1]:
-            return -(result + 180)
+            return result + 180
         else:
             return result
 
@@ -297,15 +299,12 @@ for episode_cnt in range(1,max_episodes):
                 print('Episode {0}/{1} and so far the performance is {2} and '
                       'loss is {3}'.format(episode_cnt, max_episodes,
                                            avg_reward, loss[0]))
-                print("goal : ",goal)
                 reward_data.append(avg_reward)
                 avg_reward = 0
                 loss_data.append(loss[0])
                 if episode_cnt % TARGET_NETWORK_CYCLE == 0:
                     agent.update_target_network()
                 break
-
-
 
 # 4. 결과 저장
 createDirectory(f"data")

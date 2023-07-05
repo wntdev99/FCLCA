@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 20
+MODIFY_NUM = 21
 
 import os
 import math
@@ -139,11 +139,11 @@ def Reward(state,next_state):
         if state[i * input + 1] < 0 and action == 1:
             total -= 0.1
         if state[i * input + 1] > 0 and action == 1:
-            total += 0.1
+            total += 0.02
         if state[i * input + 1] > 0 and action == 2:
             total -= 0.1
         if state[i * input] > next_state[i * input] and action == 0:
-            total += 0.1
+            total += 0.02
         if state[i * input] < next_state[i * input] and action == 0:
             total -= 0.1
     return total

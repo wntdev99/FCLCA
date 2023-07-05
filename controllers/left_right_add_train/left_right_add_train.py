@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 13
+MODIFY_NUM = 14
 
 import os
 import math
@@ -123,14 +123,8 @@ def Action(action):
         right_motor.setVelocity(MAX_SPEED)
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/2)
-    elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/2)
-        right_motor.setVelocity(MAX_SPEED)
-    elif action == 3:
-        left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(0)
-    elif action == 4:
+    elif action == 2:
         left_motor.setVelocity(0)
         right_motor.setVelocity(MAX_SPEED)
 

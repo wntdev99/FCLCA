@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 150
+MAX_EPISODE = 100
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 17
+MODIFY_NUM = 18
 
 import os
 import math
@@ -103,7 +103,7 @@ def environment():
     goal_radius = math.sqrt(pow(goal[0] - ep[0],2) + pow(goal[1] - ep[1],2))
     # 2-1-6. radius get ob
     storage.append(goal_radius)
-    storage.append(theta)
+    storage.append(math.radians(theta))
     # 2-1-6-1. sensor value
     storage.append((ps[6].value)/100)
     storage.append((ps[7].value)/100)
@@ -137,14 +137,14 @@ def Reward(state,next_state):
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
             for qq in range(50):
                 if next_state[i * input] + 0.00071 - qq * 0.000005 < state[i * input]:
-                    total += 0.1
+                    total += 0.5
             for qq in range(50):
                 if state[i * input] + 0.00071 - qq * 0.000005 < next_state[i * input]:
                     total -= 0.1
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-             if abs(next_state[i * input + 1]) - abs(state[i * input + 1]) <  1.44 and action != 0:
-                 total -= 0.1
-        if abs(next_state[i * input + 1]) >160:
+             if abs(next_state[i * input + 1]) < abs(state[i * input + 1]) and action != 0:
+                 total += 0.1
+        if abs(next_state[i * input + 1]) > 160:
             total -= 0.5
     return total
     

@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 3
+MODIFY_NUM = 4
 
 
 import os
@@ -104,7 +104,7 @@ def environment():
     goal_radius = math.sqrt(pow(goal[0] - ep[0],2) + pow(goal[1] - ep[1],2))
     # 2-1-6. radius get ob
     storage.append(goal_radius)
-    storage.append(theta)
+    storage.append(math.radians(theta))
     # 2-1-6-1. sensor value
     storage.append((ps[6].value)/100)
     storage.append((ps[7].value)/100)
@@ -137,8 +137,8 @@ def Reward(state,next_state):
         for j in range(100):
             if next_state[i * input] < 0.01 * j:
                 total += 0.01
-        if abs(next_state[i * input + 1]) + 1.44  < abs(state[i * input + 1]):
-            total += 0.01
+        if abs(next_state[i * input + 1]) + 0.024  < abs(state[i * input + 1]):
+            total += 0.0001
     return total
     
 # 2.5. Done check

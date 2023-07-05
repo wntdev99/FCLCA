@@ -11,7 +11,8 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 1
+MODIFY_NUM = 0
+
 
 import os
 import math
@@ -123,7 +124,9 @@ def Action(action):
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(-MAX_SPEED)
-
+    elif action == 2:
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
 # 2-4. Reward structure
 def Reward(state,next_state):
     total = 0                                                           # reward 변수

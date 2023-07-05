@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 19
+MODIFY_NUM = 20
 
 import os
 import math
@@ -123,9 +123,9 @@ def Action(action):
         right_motor.setVelocity(MAX_SPEED)
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(0)
     elif action == 2:
-        left_motor.setVelocity(-MAX_SPEED)
+        left_motor.setVelocity(0)
         right_motor.setVelocity(MAX_SPEED)
 
 # 2-4. Reward structure
@@ -135,17 +135,17 @@ def Reward(state,next_state):
         if next_state[i * input] < ARRIVE_STANDARD:
             total += 10
         if state[i * input + 1] < 0 and action == 2:
-            total += 0.01
+            total += 0.1
         if state[i * input + 1] < 0 and action == 1:
-            total -= 0.01
+            total -= 0.1
         if state[i * input + 1] > 0 and action == 1:
-            total += 0.01
+            total += 0.1
         if state[i * input + 1] > 0 and action == 2:
-            total -= 0.01
+            total -= 0.1
         if state[i * input] > next_state[i * input] and action == 0:
-            total += 0.01
+            total += 0.1
         if state[i * input] < next_state[i * input] and action == 0:
-            total -= 0.01
+            total -= 0.1
     return total
     
 # 2.5. Done check
@@ -319,7 +319,7 @@ createDirectory(f"data/{DAY_NUM}")
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
 loss_max = np.max(loss_data)
-plt.ylim([loss_min-0.01, 100])
+plt.ylim([loss_min-0.01, loss_max + 0.01])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")

@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 500
+MAX_EPISODE = 300
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -11,8 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 10
-
+MODIFY_NUM = 11
 
 import os
 import math
@@ -137,8 +136,8 @@ def Action(action):
 
 # 2-4. Reward structure
 def Reward(state,next_state):
-    total = 0                                                           # reward 변수
-    for i in range(MAX_FRAME):                                  # 각 프레임에 대해 모두 진행
+    total = 0                                               
+    for i in range(MAX_FRAME):                                 
         if next_state[i * input] < ARRIVE_STANDARD:
             total += 50
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
@@ -147,20 +146,10 @@ def Reward(state,next_state):
                     total += 0.1
             for qq in range(50):
                 if state[i * input] + 0.00071 - qq * 0.000005 < next_state[i * input]:
-                    total -= 0.05
+                    total -= 0.1
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-             if abs(next_state[i * input + 1] - state[i * input + 1]) <  1.44 and action != 0:
-                 total -= 0.05
-        if next_state[i * input] < 0.2:
-            total += 1
-        if next_state[i * input] < 0.3:
-            total += 0.5
-        if next_state[i * input] < 0.5:
-            total += 0.1
-        if next_state[i * input] > 0.9:
-            total -= 0.5
-        
-        
+             if abs(next_state[i * input + 1]) - abs(state[i * input + 1]) <  1.44 and action != 0:
+                 total -= 0.1
     return total
     
 # 2.5. Done check
@@ -175,10 +164,6 @@ def Done():
         return done
     
 # 2.6. Collision check
-"""
-1. 충돌 횟수를 세서 그래프 출력하기 위함
-2. 충둘 시 로봇의 위치를 다시 세팅해주기 위함
-"""
 def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
@@ -192,14 +177,6 @@ def collision_check():
                 collision_storage.append(0)
 
 # 2.7. Setting
-"""
-1. 로봇을 맵에 랜덤하게 배치
-2. 장애물이 있는 공간에 배치하면 e-puck 로봇이 망가짐
-3. 목적지에 배치하면 학습 상태가 부정확해질 수 있음
-4. -3, 3은 각도 범위인데 휴리스틱하게 정해도 됨
-5. z축 값을 5로 올려주는 이유는 z == 0인 상태에서 로봇의 위치를 옮길 때 장애물이 부딪히면 로봇이 망가짐
-6. webots에서 학습 중에 e-puck 로봇이 망가지면 고칠 수 있는 방법은 찾지 못하였음
-"""
 def setting(): 
     cc = 0
     while True:
@@ -258,12 +235,6 @@ def point_slope(target):
             return result
         
 # 2.9. coordinate transformation
-"""
-1. webots 에서 e-puck 로봇의 헤딩 각도의 단위는 라디안
-2. webots 에서 e-puck 로봇의 각도값을 출력해보면 기준이 없음을 알 수 있음
-Ex) 1,2 분면 +  3,4 분면 - 였다가 어느 순간 각도값이 바뀜
--> 모든 값을 +로 만들고 , 각 분면에 따라 각도 계산
-"""
 def rotated_point(orientation):
     angle = np.radians(-90)
     rot_matrix = np.array([[np.cos(angle), -np.sin(angle), 0],

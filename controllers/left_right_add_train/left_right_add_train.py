@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 8
+MODIFY_NUM = 9
 
 
 import os
@@ -140,17 +140,17 @@ def Reward(state,next_state):
     total = 0                                                           # reward 변수
     for i in range(MAX_FRAME):                                  # 각 프레임에 대해 모두 진행
         if next_state[i * input] < ARRIVE_STANDARD:
-            total += 100
+            total += 50
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
             for qq in range(50):
                 if next_state[i * input] + 0.00071 - qq * 0.000005 < state[i * input]:
-                    total += 0.03
+                    total += 0.1
             for qq in range(50):
                 if state[i * input] + 0.00071 - qq * 0.000005 < next_state[i * input]:
-                    total -= 0.03
+                    total -= 0.05
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
              if abs(next_state[i * input + 1] - state[i * input + 1]) <  1.44 and action != 0:
-                 total -= 0.03
+                 total -= 0.05
         if next_state[i * input] < 0.2:
             total += 1
         if next_state[i * input] < 0.3:
@@ -159,10 +159,6 @@ def Reward(state,next_state):
             total += 0.1
         if next_state[i * input] > 0.9:
             total -= 0.5
-        if next_state[i * input] > 0.8:
-            total -= 0.1
-        if next_state[i * input] > 0.7:
-            total -= 0.02
         
         
     return total

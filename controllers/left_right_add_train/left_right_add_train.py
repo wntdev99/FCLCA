@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 300
+MAX_EPISODE = 150
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 5
+MODIFY_NUM = 6
 
 
 import os
@@ -134,11 +134,30 @@ def Reward(state,next_state):
     for i in range(MAX_FRAME):                                  # 각 프레임에 대해 모두 진행
         if next_state[i * input] < ARRIVE_STANDARD:
             total += 100
-        for j in range(100):
-            if next_state[i * input] < 0.01 * j:
-                total += 0.01
-        if abs(next_state[i * input + 1]) + 1.44  < abs(state[i * input + 1]):
-            total += 0.0001
+        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
+            for qq in range(50):
+                if next_state[i * input] + 0.00071 - qq * 0.000005 < state[i * input] and action == 0:
+                    total += 0.03
+            for qq in range(50):
+                if state[i * input] + 0.00071 - qq * 0.000005 < next_state[i * input] and action == 0:
+                    total -= 0.03
+        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
+             if abs(next_state[i * input + 1] - state[i * input + 1]) <  1.44 and action != 0:
+                 total -= 0.03
+        if next_state[i * input] < 0.2:
+            total += 1
+        if next_state[i * input] < 0.3:
+            total += 0.5
+        if next_state[i * input] < 0.5:
+            total += 0.1
+        if next_state[i * input] > 0.9:
+            total -= 0.5
+        if next_state[i * input] > 0.8:
+            total -= 0.1
+        if next_state[i * input] > 0.7:
+            total -= 0.02
+        
+        
     return total
     
 # 2.5. Done check

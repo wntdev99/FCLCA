@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 7
+MODIFY_NUM = 8
 
 
 import os
@@ -128,6 +128,13 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(MAX_SPEED/2)
         right_motor.setVelocity(MAX_SPEED)
+    elif action == 3:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(0)
+    elif action == 4:
+        left_motor.setVelocity(0)
+        right_motor.setVelocity(MAX_SPEED)
+
 # 2-4. Reward structure
 def Reward(state,next_state):
     total = 0                                                           # reward 변수
@@ -136,10 +143,10 @@ def Reward(state,next_state):
             total += 100
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
             for qq in range(50):
-                if next_state[i * input] + 0.00071 - qq * 0.000005 < state[i * input] and action == 0:
+                if next_state[i * input] + 0.00071 - qq * 0.000005 < state[i * input]:
                     total += 0.03
             for qq in range(50):
-                if state[i * input] + 0.00071 - qq * 0.000005 < next_state[i * input] and action == 0:
+                if state[i * input] + 0.00071 - qq * 0.000005 < next_state[i * input]:
                     total -= 0.03
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
              if abs(next_state[i * input + 1] - state[i * input + 1]) <  1.44 and action != 0:

@@ -1,6 +1,6 @@
 INPUT_SIZE = 24
 ACTION_SIZE = 5
-LEARNING_RATE = 1e-5
+LEARNING_RATE = 1e-6
 GAMMA = 0.95
 
 import tensorflow as tf
@@ -36,7 +36,7 @@ class DqnAgent:
     # policy or random select
     def collect_policy(self,max_episodes, episode_cnt, state):
         # heuristics set 0.01 , 10 , 0.8 ㆍㆍㆍ
-        epsilon = 0.01 + (1 - 0.01) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.2)
+        epsilon = 0.01 + (1 - 0.01) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.3)
         if np.random.random() < epsilon:                                                                       
             return self.random_policy(state)
         return self.policy(state)

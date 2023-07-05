@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 100
+MAX_EPISODE = 120
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 14
+MODIFY_NUM = 15
 
 import os
 import math
@@ -144,6 +144,8 @@ def Reward(state,next_state):
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
              if abs(next_state[i * input + 1]) - abs(state[i * input + 1]) <  1.44 and action != 0:
                  total -= 0.1
+        if abs(next_state[i * input + 1]) >160:
+            total -= 0.5
     return total
     
 # 2.5. Done check

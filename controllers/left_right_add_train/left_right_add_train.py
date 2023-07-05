@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 20
 GOAL_X = 0
 GOAL_Y = 0
-MODIFY_NUM = 2
+MODIFY_NUM = 3
 
 
 import os
@@ -70,8 +70,9 @@ done_storage = []                                                       # done,c
 collision_storage = []
 action = 0
 avg_reward = 0                                                          # avg_reward 는 평균 보상 그래프 출력을 위함
-count_state = 0                                                         # one state 를 n개의 frame으로 만들기 위함
-count_experience = 0                                                    # experience replay 를 하기 위함
+count_state = 0              # one state 를 n개의 frame으로 만들기 위함
+count_experience = 0      
+set_count = 0
 x_min, x_max = -MAX_LENGHT, MAX_LENGHT
 y_min, y_max = -MAX_LENGHT, MAX_LENGHT
 # 1-5-1. 최대 에피소드
@@ -157,10 +158,12 @@ def Done():
 2. 충둘 시 로봇의 위치를 다시 세팅해주기 위함
 """
 def collision_check():
+    global set_count 
     for j in range(MAX_FRAME):
         for i in range(4):
             if 5 < next_state[j * input + 2 + i] :
                 setting()
+                set_count = 1
                 collision_storage.append(1)
                 break
             if i == 3:
@@ -175,7 +178,7 @@ def collision_check():
 5. z축 값을 5로 올려주는 이유는 z == 0인 상태에서 로봇의 위치를 옮길 때 장애물이 부딪히면 로봇이 망가짐
 6. webots에서 학습 중에 e-puck 로봇이 망가지면 고칠 수 있는 방법은 찾지 못하였음
 """
-def setting():                                                                                                      
+def setting(): 
     cc = 0
     while True:
         x = np.random.uniform(x_min, x_max)
@@ -267,6 +270,13 @@ for episode_cnt in range(1,max_episodes):
         environment()
         # 3-3. 3개 프레임 가져오기
         if count_state == MAX_FRAME:
+            # setiing 하게 되면 초기화 버그 해결
+            if set_count == 1:
+                next_state = np.array(storage)
+                count_state = 0
+                set_count = 0
+                storage = []
+                continue
             # state = previous_state
             state = np.array(next_state)
             count_state = 0  
@@ -282,17 +292,19 @@ for episode_cnt in range(1,max_episodes):
             collect_experiences(state,next_state,action,reward,done,buffer)
             # collision check
             collision_check()
+            # done check -> setting or pass
+            if done == True:
+                done_storage.append(1)
+                setting()
+                set_count = 1
+            else:
+                done_storage.append(0)
             # current state에 따라 action
             action = agent.collect_policy(max_episodes,episode_cnt, next_state)
             Action(action)
             # count experiences
             count_experience += 1
-            # done check -> setting or pass
-            if done == True:
-                done_storage.append(1)
-                setting()
-            else:
-                done_storage.append(0)
+
             # experience replay
             if count_experience == REPLAY_CYCLE:
                 count_experience = 0

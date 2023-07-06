@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-MODIFY_NUM = 30
+MODIFY_NUM = 31
 
 import os
 import math
@@ -274,7 +274,7 @@ for episode_cnt in range(1,max_episodes):
         environment()
         # 3-3. 3개 프레임 가져오기
         if count_state == MAX_FRAME:
-            episode_time += 0.0005
+            episode_time += 0.001
             # setiing 하게 되면 초기화 버그 해결
             if set_count == 1:
                 next_state = np.array(storage)

@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-MODIFY_NUM = 24
+MODIFY_NUM = 25
 
 import os
 import math

@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-MODIFY_NUM = 26
+MODIFY_NUM = 27
 
 import os
 import math
@@ -291,6 +291,8 @@ for episode_cnt in range(1,max_episodes):
             collision_check()
             # done check -> setting or pass
             if done == True:
+                for i in range(1000):
+                    collect_experiences(state,next_state,action,reward,done,buffer)
                 done_storage.append(1)
                 setting()
                 set_count = 1

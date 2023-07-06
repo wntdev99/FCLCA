@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-MODIFY_NUM = 31
+MODIFY_NUM = 32
 
 import os
 import math
@@ -157,7 +157,7 @@ def Reward(state,next_state):
             total += 0.005
         if next_state[i * input] + 0.0007 < state[i * input] and action == 0:
             total += 0.005
-    total -= state[input + 9]
+    total -= state[input + 9] * 2
     return total
     
 # 2.5. Done check
@@ -274,7 +274,7 @@ for episode_cnt in range(1,max_episodes):
         environment()
         # 3-3. 3개 프레임 가져오기
         if count_state == MAX_FRAME:
-            episode_time += 0.001
+            episode_time += 0.0001
             # setiing 하게 되면 초기화 버그 해결
             if set_count == 1:
                 next_state = np.array(storage)

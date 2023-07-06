@@ -1,17 +1,17 @@
-STATE_SIZE = 27
+STATE_SIZE = 24
 MAX_SPEED = 0.3725
 MAX_EPISODE = 120
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
-INPUT_ONE_FRAME = 9
+INPUT_ONE_FRAME = 8
 NORMALIZATION_SIZE = 100
 ARRIVE_STANDARD = 0.1
 REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-MODIFY_NUM = 32
+MODIFY_NUM = 33
 
 import os
 import math
@@ -62,7 +62,6 @@ for i in range(8):
 state = np.zeros((STATE_SIZE))
 next_state = np.zeros((STATE_SIZE))
 ep = []
-ep_time = []
 storage = []                                                            # storage 는 state를 받기 위한 임시 저장소
 loss_data = []
 reward_data = []
@@ -73,7 +72,6 @@ avg_reward = 0                                                          # avg_re
 count_state = 0              # one state 를 n개의 frame으로 만들기 위함
 count_experience = 0      
 set_count = 0
-episode_time = 0.0
 x_min, x_max = -MAX_LENGHT, MAX_LENGHT
 y_min, y_max = -MAX_LENGHT, MAX_LENGHT
 # 1-5-1. 최대 에피소드
@@ -113,7 +111,6 @@ def environment():
     storage.append((ps[1].value)/100)
     storage.append((ps[5].value)/100)
     storage.append((ps[2].value)/100)
-    storage.append(episode_time)
     
 # 2-2. Collect experiences
 def collect_experiences(state,next_state,action,reward,done,buffer):
@@ -157,7 +154,7 @@ def Reward(state,next_state):
             total += 0.005
         if next_state[i * input] + 0.0007 < state[i * input] and action == 0:
             total += 0.005
-    total -= state[input + 9] * 2
+        total -= 0.0001
     return total
     
 # 2.5. Done check
@@ -205,9 +202,6 @@ def setting():
             translation_field.setSFVec3f([x,y,0])
             rotation_field.setSFRotation([0,0,-1,r1])
             break
-    global episode_time
-    ep_time.append(episode_time)
-    episode_time = 0
     return
 
 
@@ -274,7 +268,6 @@ for episode_cnt in range(1,max_episodes):
         environment()
         # 3-3. 3개 프레임 가져오기
         if count_state == MAX_FRAME:
-            episode_time += 0.0001
             # setiing 하게 되면 초기화 버그 해결
             if set_count == 1:
                 next_state = np.array(storage)
@@ -365,17 +358,6 @@ plt.ylabel('collision')
 plt.ylim([0, 2])
 plt.plot(collision_data,collision_storage,c='green',label = "collision_storage")
 plt.savefig(f'data/{DAY_NUM}/collision_{MODIFY_NUM}.png')
-plt.cla()
-
-# 4-5. time graph
-time_data = list(range(len(ep_time)))
-plt.xlabel('Epoche')
-plt.ylabel('Time')
-time_max = np.max(np.array(ep_time))
-plt.ylim([0, time_max])
-plt.plot(time_data,np.array(ep_time),c='red',label = "time_storage")
-plt.savefig(f'data/{DAY_NUM}/time_{MODIFY_NUM}.png')
-plt.cla()
 
 # 5. model save
 agent.q_net.save(f'data/{DAY_NUM}/Tensorflow_model_{MODIFY_NUM}')

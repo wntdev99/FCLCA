@@ -1,17 +1,17 @@
-STATE_SIZE = 24
+STATE_SIZE = 27
 MAX_SPEED = 0.3725
 MAX_EPISODE = 120
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
-INPUT_ONE_FRAME = 8
+INPUT_ONE_FRAME = 9
 NORMALIZATION_SIZE = 100
 ARRIVE_STANDARD = 0.1
 REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-MODIFY_NUM = 27
+MODIFY_NUM = 28
 
 import os
 import math
@@ -72,6 +72,7 @@ avg_reward = 0                                                          # avg_re
 count_state = 0              # one state 를 n개의 frame으로 만들기 위함
 count_experience = 0      
 set_count = 0
+episode_time = 0.0
 x_min, x_max = -MAX_LENGHT, MAX_LENGHT
 y_min, y_max = -MAX_LENGHT, MAX_LENGHT
 # 1-5-1. 최대 에피소드
@@ -111,6 +112,7 @@ def environment():
     storage.append((ps[1].value)/100)
     storage.append((ps[5].value)/100)
     storage.append((ps[2].value)/100)
+    storage.append(episode_time)
     
 # 2-2. Collect experiences
 def collect_experiences(state,next_state,action,reward,done,buffer):
@@ -154,6 +156,7 @@ def Reward(state,next_state):
             total += 0.005
         if next_state[i * input] + 0.0007 < state[i * input] and action == 0:
             total += 0.005
+    total -= next_state[input + 9]/10
     return total
     
 # 2.5. Done check
@@ -201,6 +204,8 @@ def setting():
             translation_field.setSFVec3f([x,y,0])
             rotation_field.setSFRotation([0,0,-1,r1])
             break
+    global episode_time
+    episode_time = 0
     return
 
 
@@ -267,6 +272,7 @@ for episode_cnt in range(1,max_episodes):
         environment()
         # 3-3. 3개 프레임 가져오기
         if count_state == MAX_FRAME:
+            episode_time += 0.0001
             # setiing 하게 되면 초기화 버그 해결
             if set_count == 1:
                 next_state = np.array(storage)
@@ -291,8 +297,6 @@ for episode_cnt in range(1,max_episodes):
             collision_check()
             # done check -> setting or pass
             if done == True:
-                for i in range(1000):
-                    collect_experiences(state,next_state,action,reward,done,buffer)
                 done_storage.append(1)
                 setting()
                 set_count = 1

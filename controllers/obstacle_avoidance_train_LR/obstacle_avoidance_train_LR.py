@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 3.14
-MAX_EPISODE = 150
+MAX_EPISODE = 100
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 5
+MODIFY_NUM = 7
 
 import os
 import math
@@ -136,16 +136,16 @@ def Reward(state,next_state):
     total = 0
     for i in range(MAX_FRAME):                                 
         # 장애물 회피
-        if state[i * input + 2] > 2 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 3:
-            if state[i * input + 2] < 3.5 and state[i * input + 3] < 3.5 and state[i * input + 4] < 3.5 and state[i * input + 5]  < 3.5:
+        if state[i * input + 2] > 3 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 3:
+            if state[i * input + 2] < 4.5 and state[i * input + 3] < 4.5 and state[i * input + 4] < 4.5 and state[i * input + 5]  < 4.5:
                 if action == 0:
                     total -= 2
-        if state[i * input + 2] < 3.5 and state[i * input + 3] < 3.5 and state[i * input + 4] < 3.5 and state[i * input + 5]  < 3.5:
+        if state[i * input + 2] < 4.5 and state[i * input + 3] < 4.5 and state[i * input + 4] < 4.5 and state[i * input + 5]  < 4.5:
             for ww in range(5):
                 if state[i * input + 3] > 5 - ww or state[i * input + 4] > 5 - ww:
                     if action == 0:
                         total -= 1
-            if state[i * input + 2] > 3.5 or state[i * input + 5] > 3.5:
+            if state[i * input + 2] > 4 or state[i * input + 5] > 4:
                 if action == 0:
                     total -= 2
         if state[i * input + 2] > 0.8 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 0.8:

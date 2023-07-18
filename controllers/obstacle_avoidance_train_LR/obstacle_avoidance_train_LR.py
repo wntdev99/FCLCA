@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 3.14
-MAX_EPISODE = 500
+MAX_EPISODE = 150
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 4
+MODIFY_NUM = 5
 
 import os
 import math
@@ -136,16 +136,16 @@ def Reward(state,next_state):
     total = 0
     for i in range(MAX_FRAME):                                 
         # 장애물 회피
-        if state[i * input + 2] > 3 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 3:
-            if state[i * input + 2] < 4.5 and state[i * input + 3] < 4.5 and state[i * input + 4] < 4.5 and state[i * input + 5]  < 4.5:
+        if state[i * input + 2] > 2 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 3:
+            if state[i * input + 2] < 3.5 and state[i * input + 3] < 3.5 and state[i * input + 4] < 3.5 and state[i * input + 5]  < 3.5:
                 if action == 0:
                     total -= 2
-        if state[i * input + 2] < 4.5 and state[i * input + 3] < 4.5 and state[i * input + 4] < 4.5 and state[i * input + 5]  < 4.5:
+        if state[i * input + 2] < 3.5 and state[i * input + 3] < 3.5 and state[i * input + 4] < 3.5 and state[i * input + 5]  < 3.5:
             for ww in range(5):
                 if state[i * input + 3] > 5 - ww or state[i * input + 4] > 5 - ww:
                     if action == 0:
                         total -= 1
-            if state[i * input + 2] > 4 or state[i * input + 5] > 4:
+            if state[i * input + 2] > 3.5 or state[i * input + 5] > 3.5:
                 if action == 0:
                     total -= 2
         if state[i * input + 2] > 0.8 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 0.8:
@@ -157,21 +157,22 @@ def Reward(state,next_state):
         # 완전 safe 할 때 
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
              if next_state[i * input] < 0.3:
-                 if next_state[i * input + 1] + 1.4 < state[i * input + 1] and action != 0:
+                 if next_state[i * input + 1] + 2 < state[i * input + 1] and action != 0:
                      total += 1
              if next_state[i * input] < 0.2:
-                 if next_state[i * input + 1] + 1.4 < state[i * input + 1] and action != 0:
+                 if next_state[i * input + 1] + 2 < state[i * input + 1] and action != 0:
                      total += 3
              if next_state[i * input] < 0.15:
-                 if next_state[i * input + 1] + 1.4 < state[i * input + 1] and action != 0:
+                 if next_state[i * input + 1] + 2 < state[i * input + 1] and action != 0:
                      total += 4
              
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-             if abs(next_state[i * input + 1] - state[i * input + 1]) <  1.44 and action != 0:
+             if abs(next_state[i * input + 1] - state[i * input + 1]) <  2 and action != 0:
                  total -= 0.1
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-             if state[i * input + 1] +  1.44  < next_state[i * input + 1]:
+             if state[i * input + 1] +  2 < next_state[i * input + 1]:
                  total -= 0.1
+                 
           
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] > 0.8 and state[i * input + 7] < 0.8:
              if action == 0:
@@ -184,7 +185,7 @@ def Reward(state,next_state):
         # 목적지 도달
         if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
             for qq in range(50):
-                if next_state[i * input] + 0.00071 - qq * 0.000005 < state[i * input] and action == 0:
+                if next_state[i * input] + 0.015 - qq * 0.0002 < state[i * input] and action == 0:
                     total += 0.03
         if next_state[i * input] < 0.1:
             total += 100
@@ -192,12 +193,6 @@ def Reward(state,next_state):
             total += 1
         if next_state[i * input] < 0.3:
             total += 0.5
-        
-        
-            
-
-    return total
-        
     return total
     
 # 2.5. Done check

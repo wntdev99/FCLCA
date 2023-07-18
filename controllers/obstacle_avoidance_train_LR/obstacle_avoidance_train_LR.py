@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 200
+MAX_EPISODE = 500
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 2
+MODIFY_NUM = 3
 
 import os
 import math
@@ -30,7 +30,6 @@ DAY_NUM = str(datetime.date.today())
 robot = Supervisor()
 agent = DqnAgent()
 buffer = ReplayBuffer()
-
 # 1-1. 현재 world timestep
 timestep = int(robot.getBasicTimeStep())
 # 1-1-1. e-puck 모터 정보

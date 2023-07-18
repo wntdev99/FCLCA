@@ -23,7 +23,6 @@ class DqnAgent:
         q_net.add(Dense(1024, input_dim = INPUT_SIZE, activation = 'relu',                                                 
                         kernel_initializer='he_uniform'))
         q_net.add(Dense(512, activation = 'relu', kernel_initializer='he_uniform'))                                        
-        q_net.add(Dense(256, activation = 'relu', kernel_initializer='he_uniform'))                                        
         q_net.add(
             Dense(ACTION_SIZE, activation='linear', kernel_initializer='he_uniform'))                                 
         q_net.compile(optimizer=tf.optimizers.Adam(learning_rate=LEARNING_RATE),                                    

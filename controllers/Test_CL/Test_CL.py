@@ -11,8 +11,9 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-OBSTACLE_COUNT = 13
-MODIFY_NUM = 1
+OBSTACLE_COUNT = 0
+MODIFY_NUM = 0
+MODEL_NAME = "Curriculum 1"
 
 import os
 import math
@@ -135,83 +136,29 @@ def Action(action):
 def Reward(state,next_state):
     total = 0
     for i in range(MAX_FRAME):                                          # 각 프레임에 대해 모두 진행
-        # 2.4.1. collision avoidance
-        """ 
-        1. ps7 , ps0의 센서값을 중요하게 생각하고 ps6 , ps1의 센서값은 양보 
-        2. state[] < 4.5 를 둔 것은, 충돌 시 세팅되는 상태를 next_state로 인식해서
-        충돌을 회피했다고 학습하기 때문에 reward를 충돌 하기 전으로 한정지은 것
-        3. 충돌만을 막기 위한 reward로 직진하는 것에 reward를 부여함
-        4. 이전 state에서 센서값이 컸는데, 다음 state에서 센서값이 작아졌으면 회피했다고 보고 그 행동에 reward를 부여함
-        """
-        if state[i * input + 2] > 3 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 3:
-            if state[i * input + 2] < 4.5 and state[i * input + 3] < 4.5 and state[i * input + 4] < 4.5 and state[i * input + 5]  < 4.5:
-                if action == 0:
-                    total -= 2
-        if state[i * input + 2] < 4.5 and state[i * input + 3] < 4.5 and state[i * input + 4] < 4.5 and state[i * input + 5]  < 4.5:
-            for ww in range(5):
-                if state[i * input + 3] > 5 - ww or state[i * input + 4] > 5 - ww:
-                    if action == 0:
-                        total -= 1
-            if state[i * input + 2] > 4 or state[i * input + 5] > 4:
-                if action == 0:
-                    total -= 2
-        if state[i * input + 2] > 0.8 or state[i * input + 3] > 0.8 or state[i * input + 4] > 0.8 or state[i * input + 5] > 0.8:
-            if next_state[i * input + 2] < 0.8 and next_state[i * input + 3] < 0.8 and next_state[i * input + 4] < 0.8 and next_state[i * input + 5] < 0.8:
-                if state[i * input + 2] < 4.9 and state[i * input + 3] < 4.9 and state[i * input + 4] < 4.9 and state[i * input + 5]  < 4.9:
-                    total += 2
-        # 2.4.2. safe state 
-        """
-        1. 센서값이 모두 안전한 값일 때, 목적지와 가까워지면 reward
-        2. 목적지와 단순히 가까워지는 것은 멀리서만 맴돌 수 있기 때문에 일정 범위 내에서만 작용
-        3. 목적지와 가까울 때, 목적지를 바라보는 각도가 작아질수록 reward
-        """
-        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-             if next_state[i * input] < 0.3:
-                 if next_state[i * input + 1] + 1.4 < state[i * input + 1] and action != 0:
-                     total += 1
-             if next_state[i * input] < 0.2:
-                 if next_state[i * input + 1] + 1.4 < state[i * input + 1] and action != 0:
-                     total += 3
-             if next_state[i * input] < 0.15:
-                 if next_state[i * input + 1] + 1.4 < state[i * input + 1] and action != 0:
-                     total += 4
-        """
-        1. 안전한 경우인데도 불구하고, 회전만 하는 경우를 방지하기 위해 reward
-        2. 1.44 , 1.4 같은 경우는 simulation에서도 센서 오차가 있기 때문에 오차로 인한 reward를 부여하지 않기 위함
-        3. 안전한 경우인데도 불구하고, 목적지를 바라보는 각도가 커질 경우 rewrad
-        4. ps5,ps2를 사용한 이유는 충돌 회피를 위해서가 아닌, 주변에 장애물이 있는 지 판단하기 위함
-        따라서 모든 센서값중 ps5, ps2 둘 중 한 센서값만 큰 경우는 장애물이 있다고 가정하고 직진해서 그 자리를 피하도록 하기 위함
-        """     
-        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-             if abs(next_state[i * input + 1] - state[i * input + 1]) <  1.44 and action != 0:
-                 total -= 0.1
-        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-             if state[i * input + 1] +  1.44  < next_state[i * input + 1]:
-                 total -= 0.1
-          
-        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] > 0.8 and state[i * input + 7] < 0.8:
-             if action == 0:
-                 total += 3
-        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] > 0.8:
-             if action == 0:
-                 total += 3
-        # 2.4.3. Reach target
-        """
-        1. 목적지와 가까워지면 가까워지는 정도에 따라 reward 부여
-        2. 휴리스틱하게 설정
-        3. 목적지에 도달하는 경우를 0.1로 두었음
-        4. 목적지에 가까운 반경인 state에 있을수록 reward
-        """
-        if state[i * input + 2] < 0.8 and state[i * input + 3] < 0.8 and state[i * input + 4] < 0.8 and state[i * input + 5] < 0.8 and state[i * input + 6] < 0.8 and state[i * input + 7] < 0.8:
-            for qq in range(50):
-                if next_state[i * input] + 0.00071 - qq * 0.000005 < state[i * input] and action == 0:
-                    total += 0.03
         if next_state[i * input] < ARRIVE_STANDARD:
-            total += 100
-        if next_state[i * input] < 0.2:
-            total += 1
-        if next_state[i * input] < 0.3:
-            total += 0.5
+            total += 10
+        if state[i * input + 1] < 0 and action == 2:
+            total += 0.02
+        if state[i * input + 1] < 0 and action == 1:
+            total -= 0.1
+        if state[i * input + 1] > 0 and action == 1:
+            total += 0.02
+        if state[i * input + 1] > 0 and action == 2:
+            total -= 0.1
+        if state[i * input] + 0.0002 < next_state[i * input] and action == 0:
+            total -= 0.15
+        if next_state[i * input] + 0.0002< state[i * input] and action == 0:
+            total += 0.005
+        if next_state[i * input] + 0.0004 < state[i * input] and action == 0:
+            total += 0.005
+        if next_state[i * input] + 0.0005 < state[i * input] and action == 0:
+            total += 0.005
+        if next_state[i * input] + 0.0006 < state[i * input] and action == 0:
+            total += 0.005
+        if next_state[i * input] + 0.0007 < state[i * input] and action == 0:
+            total += 0.005
+        total -= 0.0001
     return total
     
 # 2.5. Done check
@@ -418,9 +365,9 @@ plt.plot(collision_data,collision_storage,c='green',label = "collision_storage")
 plt.savefig(f'data/{DAY_NUM}/collision_{MODIFY_NUM}.png')
 
 # 5. model save
-agent.q_net.save(f'data/{DAY_NUM}/Tensorflow_model_{MODIFY_NUM}')
+agent.q_net.save(f'data/{DAY_NUM}/{MODEL_NAME}_{MODIFY_NUM}')
 original_model = agent.q_net
-loaded_model = tf.keras.models.load_model(f'data/{DAY_NUM}/Tensorflow_model_{MODIFY_NUM}')
+loaded_model = tf.keras.models.load_model(f'data/{DAY_NUM}/{MODEL_NAME}_{MODIFY_NUM}')
 # Check if the weights of the two models are the same
 for i, (original_weight, loaded_weight) in enumerate(zip(original_model.weights, loaded_model.weights)):
     tf.debugging.assert_equal(original_weight, loaded_weight,

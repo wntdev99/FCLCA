@@ -1,4 +1,4 @@
-REPALY_MEMORY = 1000000
+REPALY_MEMORY = 10000
 MIN_BATCH_SIZE = 1024
 
 import random
@@ -31,4 +31,4 @@ class ReplayBuffer:
             action_batch.append(epuck_experience[3])
             done_batch.append(epuck_experience[4])
         return np.array(state_batch), np.array(next_state_batch), np.array(
-            action_batch), np.array(reward_batch), np.array(done_batch)                                 
+            action_batch), np.array(reward_batch), np.array(done_batch)   

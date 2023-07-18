@@ -1,5 +1,5 @@
 STATE_SIZE = 24
-MAX_SPEED = 0.3725
+MAX_SPEED = 3.14
 MAX_EPISODE = 500
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 3
+MODIFY_NUM = 4
 
 import os
 import math
@@ -244,6 +244,7 @@ def setting():
             translation_field.setSFVec3f([x,y,5])
             translation_field.setSFVec3f([x,y,0])
             rotation_field.setSFRotation([0,0,-1,r1])
+            robot.simulationResetPhysics()
             break
     return
 

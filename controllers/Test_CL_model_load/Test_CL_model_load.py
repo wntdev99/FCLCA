@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 20000
+MAX_EPISODE = 100
 MAX_FRAME = 3
 MAX_LENGHT = 0.5
 MIN_DISTANCE = 0.35
@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 0
+MODIFY_NUM = 1
 MODEL_NAME = "Curriculum 2"
 
 import os
@@ -140,7 +140,8 @@ def Reward(state,next_state):
     total = 0
     # Every frame
     for i in range(MAX_FRAME):
-        # safe state
+        
+        # Every Sensor safe
         if (state[i * input + 2] < 0.8
         and state[i * input + 3] < 0.8
         and state[i * input + 4] < 0.8
@@ -148,54 +149,6 @@ def Reward(state,next_state):
         and state[i * input + 6] < 0.8
         and state[i * input + 7] < 0.8
         ):
-            curr_state = 0
-            
-        # Front Two sensor
-        elif ((state[i * input + 2] > 0.8
-        or state[i * input + 7] > 0.8)
-        and state[i * input + 3] < 2
-        and state[i * input + 4] < 0.8
-        and state[i * input + 5] < 0.8
-        and state[i * input + 6] < 2
-        ):
-            curr_state = 1
-
-        # Left Right only sensor
-        elif (state[i * input + 2] < 0.8
-        and state[i * input + 3] < 1
-        and (state[i * input + 4] > 0.8
-        or state[i * input + 5] > 0.8)
-        and state[i * input + 6] < 1
-        and state[i * input + 7] < 0.8
-        ):
-            curr_state = 2
-            
-        # Right Front sensor
-        elif (state[i * input + 2] > 0.8
-        and state[i * input + 3] > 0.8
-        and state[i * input + 4] < 5
-        and state[i * input + 5] < 0.8
-        and state[i * input + 6] < 0.8
-        and state[i * input + 7] < 0.8
-        ):
-            curr_state = 3
-            
-        # Left Front sensor
-        elif (state[i * input + 2] < 0.8
-        and state[i * input + 3] < 0.8
-        and state[i * input + 4] < 0.8
-        and state[i * input + 5] < 5
-        and state[i * input + 6] > 0.8
-        and state[i * input + 7] > 0.8
-        ):
-            curr_state = 4
-            
-        # Front Two sensor
-        else:
-            curr_state = 5
-
-        # safe state
-        if curr_state == 0:
             # target reward
             if next_state[i * input] < ARRIVE_STANDARD:
                 total += 10
@@ -220,55 +173,67 @@ def Reward(state,next_state):
             if next_state[i * input] + 0.0007 < state[i * input] and action == 0:
                 total += 0.005
         
-        # Front Two sensor
-        elif curr_state == 1:
+        # Only Right Sensor
+        if (state[i * input + 2] < 0.8
+        and state[i * input + 3] < 1.5
+        and state[i * input + 4] > 0.8
+        and state[i * input + 5] < 0.8
+        and state[i * input + 6] < 0.8
+        and state[i * input + 7] < 0.8
+        ):
             if action == 0:
-                total -= 0.1
-            if (next_state[i * input + 2] < 0.8
-            and next_state[i * input + 7] > 0.8):
-                total += 0.05
-            elif (next_state[i * input + 2] > 0.8
-            and next_state[i * input + 7] < 0.8):
-                total += 0.05
-            elif (next_state[i * input + 2] < 0.8
-            and next_state[i * input + 7] < 0.8):
-                total += 0.1
-                
-        # Left Right only sensor
-        elif curr_state == 2:
+                total += 0.3
+            if (state[i * input + 1] < 0
+            and action == 2):
+                total += 0.3
+        
+        # Only Left Sensor
+        if (state[i * input + 2] < 0.8
+        and state[i * input + 3] < 0.8
+        and state[i * input + 4] < 0.8
+        and state[i * input + 5] > 0.8
+        and state[i * input + 6] < 1.5
+        and state[i * input + 7] < 0.8
+        ):
             if action == 0:
-                total += 0.05
-        
-        # Right Front sensor
-        elif curr_state == 3:
-            if next_state[i * input + 2] < 0.8:
-                total += 0.05
-            if action == 2:
-                total += 0.05
-            elif action == 1:
-                total -= 0.05
-        
-        # Left Front sensor
-        elif curr_state == 4:
-            if next_state[i * input + 7] < 0.8:
-                total += 0.05
-            if action == 1:
-                total += 0.05
-            elif action == 2:
-                total -= 0.05
+                total += 0.3
+            if (state[i * input + 1] > 0
+            and action == 1):
+                total += 0.3
         
         # Dangerous state
-        elif curr_state == 5:
-            if (next_state[i * input + 2] < 0.8
-            and next_state[i * input + 3] < 0.8
-            and next_state[i * input + 6] < 0.8
-            and next_state[i * input + 7] < 0.8
-            ):
+        if state[i * input + 2] > 2:
+            if action == 0:
+                total -= state[i * input + 2] / 5
+            elif action == 2:
+                total += 0.1
+        if state[i * input + 7] > 2:
+            if action == 0:
+                total -= state[i * input + 7] / 5
+            elif action == 1:
+                total += 0.1
+        if state[i * input + 3] > 2:
+            if action == 0:
+                total -= state[i * input + 3] / 10
+            elif action == 2:
                 total += 0.05
-            if (next_state[i * input + 2] < 0.8
-            and next_state[i * input + 7] < 0.8
-            ):
+        if state[i * input + 6] > 2:
+            if action == 0:
+                total -= state[i * input + 6] / 10
+            elif action == 1:
                 total += 0.05
+        if (state[i * input + 2] > 1
+        or state[i * input + 3] > 1
+        or state[i * input + 6] > 1
+        or state[i * input + 7] > 1
+        ):
+            if (next_state[i * input + 2] < 1
+            and next_state[i * input + 3] < 1
+            and next_state[i * input + 6] < 1
+            and next_state[i * input + 7] < 1
+            ):
+                total += 0.2
+        
         total -= 0.0001
     return total
     

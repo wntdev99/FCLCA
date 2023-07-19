@@ -2,7 +2,7 @@ INPUT_SIZE = 24
 ACTION_SIZE = 3
 LEARNING_RATE = 1e-4
 GAMMA = 0.95
-MODEL_NAME = 'Curriculum 2_0'
+MODEL_NAME = 'Curriculum 1_1'
 
 import tensorflow as tf
 import numpy as np

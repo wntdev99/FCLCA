@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 1
+MODIFY_NUM = 2
 MODEL_NAME = "Curriculum 2"
 
 import os
@@ -175,14 +175,14 @@ def Reward(state,next_state):
         
         # Only Right Sensor
         if (state[i * input + 2] < 0.8
-        and state[i * input + 3] < 1.5
+        and state[i * input + 3] < 1.0
         and state[i * input + 4] > 0.8
         and state[i * input + 5] < 0.8
         and state[i * input + 6] < 0.8
         and state[i * input + 7] < 0.8
         ):
             if action == 0:
-                total += 0.3
+                total += 0.1
             if (state[i * input + 1] < 0
             and action == 2):
                 total += 0.3
@@ -192,11 +192,11 @@ def Reward(state,next_state):
         and state[i * input + 3] < 0.8
         and state[i * input + 4] < 0.8
         and state[i * input + 5] > 0.8
-        and state[i * input + 6] < 1.5
+        and state[i * input + 6] < 1.0
         and state[i * input + 7] < 0.8
         ):
             if action == 0:
-                total += 0.3
+                total += 0.1
             if (state[i * input + 1] > 0
             and action == 1):
                 total += 0.3
@@ -233,6 +233,16 @@ def Reward(state,next_state):
             and next_state[i * input + 7] < 1
             ):
                 total += 0.2
+        if (state[i * input + 2] > 4
+        or state[i * input + 3] > 4
+        or state[i * input + 4] > 4
+        or state[i * input + 5] > 4
+        or state[i * input + 6] > 4
+        or state[i * input + 7] > 4
+        ):
+            if action == 0:
+                total -= 1
+        
         
         total -= 0.0001
     return total

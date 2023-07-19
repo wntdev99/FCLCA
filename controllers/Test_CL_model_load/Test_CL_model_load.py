@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 9
-MODIFY_NUM = 4
+MODIFY_NUM = 5
 MODEL_NAME = "Curriculum 2"
 
 import os
@@ -212,26 +212,26 @@ def Reward(state,next_state):
                     total -= 0.1
         
         # Dangerous state
-        if state[i * input + 2] > 2:
+        if state[i * input + 2] > 1.5:
             if action == 0:
-                total -= state[i * input + 2] / 5
+                total -= state[i * input + 2] / 4
+            elif action == 2:
+                total += 0.15
+        if state[i * input + 7] > 1.5:
+            if action == 0:
+                total -= state[i * input + 7] / 4
+            elif action == 1:
+                total += 0.15
+        if state[i * input + 3] > 3:
+            if action == 0:
+                total -= state[i * input + 3] / 4
             elif action == 2:
                 total += 0.1
-        if state[i * input + 7] > 2:
+        if state[i * input + 6] > 3:
             if action == 0:
-                total -= state[i * input + 7] / 5
+                total -= state[i * input + 6] / 4
             elif action == 1:
                 total += 0.1
-        if state[i * input + 3] > 2:
-            if action == 0:
-                total -= state[i * input + 3] / 10
-            elif action == 2:
-                total += 0.05
-        if state[i * input + 6] > 2:
-            if action == 0:
-                total -= state[i * input + 6] / 10
-            elif action == 1:
-                total += 0.05
         if (state[i * input + 2] > 1
         or state[i * input + 3] > 1
         or state[i * input + 6] > 1
@@ -243,12 +243,12 @@ def Reward(state,next_state):
             and next_state[i * input + 7] < 1
             ):
                 total += 0.2
-        if (state[i * input + 2] > 4
+        if (state[i * input + 2] > 3
         or state[i * input + 3] > 4
         or state[i * input + 4] > 4
         or state[i * input + 5] > 4
         or state[i * input + 6] > 4
-        or state[i * input + 7] > 4
+        or state[i * input + 7] > 3
         ):
             if action == 0:
                 total -= 1

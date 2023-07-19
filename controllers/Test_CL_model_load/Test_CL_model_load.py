@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 10
+MODIFY_NUM = 11
 MODEL_NAME = "Curriculum 5"
 
 import os
@@ -151,27 +151,27 @@ def Reward(state,next_state):
         ):
             # target reward
             if next_state[i * input] < ARRIVE_STANDARD:
-                total += 10
+                total += 20
             if state[i * input + 1] < 0 and action == 2:
-                total += 0.02
+                total += 0.1
             if state[i * input + 1] < 0 and action == 1:
                 total -= 0.1
             if state[i * input + 1] > 0 and action == 1:
-                total += 0.02
+                total += 0.1
             if state[i * input + 1] > 0 and action == 2:
                 total -= 0.1
             if state[i * input] + 0.0002 < next_state[i * input] and action == 0:
                 total -= 0.15
             if next_state[i * input] + 0.0002< state[i * input] and action == 0:
-                total += 0.005
+                total += 0.05
             if next_state[i * input] + 0.0004 < state[i * input] and action == 0:
-                total += 0.005
+                total += 0.05
             if next_state[i * input] + 0.0005 < state[i * input] and action == 0:
-                total += 0.005
+                total += 0.05
             if next_state[i * input] + 0.0006 < state[i * input] and action == 0:
-                total += 0.005
+                total += 0.05
             if next_state[i * input] + 0.0007 < state[i * input] and action == 0:
-                total += 0.005
+                total += 0.05
         
         # Only Right Sensor
         if (state[i * input + 2] < 0.8
@@ -254,12 +254,12 @@ def Reward(state,next_state):
         and state[i * input + 3] > 2
         ):
             if action == 2:
-                total += 0.5
+                total += 0.3
         if (state[i * input + 6] > 2
         and state[i * input + 7] > 2
         ):
             if action == 1:
-                total += 0.5
+                total += 0.3
         
         
         total -= 0.0001

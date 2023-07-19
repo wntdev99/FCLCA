@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.3725
-MAX_EPISODE = 300
+MAX_EPISODE = 100
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 9
-MODIFY_NUM = 3
+MODIFY_NUM = 4
 MODEL_NAME = "Curriculum 2"
 
 import os
@@ -175,31 +175,41 @@ def Reward(state,next_state):
         
         # Only Right Sensor
         if (state[i * input + 2] < 0.8
-        and state[i * input + 3] < 1.0
+        and state[i * input + 3] < 0.9
         and state[i * input + 4] > 0.8
         and state[i * input + 5] < 0.8
         and state[i * input + 6] < 0.8
         and state[i * input + 7] < 0.8
         ):
-            if action == 0:
-                total += 0.1
-            if (state[i * input + 1] < 0
-            and action == 2):
-                total += 0.3
+            if state[i * input + 1] > 0:
+                if action == 0:
+                    total += 0.1
+                elif action == 1:
+                    total -= 0.1
+            elif state[i * input + 1] < 0:
+                if action == 2:
+                    total += 0.3
+                else:
+                    total -= 0.1
         
         # Only Left Sensor
         if (state[i * input + 2] < 0.8
         and state[i * input + 3] < 0.8
         and state[i * input + 4] < 0.8
         and state[i * input + 5] > 0.8
-        and state[i * input + 6] < 1.0
+        and state[i * input + 6] < 0.9
         and state[i * input + 7] < 0.8
         ):
-            if action == 0:
-                total += 0.1
-            if (state[i * input + 1] > 0
-            and action == 1):
-                total += 0.3
+            if state[i * input + 1] < 0:
+                if action == 0:
+                    total += 0.1
+                elif action == 2:
+                    total -= 0.1
+            elif state[i * input + 1] > 0:
+                if action == 1:
+                    total += 0.3
+                else:
+                    total -= 0.1
         
         # Dangerous state
         if state[i * input + 2] > 2:

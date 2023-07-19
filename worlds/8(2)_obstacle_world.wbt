@@ -1,4 +1,4 @@
-#VRML_SIM R2023a utf8
+#VRML_SIM R2023b utf8
 
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
@@ -9,7 +9,7 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  orientation -0.5775906821725647 0.5768691446868274 0.5775906801323232 2.095121838124636
   position -3.0776858101494426e-06 -3.077694513407382e-06 4.640160747736787
 }
 TexturedBackground {
@@ -47,7 +47,7 @@ DEF ob1 AdvertisingBoard {
   poleColor 0.1 0.1 0.1
   poleThickness 0.1
 }
-DEF ob1 AdvertisingBoard {
+DEF ob2 AdvertisingBoard {
   translation 0.3 -0.2 0.1
   rotation 0 0 1 1.01503e-06
   name "advertising board(3)"
@@ -57,7 +57,7 @@ DEF ob1 AdvertisingBoard {
   poleColor 0.1 0.1 0.1
   poleThickness 0.1
 }
-DEF ob1 AdvertisingBoard {
+DEF ob3 AdvertisingBoard {
   translation 0.3 0 0.1
   rotation 0 0 1 1.01503e-06
   name "advertising board(1)"
@@ -67,7 +67,7 @@ DEF ob1 AdvertisingBoard {
   poleColor 0.1 0.1 0.1
   poleThickness 0.1
 }
-DEF ob1 AdvertisingBoard {
+DEF ob4 AdvertisingBoard {
   translation 0.3 0 0.1
   rotation 0 0 1 1.01503e-06
   name "advertising board(4)"
@@ -77,7 +77,7 @@ DEF ob1 AdvertisingBoard {
   poleColor 0.1 0.1 0.1
   poleThickness 0.1
 }
-DEF ob1 AdvertisingBoard {
+DEF ob5 AdvertisingBoard {
   translation 0.3 0.5 0.1
   rotation 0 0 1 1.01503e-06
   name "advertising board(5)"
@@ -87,7 +87,7 @@ DEF ob1 AdvertisingBoard {
   poleColor 0.1 0.1 0.1
   poleThickness 0.1
 }
-DEF ob1 AdvertisingBoard {
+DEF ob6 AdvertisingBoard {
   translation 0.1 0.5 0.1
   rotation 0 0 1 1.01503e-06
   name "advertising board(6)"
@@ -97,7 +97,7 @@ DEF ob1 AdvertisingBoard {
   poleColor 0.1 0.1 0.1
   poleThickness 0.1
 }
-DEF ob1 AdvertisingBoard {
+DEF ob7 AdvertisingBoard {
   translation -0.1 -0.5 0.1
   rotation 0 0 1 1.01503e-06
   name "advertising board(7)"
@@ -107,7 +107,7 @@ DEF ob1 AdvertisingBoard {
   poleColor 0.1 0.1 0.1
   poleThickness 0.1
 }
-DEF ob1 AdvertisingBoard {
+DEF ob8 AdvertisingBoard {
   translation -0.3 -0.5 0.1
   rotation 0 0 1 1.01503e-06
   name "advertising board(8)"

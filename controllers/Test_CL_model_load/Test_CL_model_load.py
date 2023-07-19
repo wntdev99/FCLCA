@@ -12,8 +12,8 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 9
-MODIFY_NUM = 6
-MODEL_NAME = "Curriculum 3"
+MODIFY_NUM = 7
+MODEL_NAME = "Curriculum 4"
 
 import os
 import math

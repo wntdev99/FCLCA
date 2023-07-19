@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 11
+MODIFY_NUM = 12
 MODEL_NAME = "Curriculum 5"
 
 import os
@@ -251,12 +251,12 @@ def Reward(state,next_state):
             if action == 0:
                 total -= 2
         if (state[i * input + 2] > 2
-        and state[i * input + 3] > 2
+        or state[i * input + 3] > 2
         ):
             if action == 2:
                 total += 0.3
         if (state[i * input + 6] > 2
-        and state[i * input + 7] > 2
+        or state[i * input + 7] > 2
         ):
             if action == 1:
                 total += 0.3

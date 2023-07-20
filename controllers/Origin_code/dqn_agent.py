@@ -1,6 +1,6 @@
 INPUT_SIZE = 24
 ACTION_SIZE = 3
-LEARNING_RATE = 1e-4
+LEARNING_RATE = 1e-5
 GAMMA = 0.95
 
 import tensorflow as tf
@@ -20,9 +20,9 @@ class DqnAgent:
     @staticmethod
     def Dqn_model():
         q_net = Sequential()                                                                                                         
-        q_net.add(Dense(512, input_dim = INPUT_SIZE, activation = 'relu',                                                 
+        q_net.add(Dense(2048, input_dim = INPUT_SIZE, activation = 'relu',                                                 
                         kernel_initializer='he_uniform'))
-        q_net.add(Dense(512, activation = 'relu', kernel_initializer='he_uniform'))                                        
+        q_net.add(Dense(1024, activation = 'relu', kernel_initializer='he_uniform'))                                        
         q_net.add(
             Dense(ACTION_SIZE, activation='linear', kernel_initializer='he_uniform'))                                 
         q_net.compile(optimizer=tf.optimizers.Adam(learning_rate=LEARNING_RATE),                                    

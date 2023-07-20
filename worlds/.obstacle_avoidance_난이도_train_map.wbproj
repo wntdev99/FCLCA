@@ -5,7 +5,7 @@ sceneTreePerspectives: 000000ff00000001000000030000001c000000c0000000fa010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/Origin_code/Origin_code.py" "controllers/Origin_code/dqn_agent.py" "controllers/Origin_code/replay_buffer.py"
+textFiles: 0 "../Journal/controllers/Origin_code/Origin_code.py" "../Journal/controllers/Origin_code/dqn_agent.py" "../Journal/controllers/Origin_code/replay_buffer.py"
 globalOptionalRendering: DistanceSensorRays
 consoles: Console:All:All
 renderingDevicePerspectives: e-puck:camera;1;0.820513;0;0

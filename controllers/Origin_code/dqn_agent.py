@@ -1,6 +1,6 @@
 INPUT_SIZE = 24
-ACTION_SIZE = 3
-LEARNING_RATE = 1e-6
+ACTION_SIZE = 2
+LEARNING_RATE = 1e-5
 GAMMA = 0.95
 
 import tensorflow as tf

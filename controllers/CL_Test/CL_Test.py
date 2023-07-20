@@ -78,7 +78,7 @@ def draw_trajectories(trajectories):
     for i, trajectory in enumerate(trajectories):
         plt.plot(trajectory[:, 0], trajectory[:, 1], color=colors[i], label=f'Trajectory {i+1}')
     # plt.legend()
-    plt.savefig(f'{CL_KIND}_Tragectory.png')
+    plt.savefig(f'data/{CL_MODEL}/{CL_KIND}_Tragectory.png')
     plt.cla()
     
 # 2. define function

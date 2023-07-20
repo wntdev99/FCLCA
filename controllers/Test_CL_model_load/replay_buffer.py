@@ -1,16 +1,23 @@
 REPALY_MEMORY = 1000000
 MIN_BATCH_SIZE = 1024
+CL_NAME = "CL_Easy_world_0"
+
 
 import random
+import pickle
+import datetime
 import numpy as np
 from collections import deque
+
+DAY_NUM = str(datetime.date.today())
+REPLAY_MEMORY_SAVE_FILE = f"data/{DAY_NUM}/{CL_NAME}_replay_memory.pkl"
+REPLAY_MEMORY_LOAD_FILE = "replay_memory.pkl"
 
 # experience replay 
 class ReplayBuffer:
 
-    def __init__(self):
-        self.epuck_experiences = deque(maxlen=REPALY_MEMORY)                                               
-
+    def __init__(self):                                        
+        self.epuck_experiences = self.load_replay_memory()
     # store experience
     def store_experience(self, state, next_state, reward, action, done):                       
         self.epuck_experiences.append((state, next_state, reward, action, done))
@@ -32,3 +39,17 @@ class ReplayBuffer:
             done_batch.append(epuck_experience[4])
         return np.array(state_batch), np.array(next_state_batch), np.array(
             action_batch), np.array(reward_batch), np.array(done_batch)   
+    # Replay Memory를 파일에 저장하는 함수
+    def save_replay_memory(self):
+        with open(REPLAY_MEMORY_SAVE_FILE, 'wb') as f:
+            pickle.dump(self.epuck_experiences, f)
+    
+    # 파일에서 Replay Memory를 불러오는 함수
+    def load_replay_memory(self):
+        try:
+            with open(REPLAY_MEMORY_LOAD_FILE, 'rb') as f:
+                self.epuck_experiences = pickle.load(f)
+            return self.epuck_experiences
+        except FileNotFoundError:
+            return deque(maxlen=REPALY_MEMORY)   
+        

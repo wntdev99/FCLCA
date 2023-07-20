@@ -1,8 +1,8 @@
 STATE_SIZE = 24
 MAX_SPEED = 1.57
-MAX_EPISODE = 500
+MAX_EPISODE = 10
 MAX_FRAME = 3
-MAX_LENGHT = 0.5
+MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
 INPUT_ONE_FRAME = 8
 NORMALIZATION_SIZE = 100
@@ -12,8 +12,8 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 3
-MODEL_NAME = "Curriculum 2"
+MODIFY_NUM = 4
+MODEL_NAME = "Curriculum 1"
 
 import os
 import math
@@ -475,7 +475,8 @@ for episode_cnt in range(1,max_episodes):
                 if episode_cnt % TARGET_NETWORK_CYCLE == 0:
                     agent.update_target_network()
                 break
-
+                
+buffer.save_replay_memory()
 # 4. 결과 저장
 createDirectory(f"data")
 createDirectory(f"data/{DAY_NUM}")

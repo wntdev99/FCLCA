@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 7
+MODIFY_NUM = 8
 MODEL_NAME = "Current model"
 
 import os

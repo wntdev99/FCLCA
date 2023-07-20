@@ -5,7 +5,7 @@ sceneTreePerspectives: 000000ff00000001000000030000001c0000027f000000fa010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/Test_CL_model_load/Test_CL_model_load.py" "controllers/Test_CL_model_load/dqn_agent.py" "controllers/Test_CL_model_load/replay_buffer.py"
+textFiles: 0 "controllers/Test_CL/Test_CL.py" "controllers/Test_CL/dqn_agent.py" "controllers/Test_CL/replay_buffer.py"
 globalOptionalRendering: DistanceSensorRays
 consoles: Console:All:All
 renderingDevicePerspectives: e-puck:camera;1;0.820513;0;0

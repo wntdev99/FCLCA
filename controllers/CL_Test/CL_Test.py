@@ -1,15 +1,23 @@
+CL_KIND = "CL_no_obstacle"
+CL_MODEL = "Curriculum 1_12"
+TEST_COUNT = 10
+MAX_SPEED = 0.785
+
 from controller import Supervisor
 import matplotlib.pyplot as plt
 import os
+import datetime
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import math
 
+DAY_NUM = str(datetime.date.today())
+
 # 1. 기초 세팅
 robot = Supervisor()
 # 1-1. model_load (model name is 20230315_model)
-Dqn_model = tf.keras.models.load_model('Curriculum 5_13')
+Dqn_model = tf.keras.models.load_model(CL_MODEL)
 # 1-1. model detail
 # new_model.summary()
 # 1-2. 현재 world timestep
@@ -70,7 +78,7 @@ def draw_trajectories(trajectories):
     for i, trajectory in enumerate(trajectories):
         plt.plot(trajectory[:, 0], trajectory[:, 1], color=colors[i], label=f'Trajectory {i+1}')
     # plt.legend()
-    plt.savefig('Tragectory.png')
+    plt.savefig(f'{CL_KIND}_Tragectory.png')
     plt.cla()
     
 # 2. define function
@@ -117,14 +125,14 @@ def rotated_point(orientation):
 # 2-3. select action 
 def Action(action):
     if action == 0:
-        left_motor.setVelocity(0.785)
-        right_motor.setVelocity(0.785)
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
     elif action == 1:
-        left_motor.setVelocity(0.785)
-        right_motor.setVelocity(-0.785)
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
     elif action == 2:
-        left_motor.setVelocity(-0.785)
-        right_motor.setVelocity(0.785)
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
 # 0.3925
 # 2-4. state get
 def environment():
@@ -155,13 +163,6 @@ def environment():
     storage.append((ps[5].value)/100)
     storage.append((ps[6].value)/100)
     storage.append((ps[7].value)/100)
-    
-"""
-# 2-5. collect policy
-def collect_policy(state):
-    return policy(state)
-"""
-
 
 # 2-6. policy
 def policy(state):                                                                                # state는 1차 리스트고 찐 policy 임.
@@ -198,23 +199,23 @@ def setting():
     result_done.append(0)
     result_collision.append(0)
     result_minima.append(0)
-    if x >= 0.9 and y <= -0.9:
+    if x >= 0.89 and y <= -0.89 and xy_count == 0:
         xy_count = 1
-    elif x >= 0.9 and y >= 0.9:
+    elif x >= 0.89 and y >= 0.89 and xy_count == 1:
         xy_count = 2
-    elif x <= -0.9 and y >= 0.9:
+    elif x <= -0.89 and y >= 0.89 and xy_count == 2:
         xy_count = 3
-    elif x < -0.9 and y < -0.9:
+    elif x < -0.89 and y < -0.89 and xy_count == 3:
         xy_count = 1
     
     if xy_count == 0:
-        x += (1.8/250)
+        x += (1.8 / TEST_COUNT)
     elif xy_count == 1:
-        y += (1.8/250)
+        y += (1.8 / TEST_COUNT)
     elif xy_count == 2:
-        x -= (1.8/250)
+        x -= (1.8 / TEST_COUNT)
     elif xy_count == 3:
-        y -= (1.8/250)
+        y -= (1.8 / TEST_COUNT)
     r1 = np.random.uniform(-3,3)
     translation_field.setSFVec3f([translation_field.value[0],translation_field.value[1],5])
     translation_field.setSFVec3f([x,y,5])
@@ -222,6 +223,14 @@ def setting():
     rotation_field.setSFRotation([0,0,-1,r1])
     robot.simulationResetPhysics()
     return
+
+def createDirectory(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print("Error: Failed to create the directory.")
+
 
 # 3. collision avoidance
 setting()
@@ -263,9 +272,15 @@ while robot.step(timestep) != -1:
             result_minima.append(1)
             setting()
         
-    if len(result_collision_done) >= 1000:
+    if len(result_collision_done) >= TEST_COUNT * 4:
         draw_trajectories(trajectories)
         break
+        
+# 4. 결과 저장
+createDirectory(f"data")
+createDirectory(f"data/{CL_MODEL}")
+createDirectory(f"data/{CL_MODEL}/{CL_KIND}")
+        
 x_data = list(range(len(result_collision_done)))
 loss_min = -1.1
 loss_max = 1.1
@@ -273,28 +288,28 @@ plt.ylim([loss_min, loss_max])
 plt.xlabel('Episode')
 plt.ylabel('Done')
 plt.plot(x_data,result_collision_done,c='red',label = "Done_Collision_Minima")
-plt.savefig('Done_Collision_Minima.png')
+plt.savefig(f'data/{CL_MODEL}/{CL_KIND}/{CL_KIND}_Done_Collision_Minima.png')
 plt.cla()
 
 plt.ylim([-0.1, loss_max])
 plt.xlabel('Episode')
 plt.ylabel('Done')
 plt.plot(list(range(len(result_done))),result_done,c='green',label = "Done")
-plt.savefig('Done_result.png')
+plt.savefig(f'data/{CL_MODEL}/{CL_KIND}/{CL_KIND}_Done_result.png')
 plt.cla()
 
 plt.ylim([-0.1, loss_max])
 plt.xlabel('Episode')
 plt.ylabel('Collision')
 plt.plot(list(range(len(result_collision))),result_collision,c='blue',label = "Collision")
-plt.savefig('Collision_result.png')
+plt.savefig(f'data/{CL_MODEL}/{CL_KIND}/{CL_KIND}_Collision_result.png')
 plt.cla()
 
 plt.ylim([-0.1, loss_max])
 plt.xlabel('Episode')
 plt.ylabel('Minima')
 plt.plot(list(range(len(result_minima))),result_minima,c='black',label = "Local minima")
-plt.savefig('Minima_result.png')
+plt.savefig(f'data/{CL_MODEL}/{CL_KIND}/{CL_KIND}_Minima_result.png')
 plt.cla()
 
 
@@ -317,6 +332,6 @@ ws['C5'] = collision_count/len(result_collision_done)
 ws['D4'] = 'Minima 확률'
 ws['D5'] = localminima_count/len(result_collision_done)
 
-wb.save('Test_Result.xlsx')    
+wb.save(f'data/{CL_MODEL}/{CL_KIND}/{CL_KIND}_Test_Result.xlsx')    
     
 

@@ -1,6 +1,6 @@
 STATE_SIZE = 24
 MAX_SPEED = 0.785
-MAX_EPISODE = 90
+MAX_EPISODE = 70
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -12,7 +12,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 13
-MODIFY_NUM = 8
+MODIFY_NUM = 10
 MODEL_NAME = "Current model"
 
 import os
@@ -130,12 +130,11 @@ def Action(action):
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(-MAX_SPEED)
-    """
     # Trun Left
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-    """
+
 # 2-4. Reward structure
 def Reward(state,next_state):
     total = 0                                                           # reward 변수

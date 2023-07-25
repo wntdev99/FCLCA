@@ -1,0 +1,169 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/advertising_board/protos/AdvertisingBoard.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position -4.855057605953767e-06 -4.855071335205778e-06 4.011587910037457
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF ep E-puck {
+  hidden position_0_0 175.13914081350154
+  hidden position_0_1 42.06613459882336
+  hidden linearVelocity_0 -9.875049457793042e-05 5.1534292066713545e-05 -4.7566478730921066e-07
+  hidden angularVelocity_0 -0.0036114373500225902 -0.0065254742142440356 0.26169905985078956
+  hidden rotation_1 0 -1 0 0.7900477875268804
+  hidden linearVelocity_1 0.005801055409055026 -0.0032581786468822245 -6.911536537949953e-07
+  hidden angularVelocity_1 0.1786664087704601 0.3183328477936844 0.26164373654586415
+  hidden rotation_2 0 1 0 4.367022755745841
+  hidden linearVelocity_2 -0.006062180970802594 0.003400214938723305 -6.793237270682164e-07
+  hidden angularVelocity_2 -0.18588919752555935 -0.33138384613329813 0.26165369846084524
+  translation 0.6337367606722792 -0.2986054938176755 -6.38790680033089e-05
+  rotation 0.0006431333856792992 -0.00016109220260027187 0.9999997802143512 2.6349308015644834
+  controller "Test_CL_model_load"
+  supervisor TRUE
+}
+DEF ob0 AdvertisingBoard {
+  translation -0.3 0 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(9)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob1 AdvertisingBoard {
+  translation -0.3 0.2 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(2)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob2 AdvertisingBoard {
+  translation -0.5 0.2 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(10)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob3 AdvertisingBoard {
+  translation 0.3 -0.2 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(3)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob4 AdvertisingBoard {
+  translation 0.3 0 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(1)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob5 AdvertisingBoard {
+  translation 0.5 2.03003e-07 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(12)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob6 AdvertisingBoard {
+  translation 0.3 0 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(4)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob7 AdvertisingBoard {
+  translation 0.3 0.5 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(5)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob8 AdvertisingBoard {
+  translation 0.3 0.7 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(11)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob9 AdvertisingBoard {
+  translation 0.1 0.5 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(6)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob10 AdvertisingBoard {
+  translation -0.1 -0.5 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(7)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob11 AdvertisingBoard {
+  translation -0.1 -0.7 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(13)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}
+DEF ob12 AdvertisingBoard {
+  translation -0.3 -0.5 0.1
+  rotation 0 0 1 1.01503e-06
+  name "advertising board(8)"
+  displayWidth 0.0001
+  displayHeight 0.2
+  frameThickness 0.2
+  poleColor 0.1 0.1 0.1
+  poleThickness 0.1
+}

@@ -24,7 +24,7 @@ RectangleArena {
 DEF ep E-puck {
   translation -0.8671309165564232 -0.43825082739062765 -6.368542382272947e-05
   rotation 0.00253375949485046 -0.0001564857897177874 0.9999967777823185 3.013673553809169
-  controller "Test_CL_model_load"
+  controller "Yes_obstacles_SENSOR_8"
   supervisor TRUE
 }
 DEF ob0 AdvertisingBoard {

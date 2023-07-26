@@ -12,9 +12,9 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-OBSTACLE_COUNT = 8
-MODIFY_NUM = 2
-MODEL_NAME = "Curriculum easy 1"
+OBSTACLE_COUNT = 4
+MODIFY_NUM = 3
+MODEL_NAME = "Curriculum easy 0"
 
 import os
 import math

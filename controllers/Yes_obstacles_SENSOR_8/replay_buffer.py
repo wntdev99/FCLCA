@@ -1,6 +1,6 @@
 REPALY_MEMORY = 1000000
 MIN_BATCH_SIZE = 1024
-CL_NAME = "CL_YES_world_0"
+CL_NAME = "CL_YES_world_test"
 
 import random
 import pickle

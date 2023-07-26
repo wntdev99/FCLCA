@@ -1,6 +1,6 @@
 STATE_SIZE = 30
 MAX_SPEED = 1.57
-MAX_EPISODE = 300
+MAX_EPISODE = 100
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -13,7 +13,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 1
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -321,9 +321,9 @@ for episode_cnt in range(1,max_episodes):
                 count_experience = 0
                 experience_batch = buffer.sample_batch()
                 avg_reward = avg_reward / len(experience_batch[0])
-                loss = agent.train(experience_batch, episode_cnt, max_episodes)
+                loss = agent.train(experience_batch)
                 # avg_reward = evaluate_training_result(env,agent)
-                
+                agent.update_learning_rate(episode_cnt)
                 print('Episode {0}/{1} and so far the performance is {2} and '
                       'loss is {3}'.format(episode_cnt, max_episodes,
                                            avg_reward, loss[0]))

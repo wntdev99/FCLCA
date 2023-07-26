@@ -11,11 +11,13 @@ from tensorflow.python.keras.layers import Dense
 
 # DQN Agent 객체
 class DqnAgent:
-
-    # Q-network and Target Q-network 초기화
-    def __init__(self):
+    def __init__(self, initial_learning_rate=LEARNING_RATE, learning_rate_decay=0.97):
         self.q_net = self.Dqn_model()
         self.target_q_net = self.Dqn_model()
+        self.initial_learning_rate = initial_learning_rate
+        self.learning_rate_decay = learning_rate_decay
+        self.learning_rate = initial_learning_rate  # Initialize the learning rate
+
 
     # DQN model sturture
     @staticmethod
@@ -69,3 +71,10 @@ class DqnAgent:
         training_history = self.q_net.fit(x=state_batch, y=target_q, verbose=0)                             
         loss = training_history.history['loss']                                                             
         return loss
+        
+    def update_learning_rate(self, episode):
+        self.learning_rate = self.initial_learning_rate * (self.learning_rate_decay ** episode)
+        optimizer = tf.optimizers.Adam(learning_rate=self.learning_rate)
+        self.q_net.compile(optimizer=optimizer, loss='mse')
+        print("learning rate : ",self.learning_rate)
+        

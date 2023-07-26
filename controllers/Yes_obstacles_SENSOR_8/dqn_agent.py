@@ -3,6 +3,7 @@ ACTION_SIZE = 5
 LEARNING_RATE = 1e-2
 EPSILION = 1e-2
 GAMMA = 0.95
+MODEL_NAME = 'Curriculum No ob_20'
 
 import tensorflow as tf
 import numpy as np
@@ -22,14 +23,7 @@ class DqnAgent:
     # DQN model sturture
     @staticmethod
     def Dqn_model():
-        q_net = Sequential()                                                                                                         
-        q_net.add(Dense(1024, input_dim = INPUT_SIZE, activation = 'relu',                                                 
-                        kernel_initializer='he_uniform'))
-        q_net.add(Dense(512, activation = 'relu', kernel_initializer='he_uniform'))                                        
-        q_net.add(
-            Dense(ACTION_SIZE, activation='linear', kernel_initializer='he_uniform'))                                 
-        q_net.compile(optimizer=tf.optimizers.Adam(learning_rate = LEARNING_RATE),                                    
-                      loss='mse')
+        q_net = tf.keras.models.load_model(MODEL_NAME)
         return q_net
 
     # random action set

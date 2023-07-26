@@ -13,7 +13,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 5
+MODIFY_NUM = 7
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -141,21 +141,35 @@ def Reward(state,next_state):
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
         Dangerous_state = 1
     
-    # Collision Avoidance 
+    # Collision Avoidance _ 1
     state_sensor = 0.0 ; next_state_sensor = 0.0
-    for j in range(MAX_FRAME ):
+    for j in range(MAX_FRAME):
         for k in range(2,2 + INPUT_SENSOR):
             if state[j * INPUT_ONE_FRAME + k] > 0.8:
                 state_sensor += state[j * INPUT_ONE_FRAME + k]
                 next_state_sensor += next_state[j * INPUT_ONE_FRAME + k]
-        if (state_sensor - next_state_sensor) < 0:
-            total += 2 * (state_sensor - next_state_sensor)
-        total += (state_sensor - next_state_sensor)
+    total += (state_sensor - next_state_sensor)
                 
-    # total += (next_state[j * INPUT_ONE_FRAME + k] - next_state[(j + 1) * INPUT_ONE_FRAME + k])
-
-                
-    # Collision Avoidance 
+    # Collision Avoidance _ 2
+    for i in range(MAX_FRAME):
+        if (state[i * INPUT_ONE_FRAME + 2] > 3
+        or state[i * INPUT_ONE_FRAME + 3] > 3
+        or state[i * INPUT_ONE_FRAME + 5] > 3
+        or state[i * INPUT_ONE_FRAME + 6] > 3
+        or state[i * INPUT_ONE_FRAME + 8] > 3
+        or state[i * INPUT_ONE_FRAME + 9] > 3
+        ):
+            total -= 1
+        elif (state[i * INPUT_ONE_FRAME + 2] > 4
+        or state[i * INPUT_ONE_FRAME + 3] > 4
+        or state[i * INPUT_ONE_FRAME + 5] > 4
+        or state[i * INPUT_ONE_FRAME + 6] > 4
+        or state[i * INPUT_ONE_FRAME + 8] > 4
+        or state[i * INPUT_ONE_FRAME + 9] > 4
+        ):
+            total -= 2
+    
+    # Collision Avoidance _ 3
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] > 1
         or state[i * INPUT_ONE_FRAME + 3] > 1

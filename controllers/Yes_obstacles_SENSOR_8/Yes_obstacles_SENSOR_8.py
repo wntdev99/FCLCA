@@ -13,7 +13,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 11
+MODIFY_NUM = 12
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -107,10 +107,10 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/4)
+        right_motor.setVelocity(MAX_SPEED/3)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/4)
+        left_motor.setVelocity(MAX_SPEED/3)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:
@@ -216,13 +216,18 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 8] < 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            if (state[1] < 0
-            or action == 0
-            or action == 2
+            if (state[1] < 0):
+                if (action == 0
+                or action == 2
+                ):
+                    total += 0.3
+                else:
+                    total -= 0.5
+            elif (state[1] > 0
+            and action == 0
             ):
-                total += 0.3
-            else:
-                total -= 0.5
+                total += 0.2
+            
         elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
         and state[i * INPUT_ONE_FRAME + 3] < 0.8
         and state[i * INPUT_ONE_FRAME + 4] < 0.8
@@ -232,14 +237,18 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 8] < 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            if (state[1] > 0
-            or action == 0
-            or action == 1
+            if (state[1] > 0):
+                if (action == 0
+                or action == 1
+                ):
+                    total += 0.3
+                else:
+                    total -= 0.5
+            elif (state[1] < 0
+            and action == 0
             ):
-                total += 0.3
-            else:
-                total -= 0.5
-        
+                total += 0.2
+                
     # Go staraght
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 1

@@ -1,6 +1,6 @@
 STATE_SIZE = 30
 MAX_SPEED = 6.28
-MAX_EPISODE = 100
+MAX_EPISODE = 50
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -13,7 +13,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 0
-MODIFY_NUM = 1
+MODIFY_NUM = 2
 MODEL_NAME = "Curriculum Collision Aoivdance 0"
 
 import os
@@ -157,8 +157,7 @@ def Reward(state,next_state):
             if state[(j + 1) * input + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            if action == 0:
-                total += 0.05
+            pass
         Dangerous_state = 1
     
     # Collision Avoidance 

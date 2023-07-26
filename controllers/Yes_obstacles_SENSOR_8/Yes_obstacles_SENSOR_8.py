@@ -1,6 +1,6 @@
 STATE_SIZE = 30
 MAX_SPEED = 1.57
-MAX_EPISODE = 150
+MAX_EPISODE = 30
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -13,7 +13,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 8
-MODIFY_NUM = 0
+MODIFY_NUM = 1
 MODEL_NAME = "Curriculum easy 1"
 
 import os
@@ -343,7 +343,7 @@ buffer.save_replay_memory()
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
 loss_max = np.max(loss_data)
-plt.ylim([loss_min-0.01, loss_max + 0.01])
+plt.ylim([loss_min-0.01, 1 + 0.01])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")

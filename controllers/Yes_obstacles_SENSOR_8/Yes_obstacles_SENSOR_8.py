@@ -1,6 +1,6 @@
 GOAL_X = 0
 GOAL_Y = 0 
-MAX_SPEED = 3.14
+MAX_SPEED = 6.28
 MAX_FRAME = 3
 STATE_SIZE = 30
 MAX_EPISODE = 100
@@ -13,7 +13,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 8
+MODIFY_NUM = 9
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -107,10 +107,10 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/3)
+        right_motor.setVelocity(MAX_SPEED/2)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/3)
+        left_motor.setVelocity(MAX_SPEED/2)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:
@@ -473,7 +473,7 @@ buffer.save_replay_memory()
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
 loss_max = np.max(loss_data)
-plt.ylim([loss_min-0.01, 1 + 0.01])
+plt.ylim([loss_min-0.01, loss_max + 0.01])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")

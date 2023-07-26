@@ -13,7 +13,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 13
+MODIFY_NUM = 14
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -202,7 +202,9 @@ def Reward(state,next_state):
             or action == 1
             or action == 2):
                 total += 0.2
-    
+            else:
+                total -= 0.5
+                    
     # Collision Avoidance _ 5
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 0.8
@@ -217,12 +219,17 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] < 0):
                 if (action == 0
                 or action == 2
+                or action == 3
                 ):
-                    total += 0.3
-            elif (state[i * INPUT_ONE_FRAME + 1] > 0
-            and action == 0
-            ):
-                total += 0.2
+                    total += 0.2
+                else:
+                    total -= 0.2
+            elif (state[i * INPUT_ONE_FRAME + 1] > 0):
+                if action == 0:
+                    total += 0.2
+                else:
+                    total -= 0.2
+                
             
         elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
         and state[i * INPUT_ONE_FRAME + 3] < 0.8
@@ -233,15 +240,19 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 8] < 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            if (state[1] > 0):
+            if (state[i * INPUT_ONE_FRAME + 1] > 0):
                 if (action == 0
                 or action == 1
+                or action == 4
                 ):
-                    total += 0.3
-            elif (state[1] < 0
-            and action == 0
-            ):
-                total += 0.2
+                    total += 0.2
+                else:
+                    total -= 0.2
+            elif (state[i * INPUT_ONE_FRAME + 1] < 0):
+                if action == 0:
+                    total += 0.2
+                else:
+                    total -= 0.2
                 
     # Go staraght
     for i in range(MAX_FRAME):
@@ -280,9 +291,10 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 8] < 1
         and state[i * INPUT_ONE_FRAME + 9] < 1
         ):
-            if (action == 0
-            ):
+            if (action == 0):
                 total += 0.2
+            else:
+                total -= 0.2
         elif (state[i * INPUT_ONE_FRAME + 2] < 1
         and state[i * INPUT_ONE_FRAME + 3] < 1
         and state[i * INPUT_ONE_FRAME + 4] < 1
@@ -294,6 +306,8 @@ def Reward(state,next_state):
         ):
             if (action == 0):
                 total += 0.2
+            else:
+                total -= 0.2
         
     return total
     

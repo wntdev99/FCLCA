@@ -157,16 +157,31 @@ def Reward(state,next_state):
             if state[(j + 1) * input + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * input] - next_state[(j + 1) * input]) * 1000
-            Dangerous_state = 1
-        else:
-            Dangerous_state = 1
+            total += (next_state[j * input] - next_state[(j + 1) * input]) * 100
+        Dangerous_state = 1
     
     # Collision Avoidance 
     for j in range(MAX_FRAME - 1):
         for k in range(2,2 + INPUT_SENSOR):
             if state[(j + 1) * input + k] > 0.8:
                 total += (next_state[j * input + k] - next_state[(j + 1) * input + k])
+    for i in range(MAX_FRAME):
+        if (state[i * input + 2] > 1
+        or state[i * input + 3] > 1
+        or state[i * input + 5] > 1
+        or state[i * input + 6] > 1
+        or state[i * input + 8] > 1
+        or state[i * input + 9] > 1
+        ):
+            if (next_state[i * input + 2] < 0.8
+            and next_state[i * input + 3] < 0.8
+            and next_state[i * input + 5] < 0.8
+            and next_state[i * input + 6] < 0.8
+            and next_state[i * input + 8] < 0.8
+            and next_state[i * input + 9] < 0.8
+            ):
+                total += 1
+    
     return total
     
 # 2.5. Done check

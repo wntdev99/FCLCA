@@ -34,7 +34,6 @@ class DqnAgent:
     def collect_policy(self,max_episodes, episode_cnt, state):
         # heuristics set 0.01 , 10 , 0.8 ㆍㆍㆍ
         epsilon = EPSILION + (1 - EPSILION) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.3)
-        print(epsilon)
         if np.random.random() < epsilon:                                                                       
             return self.random_policy(state)
         return self.policy(state)
@@ -71,5 +70,4 @@ class DqnAgent:
         self.learning_rate = self.initial_learning_rate * (self.learning_rate_decay ** episode)
         optimizer = tf.optimizers.Adam(learning_rate=self.learning_rate)
         self.q_net.compile(optimizer=optimizer, loss='mse')
-        print("learning rate : ",self.learning_rate)
         

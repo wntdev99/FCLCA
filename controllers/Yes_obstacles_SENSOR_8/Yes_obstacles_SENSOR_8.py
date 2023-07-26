@@ -1,6 +1,6 @@
 STATE_SIZE = 30
 MAX_SPEED = 1.57
-MAX_EPISODE = 50
+MAX_EPISODE = 100
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
@@ -13,7 +13,7 @@ TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 3
+MODIFY_NUM = 4
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -157,7 +157,7 @@ def Reward(state,next_state):
             if state[(j + 1) * input + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * input] - next_state[(j + 1) * input]) * 100
+            total += (next_state[j * input] - next_state[(j + 1) * input]) * 1000
         Dangerous_state = 1
     
     # Collision Avoidance 

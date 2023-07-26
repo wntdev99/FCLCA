@@ -5,6 +5,7 @@ sceneTreePerspectives: 000000ff00000001000000030000001c000000c0000000fa010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/Test_CL_model_load/Test_CL_model_load.py" "controllers/Test_CL_model_load/dqn_agent.py" "controllers/Test_CL_model_load/replay_buffer.py"
+textFiles: 0 "controllers/Collision_Avoidance_controller/Collision_Avoidance_controller.py" "controllers/Collision_Avoidance_controller/replay_buffer.py" "controllers/Collision_Avoidance_controller/dqn_agent.py"
+globalOptionalRendering: DistanceSensorRays
 consoles: Console:All:All
 renderingDevicePerspectives: e-puck:camera;1;1;0;0

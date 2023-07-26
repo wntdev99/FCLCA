@@ -1,19 +1,19 @@
-STATE_SIZE = 30
-MAX_SPEED = 1.57
-MAX_EPISODE = 100
-MAX_FRAME = 3
-MAX_LENGHT = 0.9
-MIN_DISTANCE = 0.35
-INPUT_ONE_FRAME = 10
-INPUT_SENSOR = 8
-NORMALIZATION_SIZE = 100
-ARRIVE_STANDARD = 0.1
-REPLAY_CYCLE = 2000
-TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
+MAX_SPEED = 1.57
+MAX_FRAME = 3
+STATE_SIZE = 30
+MAX_EPISODE = 100
+INPUT_SENSOR = 8
+REPLAY_CYCLE = 2000
+INPUT_ONE_FRAME = 10
+ARRIVE_STANDARD = 0.1
+TARGET_NETWORK_CYCLE = 5
+MAX_LENGHT = 0.9
+MIN_DISTANCE = 0.30
+NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 4
+MODIFY_NUM = 5
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -25,8 +25,6 @@ import matplotlib.pyplot as plt
 from dqn_agent import DqnAgent
 from replay_buffer import ReplayBuffer
 from controller import Supervisor
-
-DAY_NUM = str(datetime.date.today())
 
 # 1. 초기 세팅
 robot = Supervisor()
@@ -40,11 +38,8 @@ right_motor = robot.getDevice('right wheel motor')
 # 1-1-2. 로봇 모터 다음 명령 있을 때 까지 전 모터 상태 유지
 left_motor.setPosition(float('inf'))
 right_motor.setPosition(float('inf'))
-# 1-1-3. 로봇 속도 0
-left_motor.setVelocity(0)
-right_motor.setVelocity(0)
 # 1-2. 로봇 노드 정보
-ep_node = robot.getFromDef('ep')
+ep_node = robot.getFromDef('e-puck')
 # 1-3. 로봇 위치 필드 정보
 translation_field = ep_node.getField('translation')
 rotation_field = ep_node.getField('rotation')
@@ -53,7 +48,7 @@ ob_field = []
 for i in range(OBSTACLE_COUNT):
     tmp = robot.getFromDef(f'ob{i}').getField('translation').value
     ob_field.append(tmp[0:2])
-ob_field.append([0,0])
+ob_field.append([GOAL_X , GOAL_Y])
 #1-4. e-puck proximity sensor 정보
 ps = []
 psNames = [
@@ -64,27 +59,14 @@ for i in range(8):
     ps.append(robot.getDevice(psNames[i]))
     ps[i].enable(timestep)
 # 1-5. 초기화
-state = np.zeros((STATE_SIZE))
-next_state = np.zeros((STATE_SIZE))
-ep = []
-storage = []                                                            # storage 는 state를 받기 위한 임시 저장소
-loss_data = []
-reward_data = []
-done_storage = []                                                       # done,collision 은 도착, 충돌의 비율을 시각화 하기 위함 
-collision_storage = []
-action = 0
-avg_reward = 0                                                          # avg_reward 는 평균 보상 그래프 출력을 위함
-count_state = 0              # one state 를 n개의 frame으로 만들기 위함
-count_experience = 0      
-set_count = 0
+state = np.zeros((STATE_SIZE)); next_state = np.zeros((STATE_SIZE))
+ep = [] ; storage = [] ; loss_data = [] ; reward_data = [] ; done_storage = [] ; collision_storage = []
+action = 0 ; avg_reward = 0 ; count_state = 0 ; count_experience = 0 ; set_count = 0
 x_min, x_max = -MAX_LENGHT, MAX_LENGHT
 y_min, y_max = -MAX_LENGHT, MAX_LENGHT
-# 1-5-1. 최대 에피소드
-max_episodes = MAX_EPISODE
+DAY_NUM = str(datetime.date.today())
 # 1-5-2. goal 초기화
 goal = [GOAL_X,GOAL_Y,0]
-# 1-5-3. input 초기화
-input = INPUT_ONE_FRAME
 
 # 2. 함수    
 # 2-1. one frame get
@@ -97,7 +79,6 @@ def environment():
     # 2-1-3. perfect_angle get    
     perfect_angle = point_slope(goal)                           
     # 2-1-4. theta get
-    #theta = abs(perfect_angle - heading)
     theta = heading - perfect_angle
     if abs(theta) > 180:
         if theta < 0:
@@ -111,12 +92,12 @@ def environment():
     storage.append(math.radians(theta))
     # 2-1-6-1. sensor value
     for i in range(INPUT_SENSOR):
-        storage.append(ps[i].value/NORMALIZATION_SIZE)
+        storage.append(ps[i].value/NORMALIZATION_SENSOR)
     
 # 2-2. Collect experiences
 def collect_experiences(state,next_state,action,reward,done,buffer):
     buffer.store_experience(state,next_state,reward,action,done)
-   
+
 # 2-3. Select action 
 def Action(action):
     # Go straight
@@ -135,7 +116,7 @@ def Action(action):
     elif action == 3:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(-MAX_SPEED/3)
-    # Trun Left
+    # Trun Right
     elif action == 4:
         left_motor.setVelocity(-MAX_SPEED/3)
         right_motor.setVelocity(-MAX_SPEED)
@@ -148,47 +129,114 @@ def Reward(state,next_state):
     
     # Target reaching
     for i in range(MAX_FRAME):                                          # 각 프레임에 대해 모두 진행
-        if next_state[i * input] < ARRIVE_STANDARD:
+        if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 10
     
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         for k in range(2,2 + INPUT_SENSOR):
-            if state[(j + 1) * input + k] > 0.8:
+            if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * input] - next_state[(j + 1) * input]) * 1000
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
         Dangerous_state = 1
     
     # Collision Avoidance 
-    for j in range(MAX_FRAME - 1):
+    state_sensor = 0.0 ; next_state_sensor = 0.0
+    for j in range(MAX_FRAME ):
         for k in range(2,2 + INPUT_SENSOR):
-            if state[(j + 1) * input + k] > 0.8:
-                total += (next_state[j * input + k] - next_state[(j + 1) * input + k])
+            if state[j * INPUT_ONE_FRAME + k] > 0.8:
+                state_sensor += state[j * INPUT_ONE_FRAME + k]
+                next_state_sensor += next_state[j * INPUT_ONE_FRAME + k]
+        if (state_sensor - next_state_sensor) < 0:
+            total += 2 * (state_sensor - next_state_sensor)
+        total += (state_sensor - next_state_sensor)
+                
+    # total += (next_state[j * INPUT_ONE_FRAME + k] - next_state[(j + 1) * INPUT_ONE_FRAME + k])
+
+                
+    # Collision Avoidance 
     for i in range(MAX_FRAME):
-        if (state[i * input + 2] > 1
-        or state[i * input + 3] > 1
-        or state[i * input + 5] > 1
-        or state[i * input + 6] > 1
-        or state[i * input + 8] > 1
-        or state[i * input + 9] > 1
+        if (state[i * INPUT_ONE_FRAME + 2] > 1
+        or state[i * INPUT_ONE_FRAME + 3] > 1
+        or state[i * INPUT_ONE_FRAME + 5] > 1
+        or state[i * INPUT_ONE_FRAME + 6] > 1
+        or state[i * INPUT_ONE_FRAME + 8] > 1
+        or state[i * INPUT_ONE_FRAME + 9] > 1
         ):
-            if (next_state[i * input + 2] < 0.8
-            and next_state[i * input + 3] < 0.8
-            and next_state[i * input + 5] < 0.8
-            and next_state[i * input + 6] < 0.8
-            and next_state[i * input + 8] < 0.8
-            and next_state[i * input + 9] < 0.8
+            if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 5] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 6] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
             ):
                 total += 1
-    
+                
+    # Go staraght
+    for i in range(MAX_FRAME):
+        if (state[i * INPUT_ONE_FRAME + 2] < 1
+        and state[i * INPUT_ONE_FRAME + 3] < 1
+        and state[i * INPUT_ONE_FRAME + 4] > 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 3
+        and state[i * INPUT_ONE_FRAME + 6] < 1
+        and state[i * INPUT_ONE_FRAME + 7] < 1
+        and state[i * INPUT_ONE_FRAME + 8] < 1
+        and state[i * INPUT_ONE_FRAME + 9] < 1
+        ):
+            if (action == 0
+            or action == 2
+            ):
+                total += 0.2
+        elif (state[i * INPUT_ONE_FRAME + 2] < 1
+        and state[i * INPUT_ONE_FRAME + 3] < 1
+        and state[i * INPUT_ONE_FRAME + 4] < 1
+        and state[i * INPUT_ONE_FRAME + 5] < 1
+        and state[i * INPUT_ONE_FRAME + 6] < 3
+        and state[i * INPUT_ONE_FRAME + 7] > 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 1
+        and state[i * INPUT_ONE_FRAME + 9] < 1
+        ):
+            if (action == 0
+            or action == 1
+            ):
+                total += 0.2
+        elif (state[i * INPUT_ONE_FRAME + 2] < 1
+        and state[i * INPUT_ONE_FRAME + 3] < 1
+        and state[i * INPUT_ONE_FRAME + 4] > 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 1
+        and state[i * INPUT_ONE_FRAME + 6] < 1
+        and state[i * INPUT_ONE_FRAME + 7] < 1
+        and state[i * INPUT_ONE_FRAME + 8] < 1
+        and state[i * INPUT_ONE_FRAME + 9] < 1
+        ):
+            if (action == 0
+            or action == 2
+            or action == 3
+            ):
+                total += 0.2
+        elif (state[i * INPUT_ONE_FRAME + 2] < 1
+        and state[i * INPUT_ONE_FRAME + 3] < 1
+        and state[i * INPUT_ONE_FRAME + 4] < 1
+        and state[i * INPUT_ONE_FRAME + 5] < 1
+        and state[i * INPUT_ONE_FRAME + 6] < 1
+        and state[i * INPUT_ONE_FRAME + 7] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 1
+        and state[i * INPUT_ONE_FRAME + 9] < 1
+        ):
+            if (action == 0
+            or action == 1
+            or action == 4
+            ):
+                total += 0.2
+        
     return total
     
 # 2.5. Done check
 def Done():
     for i in range(MAX_FRAME):
         # location get
-        if next_state[i * input] <= ARRIVE_STANDARD:
+        if next_state[i * INPUT_ONE_FRAME] <= ARRIVE_STANDARD:
             done = True     # 그만
         else:
             done = False    # 더해    
@@ -200,7 +248,7 @@ def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):
-            if 5 < next_state[j * input + 2 + i]:
+            if 5 < next_state[j * INPUT_ONE_FRAME + 2 + i]:
                 setting()
                 set_count = 1
                 collision_storage.append(1)
@@ -288,7 +336,7 @@ def createDirectory(directory):
         
         
 # 3. Train
-for episode_cnt in range(1,max_episodes):
+for episode_cnt in range(1,MAX_EPISODE):
     # 3-1. one experience
     while robot.step(timestep) != -1:
         # 3-2. 1개 프레임 가져오기
@@ -326,7 +374,7 @@ for episode_cnt in range(1,max_episodes):
             else:
                 done_storage.append(0)
             # current state에 따라 action
-            action = agent.collect_policy(max_episodes,episode_cnt, next_state)
+            action = agent.collect_policy(MAX_EPISODE,episode_cnt, next_state)
             Action(action)
             # count experiences
             count_experience += 1
@@ -340,7 +388,7 @@ for episode_cnt in range(1,max_episodes):
                 # avg_reward = evaluate_training_result(env,agent)
                 agent.update_learning_rate(episode_cnt)
                 print('Episode {0}/{1} and so far the performance is {2} and '
-                      'loss is {3}'.format(episode_cnt, max_episodes,
+                      'loss is {3}'.format(episode_cnt, MAX_EPISODE,
                                            avg_reward, loss[0]))
                 reward_data.append(avg_reward)
                 avg_reward = 0

@@ -13,7 +13,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 12
+MODIFY_NUM = 13
 MODEL_NAME = "Curriculum easy 0"
 
 import os
@@ -202,8 +202,6 @@ def Reward(state,next_state):
             or action == 1
             or action == 2):
                 total += 0.2
-            else:
-                total -= 0.5
     
     # Collision Avoidance _ 5
     for i in range(MAX_FRAME):
@@ -216,14 +214,12 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 8] < 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            if (state[1] < 0):
+            if (state[i * INPUT_ONE_FRAME + 1] < 0):
                 if (action == 0
                 or action == 2
                 ):
                     total += 0.3
-                else:
-                    total -= 0.5
-            elif (state[1] > 0
+            elif (state[i * INPUT_ONE_FRAME + 1] > 0
             and action == 0
             ):
                 total += 0.2
@@ -242,8 +238,6 @@ def Reward(state,next_state):
                 or action == 1
                 ):
                     total += 0.3
-                else:
-                    total -= 0.5
             elif (state[1] < 0
             and action == 0
             ):
@@ -287,8 +281,6 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 9] < 1
         ):
             if (action == 0
-            or action == 2
-            or action == 3
             ):
                 total += 0.2
         elif (state[i * INPUT_ONE_FRAME + 2] < 1
@@ -296,14 +288,11 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 4] < 1
         and state[i * INPUT_ONE_FRAME + 5] < 1
         and state[i * INPUT_ONE_FRAME + 6] < 1
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] > 0.8
         and state[i * INPUT_ONE_FRAME + 8] < 1
         and state[i * INPUT_ONE_FRAME + 9] < 1
         ):
-            if (action == 0
-            or action == 1
-            or action == 4
-            ):
+            if (action == 0):
                 total += 0.2
         
     return total
@@ -482,7 +471,7 @@ buffer.save_replay_memory()
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
 loss_max = np.max(loss_data)
-plt.ylim([loss_min-0.01, loss_max + 0.01])
+plt.ylim([loss_min-0.01, 4 + 0.01])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")

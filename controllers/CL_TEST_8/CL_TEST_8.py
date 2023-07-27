@@ -1,18 +1,11 @@
-CL_KIND = "CL_no_obstacle"
-<<<<<<< HEAD
-CL_MODEL = "Curriculum No ob_15"
-=======
-CL_MODEL = "Curriculum No ob_20"
->>>>>>> main
+CL_KIND = "CL_yes_easy_0"
+CL_MODEL = "Curriculum Easy 0_19"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
-NORMALIZATION_SIZE = 100
-<<<<<<< HEAD
+NORMALIZATION_SENSOR = 100
 MAX_SPEED = 1.57
-=======
-MAX_SPEED = 6.28
->>>>>>> main
+
 
 from controller import Supervisor
 import matplotlib.pyplot as plt
@@ -43,7 +36,7 @@ left_motor.setPosition(float('inf'))
 right_motor.setPosition(float('inf'))
 # 1-4. 로봇 노드 정보
 
-ep_node = robot.getFromDef('ep')
+ep_node = robot.getFromDef('e-puck')
 # 1-3. 로봇 필드 정보
 translation_field = ep_node.getField('translation')
 rotation_field = ep_node.getField('rotation')
@@ -88,14 +81,11 @@ def draw_trajectories(trajectories):
     colors = plt.cm.rainbow(np.linspace(0, 1, len(trajectories)))
     for i, trajectory in enumerate(trajectories):
         plt.plot(trajectory[:, 0], trajectory[:, 1], color=colors[i], label=f'Trajectory {i+1}')
-    # plt.legend()
-<<<<<<< HEAD
-=======
+    
     # 4. 결과 저장
     createDirectory(f"data")
     createDirectory(f"data/{CL_MODEL}")
     createDirectory(f"data/{CL_MODEL}/{CL_KIND}")
->>>>>>> main
     plt.savefig(f'data/{CL_MODEL}/{CL_KIND}_Tragectory.png')
     plt.cla()
     
@@ -142,38 +132,25 @@ def rotated_point(orientation):
     return heading_degrees
 # 2-3. select action 
 def Action(action):
+    # Go straight
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-<<<<<<< HEAD
-        right_motor.setVelocity(0)
-    # Trun Left
-    elif action == 2:
-        left_motor.setVelocity(0)
-=======
         right_motor.setVelocity(MAX_SPEED/3)
     # Trun Left
     elif action == 2:
         left_motor.setVelocity(MAX_SPEED/3)
->>>>>>> main
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:
         left_motor.setVelocity(-MAX_SPEED)
-<<<<<<< HEAD
-        right_motor.setVelocity(0)
-    # Trun Left
+        right_motor.setVelocity(MAX_SPEED)
+    # Trun Right
     elif action == 4:
-        left_motor.setVelocity(0)
-=======
-        right_motor.setVelocity(-MAX_SPEED/3)
-    # Trun Left
-    elif action == 4:
-        left_motor.setVelocity(-MAX_SPEED/3)
->>>>>>> main
+        left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(-MAX_SPEED)
 # 0.3925
 # 2-4. state get
@@ -186,7 +163,6 @@ def environment():
     # 2-1-3. perfect_angle get    
     perfect_angle = point_slope(goal)                           
     # 2-1-4. theta get
-    #theta = abs(perfect_angle - heading)
     theta = heading - perfect_angle
     if abs(theta) > 180:
         if theta < 0:
@@ -200,16 +176,7 @@ def environment():
     storage.append(math.radians(theta))
     # 2-1-6-1. sensor value
     for i in range(INPUT_SENSOR):
-<<<<<<< HEAD
-        ps_tmp = ps[i].value/NORMALIZATION_SIZE
-        if ps_tmp < 0.8:
-            ps_tmp = 0
-        else:
-            ps_tmp = ps_tmp
-        storage.append(ps_tmp)
-=======
-        storage.append(ps[i].value/NORMALIZATION_SIZE)
->>>>>>> main
+        storage.append(ps[i].value/NORMALIZATION_SENSOR)
 
 # 2-6. policy
 def policy(state):                                                                                # state는 1차 리스트고 찐 policy 임.
@@ -225,13 +192,8 @@ def collision_check():
     global result_collision_done
     global trajectory
     for j in range(3):
-<<<<<<< HEAD
-        for i in range(INPUT_SENSOR):
-            if 5 < state[2 + i + INPUT_SIZE * j] :
-=======
         for i in range(2,INPUT_SENSOR + 2):
             if 5 < state[j * INPUT_SIZE + i] :
->>>>>>> main
                 collision_count += 1
                 time_count = 0
                 setting()
@@ -327,15 +289,6 @@ while robot.step(timestep) != -1:
     if len(result_collision_done) >= TEST_COUNT * 4:
         draw_trajectories(trajectories)
         break
-        
-<<<<<<< HEAD
-# 4. 결과 저장
-createDirectory(f"data")
-createDirectory(f"data/{CL_MODEL}")
-createDirectory(f"data/{CL_MODEL}/{CL_KIND}")
-=======
-
->>>>>>> main
         
 x_data = list(range(len(result_collision_done)))
 loss_min = -1.1

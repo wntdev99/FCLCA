@@ -1,5 +1,5 @@
-CL_KIND = "CL_yes_easy_0_test_22"
-CL_MODEL = "Curriculum Easy 0_22"
+CL_KIND = "CL_yes_easy_0_test_23"
+CL_MODEL = "Curriculum Easy 0_23"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
@@ -139,10 +139,10 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/3)
+        right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/3)
+        left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:

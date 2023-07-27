@@ -13,7 +13,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 16
+MODIFY_NUM = 17
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -200,7 +200,8 @@ def Reward(state,next_state):
         ):
             if (action == 0
             or action == 1
-            or action == 2):
+            or action == 2
+            ):
                 total += 0.2
             else:
                 total -= 0.5
@@ -219,7 +220,6 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] < 0):
                 if (action == 0
                 or action == 2
-                or action == 3
                 ):
                     total += 0.2
                 else:
@@ -243,7 +243,6 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] > 0):
                 if (action == 0
                 or action == 1
-                or action == 4
                 ):
                     total += 0.2
                 else:

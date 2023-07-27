@@ -13,7 +13,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 21
+MODIFY_NUM = 22
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -342,7 +342,21 @@ def Reward(state,next_state):
                 total += 0.2
             else:
                 total -= 0.2
-        
+                
+    # Go staraght
+    for i in range(MAX_FRAME):   
+        if (next_state[i * INPUT_ONE_FRAME + 2] > 5
+        or next_state[i * INPUT_ONE_FRAME + 3] > 5
+        or next_state[i * INPUT_ONE_FRAME + 4] > 5
+        or next_state[i * INPUT_ONE_FRAME + 5] > 5
+        or next_state[i * INPUT_ONE_FRAME + 6] > 5
+        or next_state[i * INPUT_ONE_FRAME + 7] > 5
+        or next_state[i * INPUT_ONE_FRAME + 8] > 5
+        or next_state[i * INPUT_ONE_FRAME + 9] > 5
+        ):
+            total -= 5
+    
+    
     return total
     
     
@@ -362,10 +376,12 @@ def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):
+            """
             if (i == 2
             or i == 5):
                 continue
-            if 6 < next_state[j * INPUT_ONE_FRAME + 2 + i]:
+            """
+            if 5 < next_state[j * INPUT_ONE_FRAME + 2 + i]:
                 setting()
                 set_count = 1
                 collision_storage.append(1)

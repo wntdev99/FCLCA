@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 23
+MODIFY_NUM = 24
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -108,10 +108,10 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/3)
+        right_motor.setVelocity(MAX_SPEED/1.5)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/3)
+        left_motor.setVelocity(MAX_SPEED/1.5)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:

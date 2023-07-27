@@ -1,5 +1,5 @@
 CL_KIND = "CL_yes_easy_0"
-CL_MODEL = "Curriculum easy 0_14"
+CL_MODEL = "Curriculum Normal 2_15"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10

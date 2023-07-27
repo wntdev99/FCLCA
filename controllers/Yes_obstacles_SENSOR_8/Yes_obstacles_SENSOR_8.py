@@ -107,10 +107,10 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/3)
+        right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/3)
+        left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:
@@ -362,10 +362,17 @@ def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):
-            if 5 < next_state[j * INPUT_ONE_FRAME + 2 + i]:
+            if (i == 2
+            or i == 5):
+                continue
+            if 6 < next_state[j * INPUT_ONE_FRAME + 2 + i]:
                 setting()
                 set_count = 1
                 collision_storage.append(1)
+                if episode_cnt > 90:
+                    print("state : ",state)
+                    print("next_state : ",next_state)
+                    print(f"episode : {episode_cnt} , action : {action}")
                 break
             if i == 3:
                 collision_storage.append(0)

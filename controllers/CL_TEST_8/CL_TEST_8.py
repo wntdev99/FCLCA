@@ -1,10 +1,10 @@
-CL_KIND = "CL_yes_easy_0"
-CL_MODEL = "Curriculum Normal 2_15"
+CL_KIND = "CL_yes_easy_0_test2"
+CL_MODEL = "Curriculum Easy 0_19"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
-MAX_SPEED = 1.57
+MAX_SPEED = 6.28
 
 
 from controller import Supervisor

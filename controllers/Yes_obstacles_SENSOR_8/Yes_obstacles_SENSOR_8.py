@@ -149,7 +149,6 @@ def Reward(state,next_state):
                 state_sensor += state[j * INPUT_ONE_FRAME + k]
                 next_state_sensor += next_state[j * INPUT_ONE_FRAME + k]
     total += (state_sensor - next_state_sensor)
-                
     # Collision Avoidance _ 2
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] > 3
@@ -198,13 +197,20 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 8] < 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            if (action == 0
-            or action == 1
-            or action == 2
-            ):
-                total += 0.1
-            else:
-                total -= 0.5
+            if (state[i * INPUT_ONE_FRAME + 1] < 0):
+                if (action == 0
+                or action == 2
+                ):
+                    total += 0.1
+                else:
+                    total -= 0.2
+            elif (state[i * INPUT_ONE_FRAME + 1] > 0):
+                if (action == 0
+                or action == 1
+                ):
+                    total += 0.1
+                else:
+                    total -= 0.2
                 
     # Collision Avoidance _ 6
     for i in range(MAX_FRAME):
@@ -221,7 +227,7 @@ def Reward(state,next_state):
             ):
                 total += 0.1
             else:
-                total -= 0.1
+                total -= 0.4
                 
     # Collision Avoidance _ 7
     for i in range(MAX_FRAME):
@@ -238,29 +244,29 @@ def Reward(state,next_state):
             ):
                 total += 0.1
             else:
-                total -= 0.1
+                total -= 0.4
                     
     # Collision Avoidance _ 5
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] > 1
-        and state[i * INPUT_ONE_FRAME + 5] > 1
+        and state[i * INPUT_ONE_FRAME + 3] < 2
+        and state[i * INPUT_ONE_FRAME + 4] > 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
         and state[i * INPUT_ONE_FRAME + 6] < 0.8
         and state[i * INPUT_ONE_FRAME + 7] < 0.8
         and state[i * INPUT_ONE_FRAME + 8] < 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (state[i * INPUT_ONE_FRAME + 1] < 0):
-                if (action == 0
-                or action == 2
-                or action == 1
+                if (action == 2
+                or action == 3
                 ):
                     total += 0.1
                 else:
                     total -= 0.2
             elif (state[i * INPUT_ONE_FRAME + 1] > 0):
-                if action == 0:
+                if (action == 0
+                ):
                     total += 0.1
                 else:
                     total -= 0.2
@@ -270,15 +276,14 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 3] < 0.8
         and state[i * INPUT_ONE_FRAME + 4] < 0.8
         and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] > 1
-        and state[i * INPUT_ONE_FRAME + 7] > 1
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] > 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 2
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (state[i * INPUT_ONE_FRAME + 1] > 0):
-                if (action == 0
-                or action == 1
-                or action == 2
+                if (action == 1
+                or action == 4
                 ):
                     total += 0.1
                 else:
@@ -288,41 +293,14 @@ def Reward(state,next_state):
                     total += 0.1
                 else:
                     total -= 0.2
-                
-    # Collision Avoidance 8
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] > 0.8
-        and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if (action == 2
-            ):
-                total += 0.1
-                
-        elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] > 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if (action == 1
-            ):
-                total += 0.1
-                
+            
+            
     # Go staraght
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 1
         and state[i * INPUT_ONE_FRAME + 3] < 1
         and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 3
+        and state[i * INPUT_ONE_FRAME + 5] < 4
         and state[i * INPUT_ONE_FRAME + 6] < 1
         and state[i * INPUT_ONE_FRAME + 7] < 1
         and state[i * INPUT_ONE_FRAME + 8] < 1
@@ -330,47 +308,49 @@ def Reward(state,next_state):
         ):
             if (action == 0
             or action == 2
+            or action == 1
             ):
                 total += 0.1
         elif (state[i * INPUT_ONE_FRAME + 2] < 1
         and state[i * INPUT_ONE_FRAME + 3] < 1
         and state[i * INPUT_ONE_FRAME + 4] < 1
         and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 3
+        and state[i * INPUT_ONE_FRAME + 6] < 4
         and state[i * INPUT_ONE_FRAME + 7] > 0.8
         and state[i * INPUT_ONE_FRAME + 8] < 1
         and state[i * INPUT_ONE_FRAME + 9] < 1
         ):
             if (action == 0
             or action == 1
+            or action == 2
             ):
                 total += 0.1
-        elif (state[i * INPUT_ONE_FRAME + 2] < 1
-        and state[i * INPUT_ONE_FRAME + 3] < 1
+        elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
         and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 1
-        and state[i * INPUT_ONE_FRAME + 7] < 1
-        and state[i * INPUT_ONE_FRAME + 8] < 1
-        and state[i * INPUT_ONE_FRAME + 9] < 1
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (action == 0):
-                total += 0.1
+                total += 0.2
             else:
-                total -= 0.2
-        elif (state[i * INPUT_ONE_FRAME + 2] < 1
-        and state[i * INPUT_ONE_FRAME + 3] < 1
-        and state[i * INPUT_ONE_FRAME + 4] < 1
-        and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 1
+                total -= 0.3
+        elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 4] < 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
         and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 1
-        and state[i * INPUT_ONE_FRAME + 9] < 1
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (action == 0):
-                total += 0.1
+                total += 0.2
             else:
-                total -= 0.2
+                total -= 0.3
         
     return total
     

@@ -4,8 +4,8 @@ TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
-MAX_SPEED = 6.28
-
+MAX_SPEED = 1.57
+COLLISION_R = 6
 
 from controller import Supervisor
 import matplotlib.pyplot as plt
@@ -193,7 +193,11 @@ def collision_check():
     global trajectory
     for j in range(3):
         for i in range(2,INPUT_SENSOR + 2):
-            if 5 < state[j * INPUT_SIZE + i] :
+            if (action == 3
+            or action == 4
+            ):
+                continue
+            if COLLISION_R = 6 < state[j * INPUT_SIZE + i] :
                 collision_count += 1
                 time_count = 0
                 setting()

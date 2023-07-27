@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 22
+MODIFY_NUM = 23
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -108,10 +108,10 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED/3)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED)
+        left_motor.setVelocity(MAX_SPEED/3)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:
@@ -383,10 +383,6 @@ def collision_check():
                 setting()
                 set_count = 1
                 collision_storage.append(1)
-                if episode_cnt > 90:
-                    print("state : ",state)
-                    print("next_state : ",next_state)
-                    print(f"episode : {episode_cnt} , action : {action}")
                 break
             if i == 3:
                 collision_storage.append(0)

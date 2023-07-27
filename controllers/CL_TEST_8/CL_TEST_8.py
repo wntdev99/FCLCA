@@ -1,5 +1,5 @@
-CL_KIND = "CL_yes_easy_0_test2"
-CL_MODEL = "Curriculum Easy 0_19"
+CL_KIND = "CL_yes_easy_0_test_21"
+CL_MODEL = "Curriculum Easy 0_21"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
@@ -197,7 +197,7 @@ def collision_check():
             or action == 4
             ):
                 continue
-            if COLLISION_R = 6 < state[j * INPUT_SIZE + i] :
+            if COLLISION_R < state[j * INPUT_SIZE + i] :
                 collision_count += 1
                 time_count = 0
                 setting()

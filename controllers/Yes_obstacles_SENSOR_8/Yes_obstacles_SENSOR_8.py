@@ -113,9 +113,6 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-    elif action == 3:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
 
 # 2-4. Reward structure
 def Reward(state,next_state):
@@ -228,9 +225,9 @@ def Reward(state,next_state):
     # Go staraght
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 1
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
         and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 1
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
         and state[i * INPUT_ONE_FRAME + 6] < 0.8
         and state[i * INPUT_ONE_FRAME + 7] < 0.8
         and state[i * INPUT_ONE_FRAME + 8] < 0.8
@@ -239,68 +236,22 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] > 0
             ):
                 if action == 0:
-                    total += 0.5
-                elif action == 3:
-                    total -= 1
-                
+                    total += 0.2
+            total += state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
         elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
         and state[i * INPUT_ONE_FRAME + 3] < 0.8
         and state[i * INPUT_ONE_FRAME + 4] < 0.8
         and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] < 1
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
         and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 1
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
            if (state[i * INPUT_ONE_FRAME + 1] < 0
             ):
                 if action == 0:
-                    total += 0.5
-                elif action == 3:
-                    total -= 1
-            
-                
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] > 0.8
-        and state[i * INPUT_ONE_FRAME + 6] > 0.8
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if action == 0:
-                total += 0.2
-            else:
-                total -= 1
-                
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] > 0.8
-        and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if action == 0:
-                total += 0.2
-            else:
-                total -= 1
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] > 0.8
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if action == 0:
-                total += 0.2
-            else:
-                total -= 1
-                
+                    total += 0.2
+           total += state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
                 
     # Go staraght
     for i in range(MAX_FRAME):   
@@ -335,7 +286,9 @@ def collision_check():
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):            
             if (action == 1
-            or action == 2):
+            or action == 2
+            or i == 3
+            or i == 4):
                 continue
             if COLLISION_R < next_state[j * INPUT_ONE_FRAME + 2 + i]:
                 setting()

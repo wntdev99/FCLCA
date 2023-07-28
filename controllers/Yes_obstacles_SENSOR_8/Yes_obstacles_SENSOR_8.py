@@ -185,11 +185,43 @@ def Reward(state,next_state):
             if action == 3:
                 total -= 1
     
-    
-    
-    
-    
-    
+    # Collision Avoidance _ 3
+    for i in range(MAX_FRAME):
+        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] > 1
+        and state[i * INPUT_ONE_FRAME + 4] > 1
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (state[i * INPUT_ONE_FRAME + 1] > 0
+            ):
+                if action == 0:
+                    total -= 0.2
+                elif action == 2:
+                    total += 0.1
+                    
+                    
+    # Collision Avoidance _ 3
+    for i in range(MAX_FRAME):
+        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 4] < 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] > 1
+        and state[i * INPUT_ONE_FRAME + 8] > 1
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (state[i * INPUT_ONE_FRAME + 1] < 0
+            ):
+                if action == 0:
+                    total -= 0.2
+                elif action == 1:
+                    total += 0.1
+                    
     # Collision Avoidance _ 3
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] > 0.8
@@ -229,7 +261,7 @@ def Reward(state,next_state):
     # Go staraght
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 1
         and state[i * INPUT_ONE_FRAME + 4] > 0.8
         and state[i * INPUT_ONE_FRAME + 5] < 0.8
         and state[i * INPUT_ONE_FRAME + 6] < 0.8
@@ -241,22 +273,36 @@ def Reward(state,next_state):
             ):
                 if action == 0:
                     total += 0.2
-            total += state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
+            rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
+            if rwd_tmp < 0:
+                total += rwd_tmp * 3
+            else:
+                total += rwd_tmp / 5
+            print(rwd_tmp)
+            
+            
         elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
         and state[i * INPUT_ONE_FRAME + 3] < 0.8
         and state[i * INPUT_ONE_FRAME + 4] < 0.8
         and state[i * INPUT_ONE_FRAME + 5] < 0.8
         and state[i * INPUT_ONE_FRAME + 6] < 0.8
         and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 1
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-           if (state[i * INPUT_ONE_FRAME + 1] < 0
+            if (state[i * INPUT_ONE_FRAME + 1] < 0
             ):
                 if action == 0:
                     total += 0.2
-           total += state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
-                
+                    
+            print(state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4])        
+            
+            rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
+            if rwd_tmp < 0:
+                total += rwd_tmp * 3
+            else:
+                total += rwd_tmp / 5
+            print(rwd_tmp)
     # Go staraght
     for i in range(MAX_FRAME):   
         if (next_state[i * INPUT_ONE_FRAME + 2] > COLLISION_R

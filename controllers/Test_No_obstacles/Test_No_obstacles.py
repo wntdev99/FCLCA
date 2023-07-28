@@ -1,5 +1,5 @@
-CL_KIND = "CL_No_obstacles_0_test_5"
-CL_MODEL = "Curriculum No ob_1"
+CL_KIND = "CL_No_obstacles_0_test_6"
+CL_MODEL = "Curriculum No ob_2"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
@@ -144,6 +144,10 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
+    # Trun Left
+    elif action == 3:
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
 # 0.3925
 # 2-4. state get
 def environment():

@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 0
-MODIFY_NUM = 1
+MODIFY_NUM = 2
 MODEL_NAME = "Curriculum No ob"
 
 import os
@@ -114,6 +114,12 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
+    # Back
+    elif action == 3:
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
+
+        
 
 # 2-4. Reward structure
 def Reward(state,next_state):

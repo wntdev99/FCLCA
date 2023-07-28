@@ -113,6 +113,9 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
+    elif action == 3:
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
 
 # 2-4. Reward structure
 def Reward(state,next_state):

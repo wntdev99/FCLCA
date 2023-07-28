@@ -158,14 +158,14 @@ def Reward(state,next_state):
         or state[i * INPUT_ONE_FRAME + 9] > 3.5
         ):
             if action == 0:
-                total -= 0.8
+                total -= 2
         if (state[i * INPUT_ONE_FRAME + 2] > 4.5
         or state[i * INPUT_ONE_FRAME + 3] > 4.5
         or state[i * INPUT_ONE_FRAME + 8] > 4.5
         or state[i * INPUT_ONE_FRAME + 9] > 4.5
         ):
             if action == 0:
-                total -= 1
+                total -= 5
     
     # Collision Avoidance _ 2
     for i in range(MAX_FRAME):
@@ -272,13 +272,12 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] > 0
             ):
                 if action == 0:
-                    total += 0.2
-            rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
-            if rwd_tmp < 0:
-                total += rwd_tmp * 3
-            else:
-                total += rwd_tmp / 5
-            print(rwd_tmp)
+                    total += 0.5
+                    rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
+                    if rwd_tmp < 0:
+                        total += rwd_tmp * 5
+                    else:
+                        total += rwd_tmp
             
             
         elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
@@ -293,16 +292,12 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] < 0
             ):
                 if action == 0:
-                    total += 0.2
-                    
-            print(state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4])        
-            
-            rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
-            if rwd_tmp < 0:
-                total += rwd_tmp * 3
-            else:
-                total += rwd_tmp / 5
-            print(rwd_tmp)
+                    total += 0.5
+                    rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
+                    if rwd_tmp < 0:
+                        total += rwd_tmp * 5
+                    else:
+                        total += rwd_tmp
     # Go staraght
     for i in range(MAX_FRAME):   
         if (next_state[i * INPUT_ONE_FRAME + 2] > COLLISION_R

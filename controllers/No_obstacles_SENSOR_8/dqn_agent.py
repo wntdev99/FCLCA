@@ -1,7 +1,9 @@
 INPUT_SIZE = 30
-ACTION_SIZE = 5
-LEARNING_RATE = 1e-6
+ACTION_SIZE = 3
+LEARNING_RATE = 1e-2
+EPSILION = 1e-2
 GAMMA = 0.95
+MODEL_NAME = 'Initialize model'
 
 import tensorflow as tf
 import numpy as np
@@ -10,23 +12,18 @@ from tensorflow.python.keras.layers import Dense
 
 # DQN Agent 객체
 class DqnAgent:
-
-    # Q-network and Target Q-network 초기화
-    def __init__(self):
+    def __init__(self, initial_learning_rate=LEARNING_RATE, learning_rate_decay=0.97):
         self.q_net = self.Dqn_model()
         self.target_q_net = self.Dqn_model()
+        self.initial_learning_rate = initial_learning_rate
+        self.learning_rate_decay = learning_rate_decay
+        self.learning_rate = initial_learning_rate  # Initialize the learning rate
+
 
     # DQN model sturture
     @staticmethod
     def Dqn_model():
-        q_net = Sequential()                                                                                                         
-        q_net.add(Dense(1024, input_dim = INPUT_SIZE, activation = 'relu',                                                 
-                        kernel_initializer='he_uniform'))
-        q_net.add(Dense(512, activation = 'relu', kernel_initializer='he_uniform'))                                        
-        q_net.add(
-            Dense(ACTION_SIZE, activation='linear', kernel_initializer='he_uniform'))                                 
-        q_net.compile(optimizer=tf.optimizers.Adam(learning_rate=LEARNING_RATE),                                    
-                      loss='mse')
+        q_net = tf.keras.models.load_model(MODEL_NAME)
         return q_net
 
     # random action set
@@ -36,7 +33,7 @@ class DqnAgent:
     # policy or random select
     def collect_policy(self,max_episodes, episode_cnt, state):
         # heuristics set 0.01 , 10 , 0.8 ㆍㆍㆍ
-        epsilon = 0.01 + (1 - 0.01) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.2)
+        epsilon = EPSILION + (1 - EPSILION) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.3)
         if np.random.random() < epsilon:                                                                       
             return self.random_policy(state)
         return self.policy(state)
@@ -68,3 +65,9 @@ class DqnAgent:
         training_history = self.q_net.fit(x=state_batch, y=target_q, verbose=0)                             
         loss = training_history.history['loss']                                                             
         return loss
+        
+    def update_learning_rate(self, episode):
+        self.learning_rate = self.initial_learning_rate * (self.learning_rate_decay ** episode)
+        optimizer = tf.optimizers.Adam(learning_rate=self.learning_rate)
+        self.q_net.compile(optimizer=optimizer, loss='mse')
+        

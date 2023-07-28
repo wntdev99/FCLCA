@@ -1,5 +1,5 @@
-CL_KIND = "CL_yes_easy_0_test_24"
-CL_MODEL = "Curriculum Easy 0_24"
+CL_KIND = "CL_yes_easy_0_test_25"
+CL_MODEL = "Curriculum Easy 0_1"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
@@ -139,19 +139,11 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/1.5)
+        right_motor.setVelocity(-MAX_SPEED)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/1.5)
-        right_motor.setVelocity(MAX_SPEED)
-    # Trun Left
-    elif action == 3:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-    # Trun Right
-    elif action == 4:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
 # 0.3925
 # 2-4. state get
 def environment():
@@ -193,9 +185,10 @@ def collision_check():
     global trajectory
     for j in range(3):
         for i in range(2,INPUT_SENSOR + 2):
-            if (action == 3
-            or action == 4
-            ):
+            if (action == 1
+            or action == 2
+            or i == 5
+            or i == 6):
                 continue
             if COLLISION_R < state[j * INPUT_SIZE + i] :
                 collision_count += 1

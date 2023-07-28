@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 24
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -108,21 +108,12 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/1.5)
+        right_motor.setVelocity(-MAX_SPEED)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/1.5)
-        right_motor.setVelocity(MAX_SPEED)
-    # Trun Left
-    elif action == 3:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-    # Trun Right
-    elif action == 4:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
 
-# 2-4. Reward structure
 # 2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
@@ -130,7 +121,7 @@ def Reward(state,next_state):
     Dangerous_state = 1
     
     # Target reaching
-    for i in range(MAX_FRAME):                                          # 각 프레임에 대해 모두 진행
+    for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 10
     
@@ -154,174 +145,59 @@ def Reward(state,next_state):
                 
     # Collision Avoidance _ 2
     for i in range(MAX_FRAME):
-        if (next_state[i * INPUT_ONE_FRAME + 2] > 4
-        or next_state[i * INPUT_ONE_FRAME + 3] > 4
-        or next_state[i * INPUT_ONE_FRAME + 5] > 4
-        or next_state[i * INPUT_ONE_FRAME + 6] > 4
-        or next_state[i * INPUT_ONE_FRAME + 8] > 4
-        or next_state[i * INPUT_ONE_FRAME + 9] > 4
+        if (next_state[i * INPUT_ONE_FRAME + 2] > 3.5
+        or next_state[i * INPUT_ONE_FRAME + 3] > 3.5
+        or next_state[i * INPUT_ONE_FRAME + 8] > 3.5
+        or next_state[i * INPUT_ONE_FRAME + 9] > 3.5
         ):
-            total -= 0.5
+            if action == 0:
+                total -= 0.3
     
     # Collision Avoidance _ 3
     for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] > 1
-        or state[i * INPUT_ONE_FRAME + 3] > 1
-        or state[i * INPUT_ONE_FRAME + 5] > 1
-        or state[i * INPUT_ONE_FRAME + 6] > 1
-        or state[i * INPUT_ONE_FRAME + 8] > 1
-        or state[i * INPUT_ONE_FRAME + 9] > 1
+        if (state[i * INPUT_ONE_FRAME + 2] > 0.8
+        or state[i * INPUT_ONE_FRAME + 3] > 0.8
+        or state[i * INPUT_ONE_FRAME + 5] > 0.8
+        or state[i * INPUT_ONE_FRAME + 6] > 0.8
+        or state[i * INPUT_ONE_FRAME + 8] > 0.8
+        or state[i * INPUT_ONE_FRAME + 9] > 0.8
         ):
-            if (next_state[i * INPUT_ONE_FRAME + 2] < 1
-            and next_state[i * INPUT_ONE_FRAME + 3] < 1
-            and next_state[i * INPUT_ONE_FRAME + 5] < 1
-            and next_state[i * INPUT_ONE_FRAME + 6] < 1
-            and next_state[i * INPUT_ONE_FRAME + 8] < 1
-            and next_state[i * INPUT_ONE_FRAME + 9] < 1
+            if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 5] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 6] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
             ):
-                total += 0.5
-                
-    # Collision Avoidance _ 4
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] > 1
-        and state[i * INPUT_ONE_FRAME + 6] > 1
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if (action == 0
-            or action == 1
-            or action == 2
-            ):
-                total += 0.1
-            else:
-                total -= 0.5
+                total += 0.2
                 
     # Collision Avoidance _ 6
     for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] > 1
-        and state[i * INPUT_ONE_FRAME + 3] > 1
-        and state[i * INPUT_ONE_FRAME + 4] < 1
-        and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 1
-        and state[i * INPUT_ONE_FRAME + 7] < 1
-        and state[i * INPUT_ONE_FRAME + 8] < 1
-        and state[i * INPUT_ONE_FRAME + 9] < 1
+        if (state[i * INPUT_ONE_FRAME + 2] > 2.5
+        or state[i * INPUT_ONE_FRAME + 3] > 2.5
+        or state[i * INPUT_ONE_FRAME + 8] > 2.5
+        or state[i * INPUT_ONE_FRAME + 9] > 2.5
         ):
-            if (action == 3
+            if (action == 0
             ):
-                total += 0.1
-            else:
-                total -= 0.1
+                total -= 0.2
                 
-    # Collision Avoidance _ 7
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] < 1
-        and state[i * INPUT_ONE_FRAME + 3] < 1
-        and state[i * INPUT_ONE_FRAME + 4] < 1
-        and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 1
-        and state[i * INPUT_ONE_FRAME + 7] < 1
-        and state[i * INPUT_ONE_FRAME + 8] > 1
-        and state[i * INPUT_ONE_FRAME + 9] > 1
-        ):
-            if (action == 4
-            ):
-                total += 0.1
-            else:
-                total -= 0.1
-                    
-    # Collision Avoidance _ 5
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] > 1
-        and state[i * INPUT_ONE_FRAME + 5] > 1
-        and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if (state[i * INPUT_ONE_FRAME + 1] < 0):
-                if (action == 0
-                or action == 2
-                ):
-                    total += 0.1
-                else:
-                    total -= 0.2
-            elif (state[i * INPUT_ONE_FRAME + 1] > 0):
-                if action == 0:
-                    total += 0.1
-                else:
-                    total -= 0.2
-                
-            
-        elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] > 1
-        and state[i * INPUT_ONE_FRAME + 7] > 1
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if (state[i * INPUT_ONE_FRAME + 1] > 0):
-                if (action == 0
-                or action == 1
-                ):
-                    total += 0.1
-                else:
-                    total -= 0.2
-            elif (state[i * INPUT_ONE_FRAME + 1] < 0):
-                if action == 0:
-                    total += 0.1
-                else:
-                    total -= 0.2
                 
     # Go staraght
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 1
         and state[i * INPUT_ONE_FRAME + 3] < 1
         and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 3
-        and state[i * INPUT_ONE_FRAME + 6] < 1
-        and state[i * INPUT_ONE_FRAME + 7] < 1
-        and state[i * INPUT_ONE_FRAME + 8] < 1
-        and state[i * INPUT_ONE_FRAME + 9] < 1
-        ):
-            if (action == 0
-            or action == 2
-            ):
-                total += 0.1
-        elif (state[i * INPUT_ONE_FRAME + 2] < 1
-        and state[i * INPUT_ONE_FRAME + 3] < 1
-        and state[i * INPUT_ONE_FRAME + 4] < 1
-        and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 3
-        and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 1
-        and state[i * INPUT_ONE_FRAME + 9] < 1
-        ):
-            if (action == 0
-            or action == 1
-            ):
-                total += 0.1
-        elif (state[i * INPUT_ONE_FRAME + 2] < 1
-        and state[i * INPUT_ONE_FRAME + 3] < 1
-        and state[i * INPUT_ONE_FRAME + 4] > 0.8
         and state[i * INPUT_ONE_FRAME + 5] < 1
         and state[i * INPUT_ONE_FRAME + 6] < 1
         and state[i * INPUT_ONE_FRAME + 7] < 1
         and state[i * INPUT_ONE_FRAME + 8] < 1
         and state[i * INPUT_ONE_FRAME + 9] < 1
         ):
-            if (action == 0):
+            if (action == 0
+            ):
                 total += 0.2
-            else:
-                total -= 0.1
+                
         elif (state[i * INPUT_ONE_FRAME + 2] < 1
         and state[i * INPUT_ONE_FRAME + 3] < 1
         and state[i * INPUT_ONE_FRAME + 4] < 1
@@ -331,10 +207,9 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 8] < 1
         and state[i * INPUT_ONE_FRAME + 9] < 1
         ):
-            if (action == 0):
+            if (action == 0
+            ):
                 total += 0.2
-            else:
-                total -= 0.1
                 
     # Go staraght
     for i in range(MAX_FRAME):   
@@ -347,8 +222,7 @@ def Reward(state,next_state):
         or next_state[i * INPUT_ONE_FRAME + 8] > COLLISION_R
         or next_state[i * INPUT_ONE_FRAME + 9] > COLLISION_R
         ):
-            total -= 3
-    
+            total -= 1
     
     return total
     
@@ -368,17 +242,7 @@ def Done():
 def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
-        for i in range(INPUT_SENSOR):
-            """
-            if (i == 2
-            or i == 5):
-                continue
-            """
-            if (action == 3
-            or action == 4
-            ):
-                continue
-            
+        for i in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[j * INPUT_ONE_FRAME + 2 + i]:
                 setting()
                 set_count = 1

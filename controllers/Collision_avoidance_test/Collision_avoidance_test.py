@@ -4,18 +4,18 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 200
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
 ARRIVE_STANDARD = 0.1
 TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
-MIN_DISTANCE = 0.30
+MIN_DISTANCE = 0.20
 NORMALIZATION_SENSOR = 100
-OBSTACLE_COUNT = 0
+OBSTACLE_COUNT = 12
 MODIFY_NUM = 0
-MODEL_NAME = "Curriculum No ob"
+MODEL_NAME = "CA_test"
 
 import os
 import math
@@ -63,7 +63,7 @@ for i in range(8):
 # 1-5. 초기화
 state = np.zeros((STATE_SIZE)); next_state = np.zeros((STATE_SIZE))
 ep = [] ; storage = [] ; loss_data = [] ; reward_data = [] ; done_storage = [] ; collision_storage = []
-action = [0,0] ; avg_reward = 0 ; count_state = 0 ; count_experience = 0 ; set_count = 0
+action = 0 ; avg_reward = 0 ; count_state = 0 ; count_experience = 0 ; set_count = 0
 x_min, x_max = -MAX_LENGHT, MAX_LENGHT
 y_min, y_max = -MAX_LENGHT, MAX_LENGHT
 DAY_NUM = str(datetime.date.today())
@@ -73,25 +73,9 @@ goal = [GOAL_X,GOAL_Y,0]
 # 2. 함수    
 # 2-1. one frame get
 def environment():
-    # 2-1-1. location get
-    ep = translation_field.value
-    # 2-1-2. heading get
     orientation = ep_node.getOrientation()
-    heading = rotated_point(orientation)
-    # 2-1-3. perfect_angle get    
-    perfect_angle = point_slope(goal)                           
-    # 2-1-4. theta get
-    theta = heading - perfect_angle
-    if abs(theta) > 180:
-        if theta < 0:
-            theta = theta + 360
-        elif theta > 0:
-            theta = theta - 360
-    # 2-1-5. radius get ep 
-    goal_radius = math.sqrt(pow(goal[0] - ep[0],2) + pow(goal[1] - ep[1],2))
-    # 2-1-6. radius get ob
-    storage.append(goal_radius)
-    storage.append(math.radians(theta))
+    storage.append(0)
+    storage.append(0)
     # 2-1-6-1. sensor value
     for i in range(INPUT_SENSOR):
         storage.append(ps[i].value/NORMALIZATION_SENSOR)
@@ -100,36 +84,21 @@ def environment():
 def collect_experiences(state,next_state,action,reward,done,buffer):
     buffer.store_experience(state,next_state,reward,action,done)
 
-def linear_mapping(q_value_1, q_value_2):
-    if abs(q_value_1) > abs(q_value_2):
-        divide_value = abs(q_value_1)
-    else:
-        divide_value = abs(q_value_2)
-    if q_value_1 >= q_value_2:
-        new_max = q_value_1
-        new_min = q_value_2
-        action_1 = new_max / divide_value * MAX_SPEED
-        action_2 = new_min / divide_value * MAX_SPEED
-    else:
-        new_max = q_value_2
-        new_min = q_value_1
-        action_2 = new_max / divide_value * MAX_SPEED
-        action_1 = new_min / divide_value * MAX_SPEED
-    return action_1,action_2
-
-
-def max_value(q1,q2):
-    if q1 >= q2:
-        return 0
-    else:
-        return 1
-
 # 2-3. Select action 
 def Action(action):
-    left_velocity, right_velocity = linear_mapping(action[0],action[1])
-    left_motor.setVelocity(left_velocity)
-    right_motor.setVelocity(right_velocity)
-    
+    # Go straight
+    if action == 0:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
+    # Trun Right
+    elif action == 1:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
+    # Trun Left
+    elif action == 2:
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
+        
 
 # 2-4. Reward structure
 def Reward(state,next_state):
@@ -137,18 +106,14 @@ def Reward(state,next_state):
     total = 0
     Dangerous_state = 1
     
-    # Target reaching
-    for i in range(MAX_FRAME):
-        if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
-            total += 1000
-    
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         for k in range(2,2 + INPUT_SENSOR):
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 200000
+            if action == 0:
+                total += 1
         Dangerous_state = 1
     
     # Collision Avoidance _ 1
@@ -158,8 +123,17 @@ def Reward(state,next_state):
             if state[j * INPUT_ONE_FRAME + k] > 0.8:
                 state_sensor += state[j * INPUT_ONE_FRAME + k]
                 next_state_sensor += next_state[j * INPUT_ONE_FRAME + k]
-    total += (state_sensor - next_state_sensor) * 100
-
+    total += (state_sensor - next_state_sensor) * 10
+                
+    # Collision Avoidance _ 2
+    for i in range(MAX_FRAME):
+        if (next_state[i * INPUT_ONE_FRAME + 2] > 3.5
+        or next_state[i * INPUT_ONE_FRAME + 3] > 3.5
+        or next_state[i * INPUT_ONE_FRAME + 8] > 3.5
+        or next_state[i * INPUT_ONE_FRAME + 9] > 3.5
+        ):
+            if action == 0:
+                total -= 2
     
     # Collision Avoidance _ 3
     for i in range(MAX_FRAME):
@@ -177,7 +151,19 @@ def Reward(state,next_state):
             and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
             and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
             ):
-                total += 0.2
+                total += 2
+                
+    # Collision Avoidance _ 6
+    for i in range(MAX_FRAME):
+        if (state[i * INPUT_ONE_FRAME + 2] > 2.5
+        or state[i * INPUT_ONE_FRAME + 3] > 2.5
+        or state[i * INPUT_ONE_FRAME + 8] > 2.5
+        or state[i * INPUT_ONE_FRAME + 9] > 2.5
+        ):
+            if (action == 0
+            ):
+                total -= 1
+                
                 
     # Go staraght
     for i in range(MAX_FRAME):   
@@ -190,21 +176,15 @@ def Reward(state,next_state):
         or next_state[i * INPUT_ONE_FRAME + 8] > COLLISION_R
         or next_state[i * INPUT_ONE_FRAME + 9] > COLLISION_R
         ):
-            total -= 1
+            total -= 10
     
     return total
     
     
 # 2.5. Done check
 def Done():
-    for i in range(MAX_FRAME):
-        # location get
-        if next_state[i * INPUT_ONE_FRAME] <= ARRIVE_STANDARD:
-            done = True     # 그만
-        else:
-            done = False    # 더해    
             
-        return done
+        return False 
     
 # 2.6. Collision check
 def collision_check():
@@ -326,7 +306,7 @@ for episode_cnt in range(1,MAX_EPISODE):
             # reach check (next_state , current_state)
             done = Done()
             # store experiences
-            collect_experiences(state,next_state,max_value(action[0],action[1]),reward,done,buffer)
+            collect_experiences(state,next_state,action,reward,done,buffer)
             # collision check
             collision_check()
             # done check -> setting or pass

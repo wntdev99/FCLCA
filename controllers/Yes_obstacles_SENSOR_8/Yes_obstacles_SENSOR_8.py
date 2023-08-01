@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 0
+MODIFY_NUM = 2
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -154,10 +154,24 @@ def Reward(state,next_state):
         and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            total += 1
+            total += 2
+        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 4] > 0.8
+        and state[i * INPUT_ONE_FRAME + 5] > 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
             if action == 0:
+                total += 2
                 rwd_tmp = (state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]) * 5
                 total += rwd_tmp
+            
+            
+            
+
         if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 4] > 0.8
@@ -167,8 +181,20 @@ def Reward(state,next_state):
         and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            total += 1
+            total += 0.5
+
+        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 4] > 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
             if action == 0:
+                if state[i * INPUT_ONE_FRAME + 4] < 3:
+                    total += 3
                 rwd_tmp = (state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]) * 5
                 total += rwd_tmp
         if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
@@ -180,8 +206,19 @@ def Reward(state,next_state):
         and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            total += 1
+            total += 2
+            
+        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 4] < 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] > 0.8
+        and state[i * INPUT_ONE_FRAME + 7] > 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
             if action == 0:
+                total += 2
                 rwd_tmp = (state[i * INPUT_ONE_FRAME + 7] - next_state[i * INPUT_ONE_FRAME + 7]) * 5
                 total += rwd_tmp
         if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
@@ -193,8 +230,19 @@ def Reward(state,next_state):
         and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            total += 1
+            total += 0.5
+        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 4] < 0.8
+        and state[i * INPUT_ONE_FRAME + 5] < 0.8
+        and state[i * INPUT_ONE_FRAME + 6] < 0.8
+        and state[i * INPUT_ONE_FRAME + 7] > 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
             if action == 0:
+                if state[i * INPUT_ONE_FRAME + 7] < 3:
+                    total += 3
                 rwd_tmp = (state[i * INPUT_ONE_FRAME + 7] - next_state[i * INPUT_ONE_FRAME + 7]) * 5
                 total += rwd_tmp
         
@@ -216,7 +264,15 @@ def Reward(state,next_state):
             if action == 0:
                 total -= next_state[i * INPUT_ONE_FRAME + 9]
         
-        
+        if (state[i * INPUT_ONE_FRAME + 2] > 2
+        or state[i * INPUT_ONE_FRAME + 3] > 2
+        or state[i * INPUT_ONE_FRAME + 4] > 3
+        or state[i * INPUT_ONE_FRAME + 7] > 3
+        or state[i * INPUT_ONE_FRAME + 8] > 2
+        or state[i * INPUT_ONE_FRAME + 9] > 2
+        ):
+            if action == 0:
+                total -= 5
         
     """
     # Collision Avoidance _ 2

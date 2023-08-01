@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 2
+MODIFY_NUM = 4
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -132,7 +132,7 @@ def Reward(state,next_state):
                 Dangerous_state = 0
         if Dangerous_state:
             # -2 ~ +2
-            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 1000
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
         Dangerous_state = 1
     ####################################################################
     # Collision Avoidance _ 1
@@ -250,19 +250,19 @@ def Reward(state,next_state):
         if (state[i * INPUT_ONE_FRAME + 2] > 0.8
         ):
             if action == 0:
-                total -= next_state[i * INPUT_ONE_FRAME + 2]
+                total -= 2
         if (state[i * INPUT_ONE_FRAME + 3] > 0.8
         ):
             if action == 0:
-                total -= next_state[i * INPUT_ONE_FRAME + 3]
+                total -= 2
         if (state[i * INPUT_ONE_FRAME + 8] > 0.8
         ):
             if action == 0:
-                total -= next_state[i * INPUT_ONE_FRAME + 8]
+                total -= 2
         if (state[i * INPUT_ONE_FRAME + 9] > 0.8
         ):
             if action == 0:
-                total -= next_state[i * INPUT_ONE_FRAME + 9]
+                total -= 2
         
         if (state[i * INPUT_ONE_FRAME + 2] > 2
         or state[i * INPUT_ONE_FRAME + 3] > 2

@@ -99,7 +99,7 @@ def Action(action):
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
         
-
+    print(state)
 # 2-4. Reward structure
 def Reward(state,next_state):
     # Initialization

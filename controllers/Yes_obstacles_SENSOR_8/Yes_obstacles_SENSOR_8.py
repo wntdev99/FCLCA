@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 1
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -113,7 +113,7 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-
+        
 # 2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
@@ -188,8 +188,8 @@ def Reward(state,next_state):
     # Collision Avoidance _ 3
     for i in range(MAX_FRAME):
         if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] > 1
-        and state[i * INPUT_ONE_FRAME + 4] > 1
+        and state[i * INPUT_ONE_FRAME + 3] > 0.8
+        and state[i * INPUT_ONE_FRAME + 4] > 0.8
         and state[i * INPUT_ONE_FRAME + 5] < 0.8
         and state[i * INPUT_ONE_FRAME + 6] < 0.8
         and state[i * INPUT_ONE_FRAME + 7] < 0.8
@@ -199,7 +199,7 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] > 0
             ):
                 if action == 0:
-                    total -= 0.2
+                    total -= 1
                 elif action == 2:
                     total += 0.1
                     
@@ -211,14 +211,14 @@ def Reward(state,next_state):
         and state[i * INPUT_ONE_FRAME + 4] < 0.8
         and state[i * INPUT_ONE_FRAME + 5] < 0.8
         and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] > 1
-        and state[i * INPUT_ONE_FRAME + 8] > 1
+        and state[i * INPUT_ONE_FRAME + 7] > 0.8
+        and state[i * INPUT_ONE_FRAME + 8] > 0.8
         and state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (state[i * INPUT_ONE_FRAME + 1] < 0
             ):
                 if action == 0:
-                    total -= 0.2
+                    total -= 1
                 elif action == 1:
                     total += 0.1
                     
@@ -272,12 +272,12 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] > 0
             ):
                 if action == 0:
-                    total += 0.5
-                    rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
-                    if rwd_tmp < 0:
-                        total += rwd_tmp * 5
-                    else:
-                        total += rwd_tmp
+                    total += 0.1
+            rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
+            if rwd_tmp < 0:
+                total += rwd_tmp * 5
+            else:
+                total += rwd_tmp * 5
             
             
         elif (state[i * INPUT_ONE_FRAME + 2] < 0.8
@@ -292,12 +292,12 @@ def Reward(state,next_state):
             if (state[i * INPUT_ONE_FRAME + 1] < 0
             ):
                 if action == 0:
-                    total += 0.5
-                    rwd_tmp = state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]
-                    if rwd_tmp < 0:
-                        total += rwd_tmp * 5
-                    else:
-                        total += rwd_tmp
+                    total += 0.1
+            rwd_tmp = state[i * INPUT_ONE_FRAME + 7] - next_state[i * INPUT_ONE_FRAME + 7]
+            if rwd_tmp < 0:
+                total += rwd_tmp * 5
+            else:
+                total += rwd_tmp * 5
     # Go staraght
     for i in range(MAX_FRAME):   
         if (next_state[i * INPUT_ONE_FRAME + 2] > COLLISION_R
@@ -309,7 +309,7 @@ def Reward(state,next_state):
         or next_state[i * INPUT_ONE_FRAME + 8] > COLLISION_R
         or next_state[i * INPUT_ONE_FRAME + 9] > COLLISION_R
         ):
-            total -= 3
+            total -= 10
     
     return total
     

@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 200
+MAX_EPISODE = 1000
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -13,9 +13,9 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
-OBSTACLE_COUNT = 0
+OBSTACLE_COUNT = 12
 MODIFY_NUM = 0
-MODEL_NAME = "Curriculum No ob"
+MODEL_NAME = "Action_mapping"
 
 import os
 import math
@@ -177,7 +177,7 @@ def Reward(state,next_state):
             and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
             and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
             ):
-                total += 0.2
+                total += 10
                 
     # Go staraght
     for i in range(MAX_FRAME):   
@@ -190,7 +190,7 @@ def Reward(state,next_state):
         or next_state[i * INPUT_ONE_FRAME + 8] > COLLISION_R
         or next_state[i * INPUT_ONE_FRAME + 9] > COLLISION_R
         ):
-            total -= 1
+            total -= 100
     
     return total
     

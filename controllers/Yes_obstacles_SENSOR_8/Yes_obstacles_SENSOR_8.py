@@ -150,7 +150,44 @@ def Reward(state,next_state):
         or next_state[j * INPUT_ONE_FRAME + 8] > COLLISION_R
         or next_state[j * INPUT_ONE_FRAME + 9] > COLLISION_R
         ):
-            total -= 5
+            total -= 1
+            
+        
+        if (state[j * INPUT_ONE_FRAME + 2] > 0.8
+        or state[j * INPUT_ONE_FRAME + 3] > 0.8
+        or state[j * INPUT_ONE_FRAME + 8] > 0.8
+        or state[j * INPUT_ONE_FRAME + 9] > 0.8
+        ):
+            total -= 0.1
+            if (next_state[j * INPUT_ONE_FRAME + 2] < 0.8
+            and next_state[j * INPUT_ONE_FRAME + 3] < 0.8
+            and next_state[j * INPUT_ONE_FRAME + 8] < 0.8
+            and next_state[j * INPUT_ONE_FRAME + 9] < 0.8
+            ):
+                total += 0.1
+        if (state[j * INPUT_ONE_FRAME + 2] > 0.8
+        or state[j * INPUT_ONE_FRAME + 9] > 0.8
+        ):
+            total -= 0.1
+            if (next_state[j * INPUT_ONE_FRAME + 2] < 0.8
+            and next_state[j * INPUT_ONE_FRAME + 9] < 0.8
+            ):
+                total += 0.1
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 2.0
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            total += 0.05
+            if (next_state[j * INPUT_ONE_FRAME + 2] < 0.8
+            and next_state[j * INPUT_ONE_FRAME + 9] < 0.8
+            ):
+                total += 0.1
+        
+        
             
         
             

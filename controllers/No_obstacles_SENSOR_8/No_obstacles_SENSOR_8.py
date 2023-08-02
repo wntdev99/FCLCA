@@ -138,6 +138,7 @@ def Reward(state,next_state):
         if Dangerous_state:
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 100
             total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1]))
+            total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 100
         Dangerous_state = 1    
 
     return total

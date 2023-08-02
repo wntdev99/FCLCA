@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 100
+MAX_EPISODE = 300
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 4
+MODIFY_NUM = 6
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -142,7 +142,7 @@ def Reward(state,next_state):
             if state[j * INPUT_ONE_FRAME + k] > 0.8:
                 state_sensor += state[j * INPUT_ONE_FRAME + k]
                 next_state_sensor += next_state[j * INPUT_ONE_FRAME + k]
-    total += (state_sensor - next_state_sensor)
+    total += (state_sensor - next_state_sensor) / 2
     ####################################################################
     for i in range(MAX_FRAME):
         if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
@@ -154,7 +154,7 @@ def Reward(state,next_state):
         and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            total += 2
+            total += 0.5
         if (state[i * INPUT_ONE_FRAME + 2] < 0.8
         and state[i * INPUT_ONE_FRAME + 3] < 0.8
         and state[i * INPUT_ONE_FRAME + 4] > 0.8
@@ -194,7 +194,7 @@ def Reward(state,next_state):
         ):
             if action == 0:
                 if state[i * INPUT_ONE_FRAME + 4] < 3:
-                    total += 3
+                    total += 2
                 rwd_tmp = (state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4]) * 5
                 total += rwd_tmp
         if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
@@ -206,7 +206,7 @@ def Reward(state,next_state):
         and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
         and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            total += 2
+            total += 0.5
             
         if (state[i * INPUT_ONE_FRAME + 2] < 0.8
         and state[i * INPUT_ONE_FRAME + 3] < 0.8
@@ -242,7 +242,7 @@ def Reward(state,next_state):
         ):
             if action == 0:
                 if state[i * INPUT_ONE_FRAME + 7] < 3:
-                    total += 3
+                    total += 2
                 rwd_tmp = (state[i * INPUT_ONE_FRAME + 7] - next_state[i * INPUT_ONE_FRAME + 7]) * 5
                 total += rwd_tmp
         
@@ -264,15 +264,31 @@ def Reward(state,next_state):
             if action == 0:
                 total -= 2
         
-        if (state[i * INPUT_ONE_FRAME + 2] > 2
-        or state[i * INPUT_ONE_FRAME + 3] > 2
+        if (state[i * INPUT_ONE_FRAME + 2] > 1
+        or state[i * INPUT_ONE_FRAME + 3] > 1
         or state[i * INPUT_ONE_FRAME + 4] > 3
         or state[i * INPUT_ONE_FRAME + 7] > 3
-        or state[i * INPUT_ONE_FRAME + 8] > 2
-        or state[i * INPUT_ONE_FRAME + 9] > 2
+        or state[i * INPUT_ONE_FRAME + 8] > 1
+        or state[i * INPUT_ONE_FRAME + 9] > 1
         ):
             if action == 0:
                 total -= 5
+        
+        
+    # Collision Avoidance _ 3
+    for i in range(MAX_FRAME):
+        if (state[i * INPUT_ONE_FRAME + 2] > 0.8
+        or state[i * INPUT_ONE_FRAME + 3] > 0.8
+        or state[i * INPUT_ONE_FRAME + 8] > 0.8
+        or state[i * INPUT_ONE_FRAME + 9] > 0.8
+        ):
+            if (next_state[i * INPUT_ONE_FRAME + 3] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 4] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
+            ):
+                total += 1
+                
         
     """
     # Collision Avoidance _ 2
@@ -285,15 +301,7 @@ def Reward(state,next_state):
             if action == 0:
                 total -= 1
                     
-    # Collision Avoidance _ 3
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 3] > 0.8
-        and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        ):
-            if (next_state[i * INPUT_ONE_FRAME + 3] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 4] > 0.8
-            ):
-                total += 1
+
             
                     
 

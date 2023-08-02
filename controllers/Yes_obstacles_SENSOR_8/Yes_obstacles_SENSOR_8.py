@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 100
+MAX_EPISODE = 150
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -109,9 +109,17 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED/3)
     # Trun Left
     elif action == 2:
+        left_motor.setVelocity(MAX_SPEED/3)
+        right_motor.setVelocity(MAX_SPEED)
+    # Trun Right
+    elif action == 3:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
+    # Trun Left
+    elif action == 4:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
         
@@ -140,39 +148,32 @@ def Reward(state,next_state):
             total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1]))
             total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 100
         Dangerous_state = 1    
-
-    # Collision Avoidance
-    for j in range(MAX_FRAME):
-        if (next_state[j * INPUT_ONE_FRAME + 2] > COLLISION_R
-        or next_state[j * INPUT_ONE_FRAME + 3] > COLLISION_R
-        or next_state[j * INPUT_ONE_FRAME + 4] > COLLISION_R
-        or next_state[j * INPUT_ONE_FRAME + 7] > COLLISION_R
-        or next_state[j * INPUT_ONE_FRAME + 8] > COLLISION_R
-        or next_state[j * INPUT_ONE_FRAME + 9] > COLLISION_R
-        ):
-            total -= 1
-            
         
-        if (state[j * INPUT_ONE_FRAME + 2] > 0.8
+    for j in range(MAX_FRAME):
+        if ((state[j * INPUT_ONE_FRAME + 2] > 0.8
         or state[j * INPUT_ONE_FRAME + 3] > 0.8
+        or state[j * INPUT_ONE_FRAME + 4] > 0.8)
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if action == 4:
+                total += 0.1
+            else:
+                total -= 3
+                
+        if ((state[j * INPUT_ONE_FRAME + 7] > 0.8
         or state[j * INPUT_ONE_FRAME + 8] > 0.8
-        or state[j * INPUT_ONE_FRAME + 9] > 0.8
+        or state[j * INPUT_ONE_FRAME + 9] > 0.8)
+        and state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 0.8
         ):
-            total -= 0.1
-            if (next_state[j * INPUT_ONE_FRAME + 2] < 0.8
-            and next_state[j * INPUT_ONE_FRAME + 3] < 0.8
-            and next_state[j * INPUT_ONE_FRAME + 8] < 0.8
-            and next_state[j * INPUT_ONE_FRAME + 9] < 0.8
-            ):
+            if action == 3:
                 total += 0.1
-        if (state[j * INPUT_ONE_FRAME + 2] > 0.8
-        or state[j * INPUT_ONE_FRAME + 9] > 0.8
-        ):
-            total -= 0.1
-            if (next_state[j * INPUT_ONE_FRAME + 2] < 0.8
-            and next_state[j * INPUT_ONE_FRAME + 9] < 0.8
-            ):
-                total += 0.1
+            else:
+                total -= 3
+                
         if (state[j * INPUT_ONE_FRAME + 2] < 0.8
         and state[j * INPUT_ONE_FRAME + 3] < 0.8
         and state[j * INPUT_ONE_FRAME + 4] > 0.8
@@ -181,15 +182,51 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 8] < 0.8
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
-            total += 0.05
-            if (next_state[j * INPUT_ONE_FRAME + 2] < 0.8
-            and next_state[j * INPUT_ONE_FRAME + 9] < 0.8
-            ):
+            if action == 2:
                 total += 0.1
-        
-        
-            
-        
+            else:
+                total -= 3
+                
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 7] < 2.0
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if action == 1:
+                total += 0.1
+            else:
+                total -= 3
+                
+        if (state[j * INPUT_ONE_FRAME + 2] > 0.8
+        or state[j * INPUT_ONE_FRAME + 3] > 0.8
+        or state[j * INPUT_ONE_FRAME + 4] > 2
+        or state[j * INPUT_ONE_FRAME + 7] > 2
+        or state[j * INPUT_ONE_FRAME + 8] > 0.8
+        or state[j * INPUT_ONE_FRAME + 9] > 0.8
+        ):
+            if (action == 0
+            and action == 1
+            and action == 2
+            ):
+                total -= 3
+        if (state[j * INPUT_ONE_FRAME + 2] > 1.5
+        or state[j * INPUT_ONE_FRAME + 3] > 1.5
+        or state[j * INPUT_ONE_FRAME + 4] > 3
+        or state[j * INPUT_ONE_FRAME + 7] > 3
+        or state[j * INPUT_ONE_FRAME + 8] > 1.5
+        or state[j * INPUT_ONE_FRAME + 9] > 1.5
+        ):
+            if (action == 0
+            and action == 1
+            and action == 2
+            ):
+                total -= 3
+                
+                
+                
             
     return total
 
@@ -210,8 +247,8 @@ def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):            
-            if (action == 1
-            or action == 2
+            if (action == 3
+            or action == 4
             or i == 3
             or i == 4):
                 continue
@@ -219,6 +256,12 @@ def collision_check():
                 setting()
                 set_count = 1
                 collision_storage.append(1)
+
+                if episode_cnt > 90:
+                    print("state : ",state)
+                    print("next_state : ",next_state)
+                    print("action : ",action)
+                
                 break
             if i == 3:
                 collision_storage.append(0)
@@ -346,10 +389,6 @@ for episode_cnt in range(1,MAX_EPISODE):
             # count experiences
             count_experience += 1
 
-            if episode_cnt > 90:
-                print("state : ",state)
-                print("next_state : ",next_state)
-                print("action : ",action)
 
             # experience replay
             if count_experience == REPLAY_CYCLE:

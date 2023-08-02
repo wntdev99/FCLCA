@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 0.785
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 300
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 7
+MODIFY_NUM = 8
 MODEL_NAME = "Curriculum Easy 0"
 
 import os
@@ -289,6 +289,20 @@ def Reward(state,next_state):
             ):
                 total += 2
 
+        if (next_state[i * INPUT_ONE_FRAME + 4] > 4
+        or next_state[i * INPUT_ONE_FRAME + 4] > 5
+        or next_state[i * INPUT_ONE_FRAME + 4] > 6
+        ):
+            total -= next_state[i * INPUT_ONE_FRAME + 4]
+
+        if (next_state[i * INPUT_ONE_FRAME + 7] > 4
+        or next_state[i * INPUT_ONE_FRAME + 7] > 5
+        or next_state[i * INPUT_ONE_FRAME + 7] > 6
+        ):
+            total -= next_state[i * INPUT_ONE_FRAME + 7]
+        
+        
+        
     # Go staraght
     for i in range(MAX_FRAME):   
         if (next_state[i * INPUT_ONE_FRAME + 2] > COLLISION_R

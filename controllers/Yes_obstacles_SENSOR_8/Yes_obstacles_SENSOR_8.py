@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 100
+MAX_EPISODE = 80
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 2
+MODIFY_NUM = 3
 MODEL_NAME = "Curriculum Yes ob easy 0"
 
 import os
@@ -145,7 +145,7 @@ def Reward(state,next_state):
                 Dangerous_state = 0
         if Dangerous_state:
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 1000
-            total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1])) * 2
+            total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1])) * 10
             total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 10
         Dangerous_state = 1    
         

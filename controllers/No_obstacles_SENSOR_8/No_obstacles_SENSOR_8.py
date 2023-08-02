@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 0
-MODIFY_NUM = 2
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum No ob"
 
 import os
@@ -114,11 +114,6 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-    # Back
-    elif action == 3:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
-
         
 
 # 2-4. Reward structure
@@ -130,107 +125,20 @@ def Reward(state,next_state):
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
-            total += 10
+            total += 1
     
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         for k in range(2,2 + INPUT_SENSOR):
+            if (k == 5
+            or k == 6):
+                continue
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
-        Dangerous_state = 1
-    
-    # Collision Avoidance _ 1
-    state_sensor = 0.0 ; next_state_sensor = 0.0
-    for j in range(MAX_FRAME):
-        for k in range(2,2 + INPUT_SENSOR):
-            if state[j * INPUT_ONE_FRAME + k] > 0.8:
-                state_sensor += state[j * INPUT_ONE_FRAME + k]
-                next_state_sensor += next_state[j * INPUT_ONE_FRAME + k]
-    total += (state_sensor - next_state_sensor)
-                
-    # Collision Avoidance _ 2
-    for i in range(MAX_FRAME):
-        if (next_state[i * INPUT_ONE_FRAME + 2] > 3.5
-        or next_state[i * INPUT_ONE_FRAME + 3] > 3.5
-        or next_state[i * INPUT_ONE_FRAME + 8] > 3.5
-        or next_state[i * INPUT_ONE_FRAME + 9] > 3.5
-        ):
-            if action == 0:
-                total -= 0.3
-    
-    # Collision Avoidance _ 3
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] > 0.8
-        or state[i * INPUT_ONE_FRAME + 3] > 0.8
-        or state[i * INPUT_ONE_FRAME + 5] > 0.8
-        or state[i * INPUT_ONE_FRAME + 6] > 0.8
-        or state[i * INPUT_ONE_FRAME + 8] > 0.8
-        or state[i * INPUT_ONE_FRAME + 9] > 0.8
-        ):
-            if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 5] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 6] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
-            ):
-                total += 0.2
-                
-    # Collision Avoidance _ 6
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] > 2.5
-        or state[i * INPUT_ONE_FRAME + 3] > 2.5
-        or state[i * INPUT_ONE_FRAME + 8] > 2.5
-        or state[i * INPUT_ONE_FRAME + 9] > 2.5
-        ):
-            if (action == 0
-            ):
-                total -= 0.2
-                
-                
-    # Go staraght
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] < 1
-        and state[i * INPUT_ONE_FRAME + 3] < 1
-        and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 1
-        and state[i * INPUT_ONE_FRAME + 7] < 1
-        and state[i * INPUT_ONE_FRAME + 8] < 1
-        and state[i * INPUT_ONE_FRAME + 9] < 1
-        ):
-            if (action == 0
-            ):
-                total += 0.2
-                
-        elif (state[i * INPUT_ONE_FRAME + 2] < 1
-        and state[i * INPUT_ONE_FRAME + 3] < 1
-        and state[i * INPUT_ONE_FRAME + 4] < 1
-        and state[i * INPUT_ONE_FRAME + 5] < 1
-        and state[i * INPUT_ONE_FRAME + 6] < 1
-        and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 1
-        and state[i * INPUT_ONE_FRAME + 9] < 1
-        ):
-            if (action == 0
-            ):
-                total += 0.2
-                
-    # Go staraght
-    for i in range(MAX_FRAME):   
-        if (next_state[i * INPUT_ONE_FRAME + 2] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 3] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 4] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 5] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 6] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 7] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 8] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 9] > COLLISION_R
-        ):
-            total -= 1
-    
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 100
+        Dangerous_state = 1    
+
     return total
     
     

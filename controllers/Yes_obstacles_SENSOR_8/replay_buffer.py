@@ -1,7 +1,7 @@
 REPALY_MEMORY = 1000000
 MIN_BATCH_SIZE = 1024
-CL_NAME = "CL_YES_world_easy_change_world"
-CL_LOAD_NAME = "CL_NO_world"
+CL_NAME = "CL_YES_world_easy_action3"
+CL_LOAD_NAME = "CL_No_world_action3_replay_memoryss"
 
 import random
 import pickle

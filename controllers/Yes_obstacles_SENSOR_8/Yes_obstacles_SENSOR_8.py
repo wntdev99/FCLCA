@@ -1,7 +1,7 @@
 GOAL_X = 0
 GOAL_Y = 0 
 COLLISION_R = 6
-MAX_SPEED = 0.785
+MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
 MAX_EPISODE = 100
@@ -14,8 +14,8 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 11
-MODEL_NAME = "Curriculum Easy 0"
+MODIFY_NUM = 0
+MODEL_NAME = "Curriculum Yes ob easy 0"
 
 import os
 import math
@@ -50,6 +50,7 @@ for i in range(OBSTACLE_COUNT):
     tmp = robot.getFromDef(f'ob{i}').getField('translation').value
     ob_field.append(tmp[0:2])
 ob_field.append([GOAL_X , GOAL_Y])
+print(ob_field)
 #1-4. e-puck proximity sensor 정보
 ps = []
 psNames = [
@@ -114,6 +115,7 @@ def Action(action):
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
         
+
 # 2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
@@ -123,203 +125,30 @@ def Reward(state,next_state):
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
-            total += 100
-    ####################################################################
+            total += 1
+    
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         for k in range(2,2 + INPUT_SENSOR):
+            if (k == 5
+            or k == 6):
+                continue
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            # -2 ~ +2
-            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
-        Dangerous_state = 1
-    ####################################################################
-    # Collision Avoidance _ 1
-    state_sensor = 0.0 ; next_state_sensor = 0.0
-    for j in range(MAX_FRAME):
-        for k in range(2,2 + INPUT_SENSOR):
-            if state[j * INPUT_ONE_FRAME + k] > 0.8:
-                state_sensor += state[j * INPUT_ONE_FRAME + k]
-                next_state_sensor += next_state[j * INPUT_ONE_FRAME + k]
-    total += (state_sensor - next_state_sensor) / 2
-    ####################################################################
-    for i in range(MAX_FRAME):
-        if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and next_state[i * INPUT_ONE_FRAME + 5] > 0.8
-        and next_state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            total += 2
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] > 0.8
-        and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if action == 0:
-                total += 2
-                rwd_tmp = (state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4])
-                total += rwd_tmp
-            
-            
-            
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 100
+            total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1]))
+            total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 100
+        Dangerous_state = 1    
 
-        if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and next_state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            total += 2
-
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] > 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] < 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if action == 0:
-                if state[i * INPUT_ONE_FRAME + 4] < 3:
-                    total += 2
-                rwd_tmp = (state[i * INPUT_ONE_FRAME + 4] - next_state[i * INPUT_ONE_FRAME + 4])
-                total += rwd_tmp
-        if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 6] > 0.8
-        and next_state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            total += 2
+    # Collision Avoidance
+    for j in range(MAX_FRAME - 1):
+        for k in range(2, 2 + INPUT_SENSOR):
+            if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
+                total += (state[(j + 1) * INPUT_ONE_FRAME + k] - next_state[(j + 1) * INPUT_ONE_FRAME + k])
             
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] > 0.8
-        and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if action == 0:
-                total += 2
-                rwd_tmp = (state[i * INPUT_ONE_FRAME + 7] - next_state[i * INPUT_ONE_FRAME + 7])
-                total += rwd_tmp
-        if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            total += 2
-        if (state[i * INPUT_ONE_FRAME + 2] < 0.8
-        and state[i * INPUT_ONE_FRAME + 3] < 0.8
-        and state[i * INPUT_ONE_FRAME + 4] < 0.8
-        and state[i * INPUT_ONE_FRAME + 5] < 0.8
-        and state[i * INPUT_ONE_FRAME + 6] < 0.8
-        and state[i * INPUT_ONE_FRAME + 7] > 0.8
-        and state[i * INPUT_ONE_FRAME + 8] < 0.8
-        and state[i * INPUT_ONE_FRAME + 9] < 0.8
-        ):
-            if action == 0:
-                if state[i * INPUT_ONE_FRAME + 7] < 3:
-                    total += 2
-                rwd_tmp = (state[i * INPUT_ONE_FRAME + 7] - next_state[i * INPUT_ONE_FRAME + 7])
-                total += rwd_tmp
-        
-        
-        if (state[i * INPUT_ONE_FRAME + 2] > 0.8
-        ):
-            if action == 0:
-                total -= 2
-        if (state[i * INPUT_ONE_FRAME + 3] > 0.8
-        ):
-            if action == 0:
-                total -= 2
-        if (state[i * INPUT_ONE_FRAME + 8] > 0.8
-        ):
-            if action == 0:
-                total -= 2
-        if (state[i * INPUT_ONE_FRAME + 9] > 0.8
-        ):
-            if action == 0:
-                total -= 2
-        
-        if (state[i * INPUT_ONE_FRAME + 2] > 1
-        or state[i * INPUT_ONE_FRAME + 3] > 1
-        or state[i * INPUT_ONE_FRAME + 4] > 3
-        or state[i * INPUT_ONE_FRAME + 7] > 3
-        or state[i * INPUT_ONE_FRAME + 8] > 1
-        or state[i * INPUT_ONE_FRAME + 9] > 1
-        ):
-            if action == 0:
-                total -= 5
-        
-        
-    # Collision Avoidance _ 3
-    for i in range(MAX_FRAME):
-        if (state[i * INPUT_ONE_FRAME + 2] > 0.8
-        or state[i * INPUT_ONE_FRAME + 3] > 0.8
-        or state[i * INPUT_ONE_FRAME + 8] > 0.8
-        or state[i * INPUT_ONE_FRAME + 9] > 0.8
-        ):
-            if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
-            and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
-            ):
-                total += 2
-
-        if (next_state[i * INPUT_ONE_FRAME + 4] > 4
-        or next_state[i * INPUT_ONE_FRAME + 4] > 5
-        or next_state[i * INPUT_ONE_FRAME + 4] > 6
-        or next_state[i * INPUT_ONE_FRAME + 4] > 3
-        ):
-            total -= next_state[i * INPUT_ONE_FRAME + 4]
-
-        if (next_state[i * INPUT_ONE_FRAME + 7] > 4
-        or next_state[i * INPUT_ONE_FRAME + 7] > 5
-        or next_state[i * INPUT_ONE_FRAME + 7] > 6
-        or next_state[i * INPUT_ONE_FRAME + 7] > 3
-        ):
-            total -= next_state[i * INPUT_ONE_FRAME + 7]
-        
-        
-        
-    # Go staraght
-    for i in range(MAX_FRAME):   
-        if (next_state[i * INPUT_ONE_FRAME + 2] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 3] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 4] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 5] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 6] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 7] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 8] > COLLISION_R
-        or next_state[i * INPUT_ONE_FRAME + 9] > COLLISION_R
-        ):
-            total -= 20
-    
     return total
-    
+
     
 # 2.5. Done check
 def Done():

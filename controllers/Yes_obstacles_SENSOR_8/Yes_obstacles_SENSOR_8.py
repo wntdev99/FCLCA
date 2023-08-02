@@ -175,11 +175,6 @@ def collision_check():
                 setting()
                 set_count = 1
                 collision_storage.append(1)
-                if episode_cnt > 90:
-                    print("state : ",state)
-                    print("next_state : ",next_state)
-                    print("action : ",action)
-                    
                 break
             if i == 3:
                 collision_storage.append(0)
@@ -306,6 +301,11 @@ for episode_cnt in range(1,MAX_EPISODE):
             Action(action)
             # count experiences
             count_experience += 1
+
+            if episode_cnt > 90:
+                print("state : ",state)
+                print("next_state : ",next_state)
+                print("action : ",action)
 
             # experience replay
             if count_experience == REPLAY_CYCLE:

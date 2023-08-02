@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 300
+MAX_EPISODE = 150
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -117,10 +117,10 @@ def Action(action):
     # Trun Right
     elif action == 3:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED/4)
+        right_motor.setVelocity(-MAX_SPEED)
     # Trun Left
     elif action == 4:
-        left_motor.setVelocity(-MAX_SPEED/4)
+        left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
         
         

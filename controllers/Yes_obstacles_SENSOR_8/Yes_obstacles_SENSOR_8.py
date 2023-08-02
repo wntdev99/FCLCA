@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 0
+MODIFY_NUM = 1
 MODEL_NAME = "Curriculum Yes ob easy 0"
 
 import os
@@ -146,6 +146,62 @@ def Reward(state,next_state):
         for k in range(2, 2 + INPUT_SENSOR):
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 total += (state[(j + 1) * INPUT_ONE_FRAME + k] - next_state[(j + 1) * INPUT_ONE_FRAME + k])
+        
+    for j in range(MAX_FRAME):
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 2
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if state[j * INPUT_ONE_FRAME + 1] < 0:
+                if action == 0:
+                    total += 0.1
+                elif action == 2:
+                    total += 0.05
+                else:
+                    total -= 1
+                
+        elif (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 0.8
+        and state[j * INPUT_ONE_FRAME + 7] < 2
+        and state[j * INPUT_ONE_FRAME + 7] > 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if action == 0:
+                total += 0.1
+            elif action == 1:
+                total += 0.05
+            else:
+                total -= 1
+        elif (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] > 0.8
+        and state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if action == 2:
+                total += 0.1
+            else:
+                total -= 1
+        elif (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 0.8
+        and state[j * INPUT_ONE_FRAME + 7] > 0.8
+        and state[j * INPUT_ONE_FRAME + 8] > 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if action == 1:
+                total += 0.1
+            else:
+                total -= 1
+            
+            
             
     return total
 

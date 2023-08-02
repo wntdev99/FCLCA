@@ -1,6 +1,6 @@
 REPALY_MEMORY = 1000000
 MIN_BATCH_SIZE = 1024
-CL_NAME = "CL_YES_world_easy_action 5_1"
+CL_NAME = "CL_YES_world_easy_action 5_2"
 CL_LOAD_NAME = "CL_No_world_action 5"
 
 import random

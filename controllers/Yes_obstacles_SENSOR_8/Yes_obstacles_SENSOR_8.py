@@ -142,13 +142,15 @@ def Reward(state,next_state):
         Dangerous_state = 1    
 
     # Collision Avoidance
-    for j in range(MAX_FRAME - 1):
-        for k in range(2, 2 + INPUT_SENSOR):
-            if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
-                total += (state[(j + 1) * INPUT_ONE_FRAME + k] - next_state[(j + 1) * INPUT_ONE_FRAME + k])
-        
-
-        
+    for j in range(MAX_FRAME):
+        if (next_state[j * INPUT_ONE_FRAME + 2] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 3] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 4] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 7] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 8] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 9] > COLLISION_R
+        ):
+            total -= 5
             
         
             

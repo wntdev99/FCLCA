@@ -1,0 +1,108 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/solids/protos/SolidPipe.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position 0.0003061982330888675 4.543481345305844e-06 4.532984341422913
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  translation 0.280535 -0.695017 5.51912e-05
+  rotation -0.0004964328083120498 0.0014660995271474364 0.9999988020526042 0.6529810370788454
+  controller "CL_TEST_8_action 5"
+  supervisor TRUE
+}
+DEF ob0 SolidPipe {
+  translation 0.35 0.35 0.099976
+  rotation 0.7057862342176852 0.7084248665763653 -2.25342993003519e-06 9.325355432952594e-05
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}
+DEF ob1 SolidPipe {
+  translation -0.35 0.35 0.099976
+  rotation 0.705786234217943 0.7084248665761085 -2.253429658774687e-06 9.325355432948964e-05
+  name "pipe(1)"
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}
+DEF ob2 SolidPipe {
+  translation 0.35 -0.35 0.099976
+  rotation 0.7057862342175311 0.708424866576519 -2.2534300436602013e-06 9.325355432949785e-05
+  name "pipe(2)"
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}
+DEF ob3 SolidPipe {
+  translation -0.35 -0.35 0.099976
+  rotation 0.7057862342178384 0.7084248665762126 -2.2534295449962593e-06 9.325355432952552e-05
+  name "pipe(3)"
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}
+DEF ob4 SolidPipe {
+  translation 0 -0.35 0.099976
+  rotation 0.7057862342178384 0.7084248665762126 -2.2534295449962593e-06 9.325355432952552e-05
+  name "pipe(4)"
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}
+DEF ob5 SolidPipe {
+  translation -0.35 0 0.099976
+  rotation 0.7057862342178384 0.7084248665762126 -2.2534295449962593e-06 9.325355432952552e-05
+  name "pipe(5)"
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}
+DEF ob6 SolidPipe {
+  translation 0.35 0 0.099976
+  rotation 0.7057862342178384 0.7084248665762126 -2.2534295449962593e-06 9.325355432952552e-05
+  name "pipe(6)"
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}
+DEF ob7 SolidPipe {
+  translation 0 0.35 0.099976
+  rotation 0.7057862342178384 0.7084248665762126 -2.2534295449962593e-06 9.325355432952552e-05
+  name "pipe(7)"
+  height 0.2
+  radius 0.1
+  thickness 0.02
+  physics Physics {
+  }
+}

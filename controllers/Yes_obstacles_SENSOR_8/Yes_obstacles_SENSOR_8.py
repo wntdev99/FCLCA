@@ -15,7 +15,7 @@ MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
 MODIFY_NUM = 8
-MODEL_NAME = "Curriculum Yes ob easy 0"
+MODEL_NAME = "Curriculum Yes ob pipe 0"
 
 import os
 import math

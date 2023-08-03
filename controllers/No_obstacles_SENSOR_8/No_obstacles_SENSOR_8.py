@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 150
+MAX_EPISODE = 80
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -15,7 +15,7 @@ MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 0
 MODIFY_NUM = 0
-MODEL_NAME = "Curriculum No ob"
+MODEL_NAME = "Curriculum No ob action_5"
 
 import os
 import math
@@ -133,7 +133,7 @@ def Reward(state,next_state):
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
-            total += 1
+            total += 20
     
     # Target Approaching
     for j in range(MAX_FRAME - 1):
@@ -144,9 +144,10 @@ def Reward(state,next_state):
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 100
-            total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1]))
-            total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 100
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
+            total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1])) * 20
+            total -= abs(next_state[(j * 1) + INPUT_ONE_FRAME + 1]) / 10
+            total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 10
         Dangerous_state = 1    
 
     return total

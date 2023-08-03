@@ -22,13 +22,9 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  hidden position_0_0 1.011312271877852
-  hidden position_0_1 6.111474119830148
-  hidden rotation_1 0 1 0 3.48631137311083
-  hidden rotation_2 0 -1 0 0.0676174041722757
   translation 0.37585115084932064 -0.6221056690959542 -6.395307241729292e-05
   rotation -0.0004964328083120498 0.0014660995271474364 0.9999988020526042 0.6529810370788454
-  controller "Yes_obstacles_SENSOR_8"
+  controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
 DEF ob0 SolidPipe {

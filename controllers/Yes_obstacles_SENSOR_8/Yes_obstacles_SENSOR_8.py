@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 80
+MAX_EPISODE = 90
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 7
+MODIFY_NUM = 8
 MODEL_NAME = "Curriculum Yes ob easy 0"
 
 import os
@@ -145,7 +145,7 @@ def Reward(state,next_state):
                 Dangerous_state = 0
         if Dangerous_state:
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
-            total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1])) * 10
+            total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1])) * 20
             total -= abs(next_state[(j * 1) + INPUT_ONE_FRAME + 1]) / 10
             total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 10
         Dangerous_state = 1    
@@ -266,8 +266,6 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (action == 0
-            or action == 1
-            or action == 2
             ):
                 total += 1
             else:
@@ -282,7 +280,6 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (action == 0
-            or action == 2
             ):
                 total += 1
             else:
@@ -297,7 +294,36 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (action == 0
-            or action == 1
+            ):
+                total += 1
+            else:
+                total -= 1
+                
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 0.8
+        and state[j * INPUT_ONE_FRAME + 5] < 0.8
+        and state[j * INPUT_ONE_FRAME + 6] > 0.8
+        and state[j * INPUT_ONE_FRAME + 7] > 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 0
+            ):
+                total += 1
+            else:
+                total -= 1
+                
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 5] > 0.8
+        and state[j * INPUT_ONE_FRAME + 6] < 0.8
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 0
             ):
                 total += 1
             else:
@@ -334,7 +360,7 @@ def collision_check():
                 set_count = 1
                 collision_storage.append(1)
 
-                if episode_cnt > 90:
+                if episode_cnt > 490:
                     print("state : ",state)
                     print("next_state : ",next_state)
                     print("action : ",action)
@@ -494,7 +520,7 @@ buffer.save_replay_memory()
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
 loss_max = np.max(loss_data)
-plt.ylim([loss_min-0.01, 4 + 0.01])
+plt.ylim([loss_min-0.01, 0.01 + loss_max])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")

@@ -1,4 +1,4 @@
-CL_MODEL = "Curriculum No ob action_5_0"
+CL_MODEL = "Curriculum Yes ob pipe 0_0"
 CL_KIND = f"{CL_MODEL}_test"
 TEST_COUNT = 10
 INPUT_SENSOR = 8

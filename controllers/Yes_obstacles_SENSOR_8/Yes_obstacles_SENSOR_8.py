@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 90
+MAX_EPISODE = 70
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 8
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Yes ob pipe 0"
 
 import os
@@ -329,6 +329,7 @@ def Reward(state,next_state):
             else:
                 total -= 1
         
+        
                 
         
     return total
@@ -360,7 +361,7 @@ def collision_check():
                 set_count = 1
                 collision_storage.append(1)
 
-                if episode_cnt > 490:
+                if episode_cnt > 90:
                     print("state : ",state)
                     print("next_state : ",next_state)
                     print("action : ",action)

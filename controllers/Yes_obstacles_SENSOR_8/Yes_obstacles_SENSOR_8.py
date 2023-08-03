@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 120
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 5
+MODIFY_NUM = 6
 MODEL_NAME = "Curriculum Yes ob easy 0"
 
 import os
@@ -208,10 +208,10 @@ def Reward(state,next_state):
         or state[j * INPUT_ONE_FRAME + 9] > 0.8
         ):
             if (action == 0
-            and action == 1
-            and action == 2
+            or action == 1
+            or action == 2
             ):
-                total -= 3
+                total -= 1
         if (state[j * INPUT_ONE_FRAME + 2] > 1.5
         or state[j * INPUT_ONE_FRAME + 3] > 1.5
         or state[j * INPUT_ONE_FRAME + 4] > 3
@@ -220,13 +220,44 @@ def Reward(state,next_state):
         or state[j * INPUT_ONE_FRAME + 9] > 1.5
         ):
             if (action == 0
-            and action == 1
-            and action == 2
+            or action == 1
+            or action == 2
             ):
-                total -= 3
+                total -= 1
                 
-                
-                
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 5] > 0.8
+        and state[j * INPUT_ONE_FRAME + 6] < 0.8
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 0
+            or action == 1
+            or action == 2
+            ):
+                total += 0.1
+            else:
+                total -= 1
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 0.8
+        and state[j * INPUT_ONE_FRAME + 5] < 0.8
+        and state[j * INPUT_ONE_FRAME + 6] > 0.8
+        and state[j * INPUT_ONE_FRAME + 7] > 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 0
+            or action == 1
+            or action == 2
+            ):
+                total += 0.1
+            else:
+                total -= 1
+       
             
     return total
 

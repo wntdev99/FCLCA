@@ -1,5 +1,5 @@
-CL_MODEL = "Curriculum Yes ob easy 0_8"
-CL_KIND = f"{CL_MODEL}_test_1"
+CL_MODEL = "Curriculum No ob action_5_0"
+CL_KIND = f"{CL_MODEL}_test"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10

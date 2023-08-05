@@ -1,0 +1,57 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/pipes/protos/PipeSection.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.577809759113985 0.5814323883386291 0.5727759248287906 2.0958755368857083
+  position -1.4601688518190552e-06 -0.0004007114637213133 4.5460034028958995
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  hidden translation_1 0 0.025999999999999666 0.02
+  hidden rotation_1 0 -1 0 3.3531340848010758
+  hidden translation_2 0 -0.025999999999999603 0.02
+  hidden rotation_2 0 -1 0 5.070492842136097
+  translation -0.21190332792867858 0.3174952845296564 -6.540079641056441e-05
+  rotation 0.00014195107619245788 8.22478956039904e-05 -0.9999999865425878 1.2883914580359914
+  controller "Yes_obstacles_SENSOR_8"
+  supervisor TRUE
+}
+DEF ob0 PipeSection {
+  translation 0.35 0 0
+  name "pipe section(1)"
+  height 0.2
+  radius 0.1
+}
+DEF ob1 PipeSection {
+  translation -0.35 0 0
+  name "pipe section(4)"
+  height 0.2
+  radius 0.1
+}
+DEF ob2 PipeSection {
+  translation 0 0.35 0
+  name "pipe section(5)"
+  height 0.2
+  radius 0.1
+}
+DEF ob3 PipeSection {
+  translation 0 -0.35 0
+  name "pipe section(6)"
+  height 0.2
+  radius 0.1
+}

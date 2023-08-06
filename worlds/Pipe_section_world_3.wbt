@@ -22,8 +22,18 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  translation 0 0.9 -6.40608e-05
-  rotation -0.0037290037516241213 0.009934163194214198 0.9999437018815864 0.7384578658903721
+  hidden position_0_0 844.4526341347735
+  hidden position_0_1 886.3404986620856
+  hidden linearVelocity_0 9.95038320679207e-05 -4.9644393811051987e-05 0.008117140685303488
+  hidden angularVelocity_0 0.0034487455105724272 0.0028016085473057317 -1.1073884034253187
+  hidden rotation_1 0 1 0 2.5058029727088735
+  hidden linearVelocity_1 0.01906521362962776 -0.021679925164458512 0.008132052868646239
+  hidden angularVelocity_1 1.1841359795855364 1.037798767611364 -1.10955484281383
+  hidden rotation_2 0 -1 0 5.871814957415714
+  hidden linearVelocity_2 -0.018844948734219914 0.021541046457730664 0.008126411885571465
+  hidden angularVelocity_2 -1.1772498242840357 -1.0321831459381055 -1.1094306488664378
+  translation 0.9008108672412194 0.7193700638669495 -0.00110463895587686
+  rotation 0.00036987302035709736 0.0008775373586416688 -0.9999995465609638 0.8747161916616505
   controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
@@ -75,26 +85,50 @@ DEF ob7 PipeSection {
   radius 0.1
 }
 DEF ob8 PipeSection {
-  translation -0.35 0.35 0
+  translation -0.35 0.7 0
   name "pipe section(7)"
   height 0.2
   radius 0.1
 }
 DEF ob9 PipeSection {
-  translation -0.35 0.35 0
+  translation -0.7 0.35 0
   name "pipe section(7)"
   height 0.2
   radius 0.1
 }
 DEF ob10 PipeSection {
-  translation -0.35 0.35 0
+  translation 0.7 0.35 0
   name "pipe section(7)"
   height 0.2
   radius 0.1
 }
 DEF ob11 PipeSection {
-  translation -0.35 0.35 0
+  translation 0.7 -0.35 0
   name "pipe section(7)"
+  height 0.2
+  radius 0.1
+}
+DEF ob12 PipeSection {
+  translation 0.35 -0.7 0
+  name "pipe section(8)"
+  height 0.2
+  radius 0.1
+}
+DEF ob13 PipeSection {
+  translation -0.7 -0.35 0
+  name "pipe section(8)"
+  height 0.2
+  radius 0.1
+}
+DEF ob14 PipeSection {
+  translation -0.35 -0.7 0
+  name "pipe section(8)"
+  height 0.2
+  radius 0.1
+}
+DEF ob15 PipeSection {
+  translation 0.35 0.7 0
+  name "pipe section(8)"
   height 0.2
   radius 0.1
 }

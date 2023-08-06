@@ -74,3 +74,27 @@ DEF ob7 PipeSection {
   height 0.2
   radius 0.1
 }
+DEF ob8 PipeSection {
+  translation -0.35 0.35 0
+  name "pipe section(7)"
+  height 0.2
+  radius 0.1
+}
+DEF ob9 PipeSection {
+  translation -0.35 0.35 0
+  name "pipe section(7)"
+  height 0.2
+  radius 0.1
+}
+DEF ob10 PipeSection {
+  translation -0.35 0.35 0
+  name "pipe section(7)"
+  height 0.2
+  radius 0.1
+}
+DEF ob11 PipeSection {
+  translation -0.35 0.35 0
+  name "pipe section(7)"
+  height 0.2
+  radius 0.1
+}

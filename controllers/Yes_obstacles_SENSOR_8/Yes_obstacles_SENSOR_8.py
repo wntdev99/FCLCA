@@ -184,11 +184,25 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (action == 2
-            or action == 0
             ):
-                total += 4
+                total += 2
             else:
                 total -= 3
+                
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 1.3
+        and state[j * INPUT_ONE_FRAME + 7] < 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 0
+            ):
+                total += 5
+            else:
+                total -= 3
+                
                 
         if (state[j * INPUT_ONE_FRAME + 2] < 0.8
         and state[j * INPUT_ONE_FRAME + 3] < 0.8
@@ -199,9 +213,22 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if (action == 1
-            or action == 0
             ):
-                total += 4
+                total += 2
+            else:
+                total -= 3
+                
+        if (state[j * INPUT_ONE_FRAME + 2] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 0.8
+        and state[j * INPUT_ONE_FRAME + 7] < 1.3
+        and state[j * INPUT_ONE_FRAME + 7] > 0.8
+        and state[j * INPUT_ONE_FRAME + 8] < 0.8
+        and state[j * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 0
+            ):
+                total += 5
             else:
                 total -= 3
                 

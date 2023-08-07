@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
 OBSTACLE_COUNT = 4
-MODIFY_NUM = 1
+MODIFY_NUM = 2
 MODEL_NAME = "Curriculum Yes ob pipe_section 0"
 
 import os
@@ -134,7 +134,7 @@ def Reward(state,next_state):
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
-            total += 20
+            total += 30
     
     # Target Approaching
     for j in range(MAX_FRAME - 1):
@@ -185,7 +185,7 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if action == 2:
-                total += 3
+                total += 4
             else:
                 total -= 3
                 
@@ -198,7 +198,7 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if action == 1:
-                total += 3
+                total += 4
             else:
                 total -= 3
                 

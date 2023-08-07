@@ -185,7 +185,7 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if action == 2:
-                total += 1
+                total += 3
             else:
                 total -= 3
                 
@@ -198,7 +198,7 @@ def Reward(state,next_state):
         and state[j * INPUT_ONE_FRAME + 9] < 0.8
         ):
             if action == 1:
-                total += 1
+                total += 3
             else:
                 total -= 3
                 

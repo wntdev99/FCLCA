@@ -6,5 +6,6 @@ maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
 textFiles: 3 "controllers/Yes_obstacles_SENSOR_8/Yes_obstacles_SENSOR_8.py" "controllers/Yes_obstacles_SENSOR_8/dqn_agent.py" "controllers/Yes_obstacles_SENSOR_8/replay_buffer.py" "controllers/CL_TEST_8_action 5/CL_TEST_8_action 5.py"
+globalOptionalRendering: DistanceSensorRays
 consoles: Console:All:All
 renderingDevicePerspectives: e-puck:camera;1;1;0;0

@@ -260,9 +260,11 @@ while robot.step(timestep) != -1:
     count_state += 1  
     environment()
     if count_state == 3:
+        
         count_state = 0  
         # 현 state 가져오기.    
         state = np.array(storage)
+        print(state)
         # storage 초기화 하고
         storage = []
         # 3-1-2. action 하고 다음 state로 넘어감.

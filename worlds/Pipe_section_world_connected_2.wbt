@@ -33,49 +33,25 @@ DEF ob0 PipeSection {
   radius 0.1
 }
 DEF ob1 PipeSection {
-  translation 0.4 0 0
+  translation 0.5 0 0
   name "pipe section(1)"
   height 0.2
   radius 0.1
 }
-DEF ob2 PipeSection {
-  translation 0.4 -0.4 0
-  name "pipe section(2)"
-  height 0.2
-  radius 0.1
-}
-DEF ob3 PipeSection {
-  translation -0.4 -0.4 0
-  name "pipe section(3)"
-  height 0.2
-  radius 0.1
-}
-DEF ob4 PipeSection {
-  translation -0.4 0 0
-  name "pipe section(4)"
-  height 0.2
-  radius 0.1
-}
 DEF ob5 PipeSection {
-  translation 0 0.4 0
+  translation 0 0.5 0
   name "pipe section(5)"
   height 0.2
   radius 0.1
 }
 DEF ob6 PipeSection {
-  translation 0 -0.4 0
+  translation 0 -0.6 0
   name "pipe section(6)"
   height 0.2
   radius 0.1
 }
-DEF ob7 PipeSection {
-  translation -0.4 0.4 0
-  name "pipe section(7)"
-  height 0.2
-  radius 0.1
-}
 DEF ob8 PipeSection {
-  translation -0.4 0.2 0
+  translation -0.4 0.25 0
   name "pipe section(8)"
   height 0.2
   radius 0.1
@@ -87,37 +63,31 @@ DEF ob9 PipeSection {
   radius 0.1
 }
 DEF ob10 PipeSection {
-  translation -0.4 -0.2 0
+  translation -0.4 -0.3 0
   name "pipe section(10)"
   height 0.2
   radius 0.1
 }
 DEF ob11 PipeSection {
-  translation 0.4 -0.2 0
+  translation 0.55 -0.2 0
   name "pipe section(11)"
   height 0.2
   radius 0.1
 }
 DEF ob12 PipeSection {
-  translation -0.2 -0.4 0
+  translation -0.2 -0.45 0
   name "pipe section(12)"
   height 0.2
   radius 0.1
 }
 DEF ob13 PipeSection {
-  translation 0.2 -0.4 0
+  translation 0.2 -0.45 0
   name "pipe section(13)"
   height 0.2
   radius 0.1
 }
-DEF ob14 PipeSection {
-  translation 0.2 0.4 0
-  name "pipe section(14)"
-  height 0.2
-  radius 0.1
-}
 DEF ob15 PipeSection {
-  translation 0.4 0.2 0
+  translation 0.45 0.2 0
   name "pipe section(15)"
   height 0.2
   radius 0.1

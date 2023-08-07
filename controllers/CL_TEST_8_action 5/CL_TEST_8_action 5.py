@@ -1,5 +1,5 @@
 CL_MODEL = "Curriculum Yes ob pipe_section 0_2"
-CL_KIND = f"{CL_MODEL}_test_pipe_section_11(gap)"
+CL_KIND = f"{CL_MODEL}_test_pipe_section_connected_ob"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10

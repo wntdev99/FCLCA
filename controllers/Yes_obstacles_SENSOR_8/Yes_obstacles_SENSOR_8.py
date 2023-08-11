@@ -147,8 +147,8 @@ def Reward(state,next_state):
         if Dangerous_state:
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
             total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1])) * 20
-            total -= abs(next_state[(j * 1) + INPUT_ONE_FRAME + 1]) / 10
-            total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 10
+            total -= abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1]) / 10
+            total -= next_state[(j + 1) * INPUT_ONE_FRAME] / 10
         Dangerous_state = 1    
         
     for j in range(MAX_FRAME):
@@ -177,7 +177,7 @@ def Reward(state,next_state):
                 total -= 3
                 
         if (state[j * INPUT_ONE_FRAME + 2] < 0.8
-        and state[j * INPUT_ONE_FRAME + 3] < 0.8
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8i in range(MAX_FRAME)
         and state[j * INPUT_ONE_FRAME + 4] > 0.8
         and state[j * INPUT_ONE_FRAME + 4] < 2.0
         and state[j * INPUT_ONE_FRAME + 7] < 0.8

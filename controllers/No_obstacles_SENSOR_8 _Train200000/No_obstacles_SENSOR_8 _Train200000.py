@@ -1,10 +1,10 @@
 GOAL_X = 0
 GOAL_Y = 0 
 COLLISION_R = 6
-MAX_SPEED = 1.57
+MAX_SPEED = 6.28
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 200
+MAX_EPISODE = 500
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -12,7 +12,7 @@ ARRIVE_STANDARD = 0.1
 TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
-NORMALIZATION_SENSOR = 100
+NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 0
 MODIFY_NUM = 0
 MODEL_NAME = "Curriculum No ob train 5000"
@@ -108,19 +108,16 @@ def Action(action):
     # Trun Right
     elif action == 1:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/3)
+        right_motor.setVelocity(0)
     # Trun Left
     elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/3)
+        left_motor.setVelocity(0)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
     elif action == 3:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
-    # Trun Left
-    elif action == 4:
         left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
+
         
         
 # 2-4. Reward structure
@@ -134,22 +131,14 @@ def Reward(state,next_state):
         
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
-        elif next_state[i * INPUT_ONE_FRAME] < 0.2:
-            total += 10
-        elif next_state[i * INPUT_ONE_FRAME] < 0.3:
-            total += 5
-        elif next_state[i * INPUT_ONE_FRAME] < 0.4:
-            total += 2
-        elif next_state[i * INPUT_ONE_FRAME] < 0.5:
-            total += 1
         else:
             total -= 0.01
-    for i in range(MAX_FRAME - 1):
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 50
                 break
-        
+    for i in range(MAX_FRAME - 1):
+        total -= next_state[(i + 1) * INPUT_ONE_FRAME] 
     return total
     
     

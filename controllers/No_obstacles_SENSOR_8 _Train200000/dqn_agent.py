@@ -1,9 +1,9 @@
 INPUT_SIZE = 30
-ACTION_SIZE = 5
+ACTION_SIZE = 4
 LEARNING_RATE = 1e-2
 EPSILION = 1e-2
 GAMMA = 0.95
-MODEL_NAME = 'Initialize model 5'
+MODEL_NAME = 'Initialize model 4'
 
 import tensorflow as tf
 import numpy as np
@@ -60,8 +60,7 @@ class DqnAgent:
         for i in range(state_batch.shape[0]):                                                               
             target_q_val = reward_batch[i]                                                           
             if not done_batch[i]:                                                                           
-                target_q_val += GAMMA * max_next_q[i]
-                print(target_q_val)                                                        
+                target_q_val += GAMMA * max_next_q[i]                                                       
             target_q[i][action_batch[i]] = target_q_val                                                     
         training_history = self.q_net.fit(x=state_batch, y=target_q, verbose=0)                             
         loss = training_history.history['loss']                                                             

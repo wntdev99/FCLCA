@@ -4,17 +4,17 @@ COLLISION_R = 6
 MAX_SPEED = 6.28
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 500
+MAX_EPISODE = 1000
 INPUT_SENSOR = 8
-REPLAY_CYCLE = 2000
+REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
 ARRIVE_STANDARD = 0.1
 TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
-OBSTACLE_COUNT = 0
-MODIFY_NUM = 0
+OBSTACLE_COUNT = 12
+MODIFY_NUM = 1
 MODEL_NAME = "Curriculum No ob train 5000"
 
 import os
@@ -90,8 +90,8 @@ def environment():
     # 2-1-5. radius get ep 
     goal_radius = math.sqrt(pow(goal[0] - ep[0],2) + pow(goal[1] - ep[1],2))
     # 2-1-6. radius get ob
-    storage.append(round(goal_radius,2))
-    storage.append(round(math.radians(theta),2))
+    storage.append(goal_radius)
+    storage.append(math.radians(theta))
     # 2-1-6-1. sensor value
     for i in range(INPUT_SENSOR):
         storage.append(round(ps[i].value/NORMALIZATION_SENSOR,2))
@@ -115,8 +115,8 @@ def Action(action):
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
     elif action == 3:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
+        left_motor.setVelocity(MAX_SPEED/2)
+        right_motor.setVelocity(MAX_SPEED/2)
 
         
         
@@ -125,20 +125,29 @@ def Reward(state,next_state):
     # Initialization
     total = 0
     Dangerous_state = 1
-    
     # Target reaching
     for i in range(MAX_FRAME):
-        
+        total -= (1 - next_state[(i) * INPUT_ONE_FRAME])
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
+
         else:
             total -= 0.01
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 50
+                total -= 100
+            elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 10
+            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 2
+            elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 1
+            
                 break
-    for i in range(MAX_FRAME - 1):
-        total -= next_state[(i + 1) * INPUT_ONE_FRAME] 
+    # Target Approaching
+    for j in range(MAX_FRAME - 1):
+        total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 5000
+
     return total
     
     

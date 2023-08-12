@@ -177,7 +177,7 @@ def Reward(state,next_state):
                 total -= 3
                 
         if (state[j * INPUT_ONE_FRAME + 2] < 0.8
-        and state[j * INPUT_ONE_FRAME + 3] < 0.8i in range(MAX_FRAME)
+        and state[j * INPUT_ONE_FRAME + 3] < 0.8
         and state[j * INPUT_ONE_FRAME + 4] > 0.8
         and state[j * INPUT_ONE_FRAME + 4] < 2.0
         and state[j * INPUT_ONE_FRAME + 7] < 0.8

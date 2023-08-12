@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE =120
+MAX_EPISODE = 20
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -34,7 +34,7 @@ agent = DqnAgent()
 buffer = ReplayBuffer()
 # 1-1. 현재 world timestep
 timestep = int(robot.getBasicTimeStep())
-# 1-1-1. e-puck 모터 정보
+# 1-1-1. e-p10uck 모터 정보
 left_motor = robot.getDevice('left wheel motor')
 right_motor = robot.getDevice('right wheel motor')
 # 1-1-2. 로봇 모터 다음 명령 있을 때 까지 전 모터 상태 유지
@@ -147,8 +147,8 @@ def Reward(state,next_state):
         if Dangerous_state:
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
             total += (abs(state[(j + 1) * INPUT_ONE_FRAME + 1]) - abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1])) * 20
-            total -= abs(next_state[(j * 1) + INPUT_ONE_FRAME + 1]) / 10
-            total -= next_state[(j * 1) + INPUT_ONE_FRAME] / 10
+            total -= abs(next_state[(j + 1) * INPUT_ONE_FRAME + 1]) / 10
+            total -= next_state[(j + 1) * INPUT_ONE_FRAME] / 10
         Dangerous_state = 1    
         
     for j in range(MAX_FRAME):
@@ -329,19 +329,42 @@ def Reward(state,next_state):
                 total += 1
             else:
                 total -= 1
-              
-        if (next_state[j * INPUT_ONE_FRAME + 4] > 0.8
-        and next_state[j * INPUT_ONE_FRAME + 7] > 0.8
-        ):
-            total += 5
-            total -= abs(next_state[j * INPUT_ONE_FRAME + 4] - next_state[j * INPUT_ONE_FRAME + 7])
-            
+        
+        
         if (state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 8] > 0.8
+        ):
+            if action == 1:
+                total += 0.5
+            elif action == 3:
+                total += 1
+            else:
+                total -= 0.5
+        elif (state[j * INPUT_ONE_FRAME + 3] > 0.8
         and state[j * INPUT_ONE_FRAME + 7] > 0.8
         ):
-            if action == 0:
-                total += 2
-            total += abs(state[j * INPUT_ONE_FRAME + 4] - state[j * INPUT_ONE_FRAME + 7]) - abs(next_state[j * INPUT_ONE_FRAME + 4] - next_state[j * INPUT_ONE_FRAME + 7]) * 4
+            if action == 2:
+                total += 0.5
+            elif action == 4:
+                total += 1
+            else:
+                total -= 0.5
+
+        
+        if (state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 7] > 0.8
+        ):    
+            if state[j * INPUT_ONE_FRAME + 4] < state[j * INPUT_ONE_FRAME + 7]:
+                if action == 1:
+                    total += 2
+                else:
+                    total -= 5
+            elif state[j * INPUT_ONE_FRAME + 4] > state[j * INPUT_ONE_FRAME + 7]:
+                if action == 2:
+                    total += 2
+                else:
+                    total -= 5              
+
     return total
 
     

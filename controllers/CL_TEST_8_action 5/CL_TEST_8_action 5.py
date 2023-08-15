@@ -6,6 +6,7 @@ INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
 MAX_SPEED = 1.57
 COLLISION_R = 6
+Time_Out = 3000
 
 from controller import Supervisor
 import matplotlib.pyplot as plt
@@ -285,7 +286,7 @@ while robot.step(timestep) != -1:
                 break
         finish = finish + 1
         time_count += 1
-        if time_count == 3000:
+        if time_count == Time_Out:
             trajectory = []
             time_count = 0
             localminima_count += 1

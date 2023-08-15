@@ -13,8 +13,8 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
-OBSTACLE_COUNT = 4
-MODIFY_NUM = 2
+OBSTACLE_COUNT = 1
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Yes ob pipe_section 0"
 
 import os
@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 from dqn_agent import DqnAgent
 from replay_buffer import ReplayBuffer
 from controller import Supervisor
-0
+
 
 # 1. 초기 세팅
 robot = Supervisor()
@@ -103,6 +103,7 @@ def collect_experiences(state,next_state,action,reward,done,buffer):
 
 # 2-3. Select action 
 def Action(action):
+    print("state : ",next_state)
     # Go straight
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)

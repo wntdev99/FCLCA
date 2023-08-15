@@ -1,0 +1,77 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/pipes/protos/PipeSection.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5770758673443693 0.5828756590204225 0.572048432783669 2.0937289903699465
+  position -1.4601688518190552e-06 -0.0004007114637213133 4.5460034028958995
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  translation -0.172886 0.183039 -9.0794e-05
+  rotation 0.00014195107619245788 8.22478956039904e-05 -0.9999999865425878 1.2883914580359914
+  controller "pipe_section_train_2"
+  supervisor TRUE
+}
+DEF ob0 PipeSection {
+  translation 0.35 0 0
+  name "pipe section(1)"
+  height 0.2
+  radius 0.1
+}
+DEF ob1 PipeSection {
+  translation -0.35 0 0
+  name "pipe section(4)"
+  height 0.2
+  radius 0.1
+}
+DEF ob2 PipeSection {
+  translation 0 0.35 0
+  name "pipe section(5)"
+  height 0.2
+  radius 0.1
+}
+DEF ob3 PipeSection {
+  translation 0 -0.35 0
+  name "pipe section(6)"
+  height 0.2
+  radius 0.1
+}
+DEF ob4 PipeSection {
+  translation 0.35 0.35 0
+  name "pipe section(2)"
+  height 0.2
+  radius 0.1
+}
+DEF ob5 PipeSection {
+  translation -0.35 -0.35 0
+  name "pipe section(7)"
+  height 0.2
+  radius 0.1
+}
+DEF ob6 PipeSection {
+  translation -0.35 0.35 0
+  name "pipe section(8)"
+  height 0.2
+  radius 0.1
+}
+DEF ob7 PipeSection {
+  translation 0.35 -0.35 0
+  name "pipe section(3)"
+  height 0.2
+  radius 0.1
+}

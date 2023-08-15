@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 25
+MAX_EPISODE = 80
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -13,8 +13,8 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.2
 NORMALIZATION_SENSOR = 100
-OBSTACLE_COUNT = 20
-MODIFY_NUM = 2
+OBSTACLE_COUNT = 16
+MODIFY_NUM = 3
 MODEL_NAME = "Curriculum Yes ob pipe_section 2"
 
 import os
@@ -334,36 +334,34 @@ def Reward(state,next_state):
         if (state[j * INPUT_ONE_FRAME + 4] > 0.8
         and state[j * INPUT_ONE_FRAME + 8] > 0.8
         ):
-            if action == 1:
-                total += 0.5
-            elif action == 3:
+            if action == 3:
                 total += 1
             else:
-                total -= 0.5
-        elif (state[j * INPUT_ONE_FRAME + 3] > 0.8
+                total -= 1
+        if (state[j * INPUT_ONE_FRAME + 3] > 0.8
         and state[j * INPUT_ONE_FRAME + 7] > 0.8
         ):
-            if action == 2:
-                total += 0.5
-            elif action == 4:
+            if action == 4:
                 total += 1
             else:
-                total -= 0.5
+                total -= 1
 
         
         if (state[j * INPUT_ONE_FRAME + 4] > 0.8
+        and state[j * INPUT_ONE_FRAME + 4] < 1.5
         and state[j * INPUT_ONE_FRAME + 7] > 0.8
+        and state[j * INPUT_ONE_FRAME + 7] < 1.5
         ):    
             if state[j * INPUT_ONE_FRAME + 4] < state[j * INPUT_ONE_FRAME + 7]:
                 if action == 1:
-                    total += 2
+                    total += 1
                 else:
-                    total -= 5
+                    total -= 1
             elif state[j * INPUT_ONE_FRAME + 4] > state[j * INPUT_ONE_FRAME + 7]:
                 if action == 2:
-                    total += 2
+                    total += 1
                 else:
-                    total -= 5              
+                    total -= 1     
 
     return total
 
@@ -394,7 +392,7 @@ def collision_check():
                 set_count = 1
                 collision_storage.append(1)
 
-                if episode_cnt > 90:
+                if episode_cnt > MAX_EPISODE / 100 * 95:
                     print("state : ",state)
                     print("next_state : ",next_state)
                     print("action : ",action)

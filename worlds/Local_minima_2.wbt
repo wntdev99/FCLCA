@@ -1,0 +1,88 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position -3.395274641497539e-06 -3.395284242822827e-06 4.5278445101249805
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  translation 0.15806340248295478 -0.11604100538513606 -6.466949313608562e-05
+  rotation 0.0008715433577903358 -0.0006881147982736077 -0.9999993834549099 -1.8332074462425512
+  controller "CL_TEST_8_action 5"
+  supervisor TRUE
+}
+DEF ob0 Wall {
+  translation 0 0.4 0
+  size 0.4 0.1 0.3
+}
+DEF ob1 Wall {
+  translation 0.4 0 0
+  name "wall(1)"
+  size 0.1 0.4 0.3
+}
+DEF ob2 Wall {
+  translation 0 -0.4 0
+  name "wall(2)"
+  size 0.4 0.1 0.3
+}
+DEF ob3 Wall {
+  translation -0.4 0 0
+  name "wall(3)"
+  size 0.1 0.4 0.3
+}
+DEF ob4 Wall {
+  translation -0.15 0.55 0
+  name "wall(4)"
+  size 0.1 0.2 0.3
+}
+DEF ob5 Wall {
+  translation 0.15 0.55 0
+  name "wall(5)"
+  size 0.1 0.2 0.3
+}
+DEF ob6 Wall {
+  translation -0.15 -0.55 0
+  name "wall(6)"
+  size 0.1 0.2 0.3
+}
+DEF ob7 Wall {
+  translation 0.15 -0.55 0
+  name "wall(7)"
+  size 0.1 0.2 0.3
+}
+DEF ob8 Wall {
+  translation 0.55 0.15 0
+  name "wall(8)"
+  size 0.2 0.1 0.3
+}
+DEF ob9 Wall {
+  translation 0.55 -0.15 0
+  name "wall(9)"
+  size 0.2 0.1 0.3
+}
+DEF ob10 Wall {
+  translation -0.55 0.15 0
+  name "wall(10)"
+  size 0.2 0.1 0.3
+}
+DEF ob11 Wall {
+  translation -0.55 -0.15 0
+  name "wall(11)"
+  size 0.2 0.1 0.3
+}

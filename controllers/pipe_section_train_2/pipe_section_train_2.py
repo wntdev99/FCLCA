@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 300
+MAX_EPISODE = 50
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -363,9 +363,9 @@ def Reward(state,next_state):
                 else:
                     total -= 1    
         if (state[j * INPUT_ONE_FRAME + 4] > 0.8
-        and state[j * INPUT_ONE_FRAME + 4] < 2
+        and state[j * INPUT_ONE_FRAME + 4] < 1.5
         and state[j * INPUT_ONE_FRAME + 7] > 0.8
-        and state[j * INPUT_ONE_FRAME + 7] < 2
+        and state[j * INPUT_ONE_FRAME + 7] < 1.5
         and state[j * INPUT_ONE_FRAME + 2] < 0.8
         and state[j * INPUT_ONE_FRAME + 3] < 0.8
         and state[j * INPUT_ONE_FRAME + 8] < 0.8
@@ -390,7 +390,17 @@ def Reward(state,next_state):
             or action == 2):
                 total -= 1
         
-         
+        
+        if (next_state[j * INPUT_ONE_FRAME + 2] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 3] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 4] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 5] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 6] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 7] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 8] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 9] > COLLISION_R
+        ):
+            total -= 20
 
     return total
 

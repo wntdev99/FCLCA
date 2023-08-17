@@ -1,4 +1,4 @@
-CL_MODEL = "Curriculum Yes ob origin world_0"
+CL_MODEL = "Curriculum Yes ob origin world_1"
 CL_KIND = f"{CL_MODEL}_Test_No_world"
 TEST_COUNT = 10
 INPUT_SENSOR = 8

@@ -1,5 +1,5 @@
-CL_MODEL = "Curriculum Yes ob pipe_section 2_4"
-CL_KIND = f"{CL_MODEL}_test_pipe_section_0"
+CL_MODEL = "Curriculum Yes ob origin world_0"
+CL_KIND = f"{CL_MODEL}_Test_No_world"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10

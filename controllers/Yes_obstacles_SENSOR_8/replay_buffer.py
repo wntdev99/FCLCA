@@ -1,7 +1,7 @@
 REPALY_MEMORY = 1000000
 MIN_BATCH_SIZE = 1024
-CL_NAME = "CL_YES_world_pipe_section_0_2_action 5"
-CL_LOAD_NAME = "CL_No_world_action 5"
+CL_NAME = "CL_Origin_world_action 5"
+CL_LOAD_NAME = ""
 
 import random
 import pickle

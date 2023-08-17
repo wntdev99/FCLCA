@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE =120
+MAX_EPISODE = 300
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
@@ -13,9 +13,9 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100
-OBSTACLE_COUNT = 1
-MODIFY_NUM = 0
-MODEL_NAME = "Curriculum Yes ob pipe_section 0"
+OBSTACLE_COUNT = 13
+MODIFY_NUM = 1
+MODEL_NAME = "Curriculum Yes ob origin world"
 
 import os
 import math
@@ -103,7 +103,6 @@ def collect_experiences(state,next_state,action,reward,done,buffer):
 
 # 2-3. Select action 
 def Action(action):
-    print("state : ",next_state)
     # Go straight
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
@@ -331,7 +330,16 @@ def Reward(state,next_state):
             else:
                 total -= 1
         
-        
+        if (next_state[j * INPUT_ONE_FRAME + 2] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 3] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 4] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 5] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 6] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 7] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 8] > COLLISION_R
+        or next_state[j * INPUT_ONE_FRAME + 9] > COLLISION_R
+        ):
+            total -= 5
                 
         
     return total
@@ -362,12 +370,6 @@ def collision_check():
                 setting()
                 set_count = 1
                 collision_storage.append(1)
-
-                if episode_cnt > 90:
-                    print("state : ",state)
-                    print("next_state : ",next_state)
-                    print("action : ",action)
-                
                 break
             else:
                 collision_storage.append(0)

@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 3000
+MAX_EPISODE = 1000
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 8
-MODIFY_NUM = 0
+MODIFY_NUM = 1 
 MODEL_NAME = "Curriculum No ob train 5000"
 
 import os
@@ -141,16 +141,16 @@ def Reward(state,next_state):
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 10
+                total -= 50
             elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 2
+                total -= 20
             elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 1
+                total -= 10
             
                 break
     # Target Approaching
     for j in range(MAX_FRAME - 1):
-        total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 5000
+        total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
 
     return total
     
@@ -171,8 +171,8 @@ def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):            
-            if (action == 3
-            or action == 4
+            if (action == 4
+            or action == 5
             or i == 3
             or i == 4):
                 continue

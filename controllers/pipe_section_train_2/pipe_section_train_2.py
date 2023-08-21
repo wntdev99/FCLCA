@@ -13,8 +13,8 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.2
 NORMALIZATION_SENSOR = 100
-OBSTACLE_COUNT = 18
-MODIFY_NUM = 5
+OBSTACLE_COUNT = 16
+MODIFY_NUM = 6
 MODEL_NAME = "Curriculum Yes ob pipe_section 2"
 
 import os
@@ -348,9 +348,9 @@ def Reward(state,next_state):
 
         
         if (state[j * INPUT_ONE_FRAME + 4] > 0.8
-        and state[j * INPUT_ONE_FRAME + 4] < 2
+        and state[j * INPUT_ONE_FRAME + 4] < 3
         and state[j * INPUT_ONE_FRAME + 7] > 0.8
-        and state[j * INPUT_ONE_FRAME + 7] < 2
+        and state[j * INPUT_ONE_FRAME + 7] < 3
         ):   
             if state[j * INPUT_ONE_FRAME + 4] < state[j * INPUT_ONE_FRAME + 7]:
                 if action == 1:
@@ -363,9 +363,9 @@ def Reward(state,next_state):
                 else:
                     total -= 1    
         if (state[j * INPUT_ONE_FRAME + 4] > 0.8
-        and state[j * INPUT_ONE_FRAME + 4] < 1.5
+        and state[j * INPUT_ONE_FRAME + 4] < 1.2
         and state[j * INPUT_ONE_FRAME + 7] > 0.8
-        and state[j * INPUT_ONE_FRAME + 7] < 1.5
+        and state[j * INPUT_ONE_FRAME + 7] < 1.2
         and state[j * INPUT_ONE_FRAME + 2] < 0.8
         and state[j * INPUT_ONE_FRAME + 3] < 0.8
         and state[j * INPUT_ONE_FRAME + 8] < 0.8

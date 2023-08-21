@@ -1,10 +1,10 @@
 GOAL_X = 0
 GOAL_Y = 0 
 COLLISION_R = 6
-MAX_SPEED = 6.28
+MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 1000
+MAX_EPISODE = 3000
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -13,8 +13,8 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
-OBSTACLE_COUNT = 12
-MODIFY_NUM = 1
+OBSTACLE_COUNT = 8
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum No ob train 5000"
 
 import os
@@ -101,22 +101,28 @@ def collect_experiences(state,next_state,action,reward,done,buffer):
 
 # 2-3. Select action 
 def Action(action):
-    # Go straight
+    # Trun Right
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
-    # Trun Right
-    elif action == 1:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(0)
+        right_motor.setVelocity(4)
     # Trun Left
-    elif action == 2:
-        left_motor.setVelocity(0)
+    elif action == 1:
+        left_motor.setVelocity(4)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
+    elif action == 2:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED/2)
+        
     elif action == 3:
         left_motor.setVelocity(MAX_SPEED/2)
-        right_motor.setVelocity(MAX_SPEED/2)
+        right_motor.setVelocity(MAX_SPEED)
+    elif action == 4:
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
+    elif action == 5:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
 
         
         
@@ -127,12 +133,10 @@ def Reward(state,next_state):
     Dangerous_state = 1
     # Target reaching
     for i in range(MAX_FRAME):
-        total -= (1 - next_state[(i) * INPUT_ONE_FRAME])
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
-
         else:
-            total -= 0.01
+            total -= 0.1
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100

@@ -1,5 +1,5 @@
 CL_MODEL = "Curriculum No ob train 5000_1"
-CL_KIND = f"{CL_MODEL}_Test_hard"
+CL_KIND = f"{CL_MODEL}_Test_connected_1"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10

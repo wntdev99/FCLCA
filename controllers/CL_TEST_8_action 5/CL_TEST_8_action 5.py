@@ -1,4 +1,4 @@
-CL_MODEL = "Curriculum Yes ob pipe_section 2_6"
+CL_MODEL = "Curriculum No ob train 5000_1"
 CL_KIND = f"{CL_MODEL}_Test_gap"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
@@ -133,26 +133,28 @@ def rotated_point(orientation):
     return heading_degrees
 # 2-3. select action 
 def Action(action):
-    # Go straight
+    # Trun Right
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
-    # Trun Right
+        right_motor.setVelocity(4)
+    # Trun Left
     elif action == 1:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/3)
-    # Trun Left
-    elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/3)
+        left_motor.setVelocity(4)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
-    elif action == 3:
+    elif action == 2:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
-    # Trun Left
+        right_motor.setVelocity(MAX_SPEED/2)
+        
+    elif action == 3:
+        left_motor.setVelocity(MAX_SPEED/2)
+        right_motor.setVelocity(MAX_SPEED)
     elif action == 4:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
+    elif action == 5:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
 # 0.3925
 # 2-4. state get
 def environment():

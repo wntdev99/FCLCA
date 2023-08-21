@@ -1,5 +1,5 @@
 CL_MODEL = "Curriculum No ob train 5000_1"
-CL_KIND = f"{CL_MODEL}_Test_gap11"
+CL_KIND = f"{CL_MODEL}_Test_gap"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
@@ -196,8 +196,8 @@ def collision_check():
     global trajectory
     for j in range(3):
         for i in range(2,INPUT_SENSOR + 2):
-            if (action == 1
-            or action == 2
+            if (action == 4
+            or action == 5
             or i == 5
             or i == 6):
                 continue

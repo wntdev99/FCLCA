@@ -1,10 +1,10 @@
 CL_MODEL = "Curriculum No ob train 5000_1"
-CL_KIND = f"{CL_MODEL}_Test_multi_agent"
+CL_KIND = f"{CL_MODEL}_Test_heterogenieous_6.28"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
-MAX_SPEED = 1.57
+MAX_SPEED = 6.28
 COLLISION_R = 6
 Time_Out = 3000
 
@@ -133,6 +133,29 @@ def rotated_point(orientation):
     return heading_degrees
 # 2-3. select action 
 def Action(action):
+    """
+    # Go straight
+    if action == 0:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
+    # Trun Right
+    elif action == 1:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED/3)
+    # Trun Left
+    elif action == 2:
+        left_motor.setVelocity(MAX_SPEED/3)
+        right_motor.setVelocity(MAX_SPEED)
+    # Trun Right
+    elif action == 3:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
+    # Trun Left
+    elif action == 4:
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
+        
+    """
     # Trun Right
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
@@ -155,6 +178,8 @@ def Action(action):
     elif action == 5:
         left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(-MAX_SPEED)
+
+        
 # 0.3925
 # 2-4. state get
 def environment():

@@ -2,8 +2,8 @@ from controller import Robot, DistanceSensor, Motor
 
 # time in [ms] of a simulation step
 TIME_STEP = 32
-
-MAX_SPEED = 1.57
+TARGET_SENSOR = 500
+MAX_SPEED = 6.28
 # create the Robot instance.
 robot = Robot()
 
@@ -34,8 +34,8 @@ while robot.step(TIME_STEP) != -1:
         psValues.append(ps[i].getValue())
 
     # detect obstacles
-    right_obstacle = psValues[0] > 80.0 or psValues[1] > 80.0 or psValues[2] > 80.0
-    left_obstacle = psValues[5] > 80.0 or psValues[6] > 80.0 or psValues[7] > 80.0
+    right_obstacle = psValues[0] > TARGET_SENSOR or psValues[1] > TARGET_SENSOR  or psValues[2] > TARGET_SENSOR 
+    left_obstacle = psValues[5] > TARGET_SENSOR or psValues[6] > TARGET_SENSOR  or psValues[7] > TARGET_SENSOR 
 
     # initialize motor speeds at 50% of MAX_SPEED.
     leftSpeed  = 0.5 * MAX_SPEED

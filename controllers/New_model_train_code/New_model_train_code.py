@@ -4,17 +4,17 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 1000
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
-ARRIVE_STANDARD = 0.1
+ARRIVE_STANDARD = 0.1 
 TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 12
-MODIFY_NUM = 0
+MODIFY_NUM = 1
 MODEL_NAME = "Curriculum Yes new model_1"
 
 import os
@@ -127,6 +127,8 @@ def Action(action):
         
         
 # 2-4. Reward structure
+        
+# 2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
     total = 0
@@ -136,22 +138,20 @@ def Reward(state,next_state):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
         else:
-            total -= 0.1
+            total -= 0.01
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 50
             elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 20
-            elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
-            
-                break
     # Target Approaching
     for j in range(MAX_FRAME - 1):
-        total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
-
+        if (action == 4
+        or action == 5):
+            break
+        total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 1000
     return total
     
     

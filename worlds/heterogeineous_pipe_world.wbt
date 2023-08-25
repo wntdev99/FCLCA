@@ -24,7 +24,7 @@ RectangleArena {
 DEF e-puck E-puck {
   translation 0.262241 -0.715915 -0.000809346
   rotation -0.0007822162212285237 -0.00032605654875374716 0.9999996409123906 -2.395857769542348
-  controller "CL_TEST_8_action 5"
+  controller "No_obstacles_SENSOR_8 _Train200000"
   supervisor TRUE
 }
 DEF ob0 PipeSection {

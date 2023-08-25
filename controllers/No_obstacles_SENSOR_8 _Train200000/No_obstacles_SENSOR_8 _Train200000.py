@@ -136,16 +136,20 @@ def Reward(state,next_state):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
         else:
-            total -= 0.1
+            total -= 0.01
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 200
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
+            elif COLLISION_R - 1.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 50
             elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
+            elif COLLISION_R - 2.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 3
             elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 5
+                total -= 1
             
                 break
     # Target Approaching

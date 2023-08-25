@@ -1,10 +1,10 @@
-CL_MODEL = "Curriculum No ob train 5000_1"
-CL_KIND = f"{CL_MODEL}_Test_heterogenieous_6.28"
-TEST_COUNT = 10
+CL_MODEL = "Curriculum Yes new model_1_0"
+CL_KIND = f"{CL_MODEL}_Test_heterogeineous_pipe_1"
+TEST_COUNT = 100
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
-MAX_SPEED = 6.28
+MAX_SPEED = 1.57
 COLLISION_R = 6
 Time_Out = 3000
 
@@ -133,7 +133,7 @@ def rotated_point(orientation):
     return heading_degrees
 # 2-3. select action 
 def Action(action):
-    """
+
     # Go straight
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
@@ -178,7 +178,7 @@ def Action(action):
     elif action == 5:
         left_motor.setVelocity(MAX_SPEED)
         right_motor.setVelocity(-MAX_SPEED)
-
+    """
         
 # 0.3925
 # 2-4. state get

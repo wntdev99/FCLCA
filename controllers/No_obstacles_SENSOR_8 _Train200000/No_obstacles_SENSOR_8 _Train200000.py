@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 8
-MODIFY_NUM = 1 
+MODIFY_NUM = 2
 MODEL_NAME = "Curriculum No ob train 5000"
 
 import os
@@ -139,13 +139,13 @@ def Reward(state,next_state):
             total -= 0.1
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 100
+                total -= 200
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 50
+                total -= 100
             elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 20
-            elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
+            elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 5
             
                 break
     # Target Approaching

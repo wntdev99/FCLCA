@@ -3,7 +3,7 @@ from controller import Robot, DistanceSensor, Motor
 # time in [ms] of a simulation step
 TIME_STEP = 32
 TARGET_SENSOR = 500
-MAX_SPEED = 6.28
+MAX_SPEED = 3.14
 # create the Robot instance.
 robot = Robot()
 

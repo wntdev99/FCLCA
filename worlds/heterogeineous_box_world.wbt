@@ -1,0 +1,278 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position -8.249305889195137e-06 -8.249329216591883e-06 2.811201879219629
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  hidden position_0_0 -12615.039178223358
+  hidden position_0_1 60076.32091820606
+  hidden linearVelocity_0 -0.01842999805274774 -0.025603035603581747 1.361600774499088e-07
+  hidden angularVelocity_0 0.007936546911123298 -0.005704097781237381 -9.902983798010013e-06
+  hidden rotation_1 0 1 0 1.5969185932513967
+  hidden linearVelocity_1 -0.018458655372353482 -0.025642777489034797 -3.6311243511475586e-08
+  hidden angularVelocity_1 1.2821411290299254 -0.9229296332358072 -3.5636233206442024e-06
+  hidden rotation_2 0 -1 0 3.4969890451458783
+  hidden linearVelocity_2 -0.01845852907173867 -0.025642869363508826 -4.067523203368356e-08
+  hidden angularVelocity_2 1.2821411788669272 -0.9229295640333303 5.457679795447081e-06
+  translation 0.5120357224950439 0.7796024397191711 -6.395397615859173e-05
+  rotation -0.0007575064142683788 -0.0003872661650277016 0.9999996381044093 -2.1947155548524977
+  controller "CL_TEST_8_action 5"
+  supervisor TRUE
+}
+Wall {
+  translation -0.41 0.6 0
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.53 0.41 0
+  name "wall(1)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.41 0.6 0
+  name "wall(2)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.2 0.49 0
+  name "wall(3)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.2 0.74 0
+  name "wall(45)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.18 0.74 0
+  name "wall(46)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.57 0.74 0
+  name "wall(47)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.01 0.6 0
+  name "wall(4)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.4 0.62 0
+  name "wall(5)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.21 0.49 0
+  name "wall(6)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.33 0.22 0
+  name "wall(7)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.41 -0.02 0
+  name "wall(8)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.41 -0.24 0
+  name "wall(9)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.3 -0.47 0
+  name "wall(10)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.13 0.31 0
+  name "wall(11)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.1 0.24 0
+  name "wall(12)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.56 0.18 0
+  name "wall(13)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.41 0.6 0
+  name "wall(14)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.26 -0.02 0
+  name "wall(15)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.55 -0.5 0
+  name "wall(16)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.04 -0.5 0
+  name "wall(17)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.29 -0.52 0
+  name "wall(18)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.32 -0.72 0
+  name "wall(38)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.11 -0.69 0
+  name "wall(39)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.12 -0.69 0
+  name "wall(40)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.35 -0.69 0
+  name "wall(41)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.53 -0.69 0
+  name "wall(42)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.6 -0.69 0
+  name "wall(43)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.66 -0.27 0
+  name "wall(44)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.58 -0.5 0
+  name "wall(19)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.58 -0.3 0
+  name "wall(20)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.62 -0.11 0
+  name "wall(21)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.58 0.26 0
+  name "wall(22)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.58 0.45 0
+  name "wall(23)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.35 0.31 0
+  name "wall(24)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.49 0.08 0
+  name "wall(25)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.39 -0.22 0
+  name "wall(26)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.19 -0.18 0
+  name "wall(27)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.18 0.04 0
+  name "wall(28)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.12 -0.36 0
+  name "wall(29)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.09 -0.36 0
+  name "wall(30)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.32 -0.3 0
+  name "wall(31)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.1 0.04 0
+  name "wall(32)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.01 0.52 0
+  name "wall(33)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation 0.68 0.66 0
+  name "wall(34)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.49 0.67 0
+  name "wall(35)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.49 -0.02 0
+  name "wall(36)"
+  size 0.08 0.08 0.3
+}
+Wall {
+  translation -0.57 -0.02 0
+  name "wall(37)"
+  size 0.08 0.08 0.3
+}

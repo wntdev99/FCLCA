@@ -33,6 +33,11 @@ E-puck {
   controller "tutorial_collision_avoidance"
 }
 E-puck {
+  translation -0.37 -0.25 0.1
+  name "e-puck(21)"
+  controller "tutorial_collision_avoidance"
+}
+E-puck {
   translation -0.08 0 0.1
   rotation 0 0 1 -1.5707953071795862
   name "e-puck(5)"
@@ -58,8 +63,32 @@ E-puck {
 }
 E-puck {
   translation -0.431661 -0.513695 0.4
-  rotation 0 0 1 2.618
+  rotation 0 0 -1 -1.8326053071795858
   name "e-puck(6)"
+  controller "tutorial_collision_avoidance"
+}
+E-puck {
+  translation -0.331661 -0.513695 0.5
+  rotation 0 0 1 -2.0943853071795866
+  name "e-puck(15)"
+  controller "tutorial_collision_avoidance"
+}
+E-puck {
+  translation -0.23166099999999998 -0.513695 0.6
+  rotation 0 0 1 -1.8325853071795866
+  name "e-puck(16)"
+  controller "tutorial_collision_avoidance"
+}
+E-puck {
+  translation -0.13166099999999997 -0.513695 0.7
+  rotation 0 0 1 2.618
+  name "e-puck(17)"
+  controller "tutorial_collision_avoidance"
+}
+E-puck {
+  translation 0.332065 -0.723695 0.8
+  rotation 0 0 1 2.618
+  name "e-puck(18)"
   controller "tutorial_collision_avoidance"
 }
 E-puck {
@@ -78,6 +107,12 @@ E-puck {
   translation 0.203336 0.0665458 0.7
   rotation 0 0 1 -1.5707853071795865
   name "e-puck(9)"
+  controller "tutorial_collision_avoidance"
+}
+E-puck {
+  translation 0.303337 -0.433454 0.8
+  rotation 0 0 1 -1.5707853071795865
+  name "e-puck(19)"
   controller "tutorial_collision_avoidance"
 }
 E-puck {
@@ -102,6 +137,12 @@ E-puck {
   translation -0.051703 0.265282 1.1
   rotation 0 0 1 -2.356185307179586
   name "e-puck(13)"
+  controller "tutorial_collision_avoidance"
+}
+E-puck {
+  translation 0.592766 -0.279185 1.2
+  rotation 0 0 1 -2.356185307179586
+  name "e-puck(20)"
   controller "tutorial_collision_avoidance"
 }
 E-puck {

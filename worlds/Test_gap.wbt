@@ -22,65 +22,55 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  hidden position_0_0 1615.6590896150074
-  hidden position_0_1 2877.6928533609307
-  hidden linearVelocity_0 -5.138771936815352e-05 -6.460460518553375e-06 -1.0238857228728058e-07
-  hidden angularVelocity_0 0.0005613772352928327 -0.0014005275965723518 1.1080646549819535
-  hidden rotation_1 0 -1 0 5.4027196373259505
-  hidden linearVelocity_1 0.02688458260074938 0.01042482245675909 -6.871940794464705e-10
-  hidden angularVelocity_1 -0.5673330010210036 1.4625271222052494 1.1146217877014934
-  hidden rotation_2 0 -1 0 0.0060173273198705236
-  hidden linearVelocity_2 -0.02700030332575056 -0.010447235485526549 1.0159096541785063e-08
-  hidden angularVelocity_2 0.568448530347846 -1.4653307385979115 1.1146658822721716
   translation 0.014807188428922811 -0.09650502951532719 -7.062281970978378e-05
   rotation 0.0001915093443371048 3.412269586087453e-05 -0.9999999810799061 2.7527908231859586
   controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
 DEF ob0 PipeSection {
-  translation 0.29 -0.62 0
+  translation 0.2655 -0.548 0
   name "pipe section(1)"
   height 0.2
   radius 0.1
 }
 DEF ob1 PipeSection {
-  translation 0.63 -0.3 0
+  translation 0.548 -0.264 0
   name "pipe section(9)"
   height 0.2
   radius 0.1
 }
 DEF ob2 PipeSection {
-  translation -0.62 -0.29 0
+  translation -0.6 -0.264 0
   name "pipe section(16)"
   height 0.2
   radius 0.1
 }
 DEF ob3 PipeSection {
-  translation 0.29 0.6 0
+  translation 0.2655 0.6 0
   name "pipe section(13)"
   height 0.2
   radius 0.1
 }
 DEF ob4 PipeSection {
-  translation -0.62 0.01 0
+  translation -0.6 0.022 0
   name "pipe section(4)"
   height 0.2
   radius 0.1
 }
 DEF ob5 PipeSection {
-  translation 0.63 0.02 0
+  translation 0.548 0.022 0
   name "pipe section(15)"
   height 0.2
   radius 0.1
 }
 DEF ob6 PipeSection {
-  translation -0.01 0.6 0
+  translation -0.022 0.6 0
   name "pipe section(12)"
   height 0.2
   radius 0.1
 }
 DEF ob7 PipeSection {
-  translation -0.01 -0.62 0
+  translation -0.022 -0.548 0
   name "pipe section(7)"
   height 0.2
   radius 0.1
@@ -92,19 +82,19 @@ DEF ob8 PipeSection {
   radius 0.1
 }
 DEF ob9 PipeSection {
-  translation -0.32 -0.62 0
+  translation -0.31 -0.548 0
   name "pipe section(6)"
   height 0.2
   radius 0.1
 }
 DEF ob10 PipeSection {
-  translation 0.6 0.6 0
+  translation 0.5525 0.6 0
   name "pipe section(2)"
   height 0.2
   radius 0.1
 }
 DEF ob11 PipeSection {
-  translation 0.62 -0.62 0
+  translation 0.2655 -0.548 0
   name "pipe section(10)"
   height 0.2
   radius 0.1
@@ -116,20 +106,26 @@ DEF ob12 PipeSection {
   radius 0.1
 }
 DEF ob13 PipeSection {
-  translation 0.63 0.33 0
+  translation 0.548 0.31 0
   name "pipe section(11)"
   height 0.2
   radius 0.1
 }
 DEF ob14 PipeSection {
-  translation -0.62 0.32 0
+  translation -0.6 0.288 0
   name "pipe section(14)"
   height 0.2
   radius 0.1
 }
 DEF ob15 PipeSection {
-  translation -0.62 -0.62 0
+  translation -0.6 -0.548 0
   name "pipe section(3)"
+  height 0.2
+  radius 0.1
+}
+DEF ob15 PipeSection {
+  translation 0.5525 -0.548 0
+  name "pipe section(17)"
   height 0.2
   radius 0.1
 }

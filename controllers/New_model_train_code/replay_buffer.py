@@ -1,7 +1,7 @@
 REPALY_MEMORY = 10000000
 MIN_BATCH_SIZE = 1024
 CL_NAME = "Curriculum Yes new model_1"
-CL_LOAD_NAME = "Curriculum Yes new model_1"
+CL_LOAD_NAME = "Curriculum No ob train 5000_1"
 
 import random
 import pickle
@@ -11,7 +11,7 @@ from collections import deque
 
 DAY_NUM = str(datetime.date.today())
 REPLAY_MEMORY_SAVE_FILE = f"/home/muros/문서/JOURNAL_PKL_FILE/{CL_NAME}_replay_memory.pkl"
-REPLAY_MEMORY_LOAD_FILE = f"/home/muros/문서/JOURNAL_PKL_FILE/{CL_LOAD_NAME}_replay_memmory.pkl"
+REPLAY_MEMORY_LOAD_FILE = f"/home/muros/문서/JOURNAL_PKL_FILE/{CL_LOAD_NAME}_replay_memory.pkl"
 
 # experience replay 
 class ReplayBuffer:

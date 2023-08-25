@@ -1,0 +1,103 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/pipes/protos/PipeSection.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position -6.580007388083588e-06 -6.580025995092406e-06 3.4015542738552664
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  translation 0.18626131525988696 -0.7940592099899709 -7.340549278627741e-05
+  rotation 0.0007333250924956094 0.0003003677875074161 0.9999996860067012 -2.144683530685188
+  controller "New_model_train_code"
+  supervisor TRUE
+}
+DEF ob0 PipeSection {
+  translation 0.3 0.3 0
+  radius 0.1
+}
+DEF ob1 PipeSection {
+  translation -0.5 -0.3 0
+  name "pipe section(1)"
+  radius 0.15
+}
+DEF ob2 PipeSection {
+  translation 0.4 -0.3 0
+  name "pipe section(2)"
+  radius 0.2
+}
+DEF ob3 PipeSection {
+  translation -0.4 0.6 0
+  name "pipe section(3)"
+  radius 0.1
+}
+DEF ob4 PipeSection {
+  translation 0 0.6 0
+  name "pipe section(4)"
+  radius 0.1
+}
+DEF ob5 PipeSection {
+  translation 0.6 0.6 0
+  name "pipe section(5)"
+  radius 0.1
+}
+DEF ob6 PipeSection {
+  translation -0.4 0.2 0
+  name "pipe section(6)"
+  radius 0.1
+}
+DEF ob7 PipeSection {
+  translation 0 -0.6 0
+  name "pipe section(7)"
+  radius 0.1
+}
+DEF ob8 PipeSection {
+  translation 0.71 0.11 0
+  name "pipe section(9)"
+  radius 0.1
+}
+DEF ob9 PipeSection {
+  translation -0.73 0.41 0
+  name "pipe section(10)"
+  radius 0.1
+}
+DEF ob10 PipeSection {
+  translation -0.73 -0.72 0
+  name "pipe section(8)"
+  radius 0.1
+}
+DEF ob11 PipeSection {
+  translation 0.68 -0.72 0
+  name "pipe section(11)"
+  radius 0.1
+}
+DEF ob12 PipeSection {
+  translation -0.92 -0.01 0
+  name "pipe section(12)"
+  radius 0.1
+}
+DEF ob13 PipeSection {
+  translation 0.31 0.89 0
+  name "pipe section(13)"
+  radius 0.1
+}
+DEF ob14 PipeSection {
+  translation -0.67 0.89 0
+  name "pipe section(14)"
+  radius 0.1
+}

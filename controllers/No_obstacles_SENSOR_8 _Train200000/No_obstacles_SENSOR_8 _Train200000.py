@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 1000
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -131,27 +131,40 @@ def Reward(state,next_state):
     # Initialization
     total = 0
     Dangerous_state = 1
+    
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
         else:
             total -= 0.01
+            
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 200
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
             elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 20
-            elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 50
+            elif COLLISION_R - 3  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
+
+
+            
+
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         if (action == 4
         or action == 5):
             break
-        total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
+        for k in range(2,2 + INPUT_SENSOR):
+            if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
+                Dangerous_state = 0
+        if Dangerous_state:
+                total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 4000
+        Dangerous_state = 1    
+
+
     return total
     
     

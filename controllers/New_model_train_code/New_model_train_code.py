@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 300
+MAX_EPISODE = 1000
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 12
-MODIFY_NUM = 2
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Yes new model_1"
 
 import os
@@ -133,28 +133,44 @@ def Reward(state,next_state):
     # Initialization
     total = 0
     Dangerous_state = 1
+    
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
         else:
             total -= 0.01
+            
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 50
-            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 1.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
+            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 5
+            elif COLLISION_R - 2.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 2
+            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 1
+            
+
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         if (action == 4
         or action == 5):
             break
-        total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 1000
+        for k in range(2,2 + INPUT_SENSOR):
+            if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
+                Dangerous_state = 0
+        if Dangerous_state:
+                total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 1000
+        Dangerous_state = 1    
+
+
     return total
-    
-    
+ 
 # 2.5. Done check
 def Done():
     for i in range(MAX_FRAME):

@@ -1,7 +1,7 @@
 REPALY_MEMORY = 10000000
 MIN_BATCH_SIZE = 1024
 CL_NAME = "Curriculum Yes new model_1"
-CL_LOAD_NAME = "Curriculum No ob train 5000_1"
+CL_LOAD_NAME = "0"
 
 import random
 import pickle

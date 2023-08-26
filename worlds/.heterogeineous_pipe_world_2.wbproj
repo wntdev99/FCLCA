@@ -5,7 +5,7 @@ sceneTreePerspectives: 000000ff00000001000000030000001c0000016500000151010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 2 "controllers/New_model_train_code/New_model_train_code.py" "controllers/New_model_train_code/replay_buffer.py" "controllers/New_model_train_code/dqn_agent.py" "controllers/CL_TEST_8_action 5/CL_TEST_8_action 5.py"
+textFiles: 0 "controllers/New_model_train_code/New_model_train_code.py" "controllers/New_model_train_code/replay_buffer.py" "controllers/New_model_train_code/dqn_agent.py" "controllers/CL_TEST_8_action 5/CL_TEST_8_action 5.py"
 globalOptionalRendering: DistanceSensorRays
 consoles: Console:All:All
 renderingDevicePerspectives: e-puck:camera;1;1;0;0

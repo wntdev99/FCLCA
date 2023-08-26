@@ -22,10 +22,6 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  hidden translation_1 0 0.025999999999999787 0.02
-  hidden rotation_1 0 1 0 5.335598292951055
-  hidden translation_2 0 -0.025999999999999673 0.02
-  hidden rotation_2 0 -1 0 4.930984914757221
   translation -0.571188092268179 -0.5081522321691861 -7.063410832716666e-05
   rotation 0.00013697744641641944 5.193082887109614e-05 0.9999999892701839 -2.3564477867611897
   controller "CL_TEST_8_action 5"
@@ -71,22 +67,22 @@ DEF ob7 PipeSection {
   radius 0.1
 }
 DEF ob8 PipeSection {
-  translation 0.6 0.27 0
+  translation 0.6 0.28 0
   name "pipe section(9)"
   radius 0.1
 }
 DEF ob9 PipeSection {
-  translation -0.73 0.6 0
+  translation -0.72 0.6 0
   name "pipe section(10)"
   radius 0.1
 }
 DEF ob10 PipeSection {
-  translation -0.5 -0.68 0
+  translation -0.5 -0.67 0
   name "pipe section(8)"
   radius 0.1
 }
 DEF ob11 PipeSection {
-  translation 0.4 -0.73 0
+  translation 0.4 -0.72 0
   name "pipe section(11)"
   radius 0.1
 }

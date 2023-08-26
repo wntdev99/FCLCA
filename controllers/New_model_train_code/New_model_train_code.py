@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 1000
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -125,9 +125,6 @@ def Action(action):
         right_motor.setVelocity(-MAX_SPEED)
 
         
-        
-# 2-4. Reward structure
-        
 # 2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
@@ -143,17 +140,15 @@ def Reward(state,next_state):
             
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 100
+                total -= 200
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 100
+            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 50
-            elif COLLISION_R - 1.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 3  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
-            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 5
-            elif COLLISION_R - 2.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 2
-            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 1
+
+
             
 
     # Target Approaching
@@ -165,7 +160,7 @@ def Reward(state,next_state):
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-                total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 1000
+                total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 4000
         Dangerous_state = 1    
 
 

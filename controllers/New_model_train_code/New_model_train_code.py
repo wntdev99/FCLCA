@@ -13,9 +13,9 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
-OBSTACLE_COUNT = 15
-MODIFY_NUM = 1
-MODEL_NAME = "Curriculum Yes new model_2"
+OBSTACLE_COUNT = 12
+MODIFY_NUM = 0
+MODEL_NAME = "Curriculum Yes new model_1"
 
 import os
 import math

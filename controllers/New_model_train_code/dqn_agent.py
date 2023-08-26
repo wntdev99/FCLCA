@@ -1,8 +1,9 @@
 INPUT_SIZE = 30
 ACTION_SIZE = 6
 LEARNING_RATE = 1e-8
-EPSILION = 1e-4
+EPSILION = 1e-2
 GAMMA = 0.95
+DECLINE_LIMIT = 0.1
 MODEL_NAME = 'Curriculum Yes new model_1_0'
 
 import tensorflow as tf
@@ -33,7 +34,7 @@ class DqnAgent:
     # policy or random select
     def collect_policy(self,max_episodes, episode_cnt, state):
         # heuristics set 0.01 , 10 , 0.8 ㆍㆍㆍ
-        epsilon = EPSILION + (1 - EPSILION) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.3)
+        epsilon = EPSILION + (1 - EPSILION) * np.exp(-(10 * (episode_cnt) / max_episodes) * DECLINE_LIMIT)
         if np.random.random() < epsilon:                                                                       
             return self.random_policy(state)
         return self.policy(state)

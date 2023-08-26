@@ -22,8 +22,18 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  translation 0.18626131525988696 -0.7940592099899709 -7.340549278627741e-05
-  rotation 0.0007333250924956094 0.0003003677875074161 0.9999996860067012 -2.144683530685188
+  hidden position_0_0 -6916.735219324469
+  hidden position_0_1 11608.662787569054
+  hidden linearVelocity_0 3.9585283765350906e-05 1.1302404359343387e-05 -7.172052344610274e-09
+  hidden angularVelocity_0 -0.0005790088930145724 0.0008754275970476896 1.105291436733036
+  hidden rotation_1 0 -1 0 5.23138142692362
+  hidden linearVelocity_1 -0.023127729639250735 -0.017125467564979353 4.60447635575551e-09
+  hidden angularVelocity_1 0.9336692847272248 -1.2611719968328634 1.111887583406032
+  hidden rotation_2 0 -0.9999999999999999 0 2.663660098822047
+  hidden linearVelocity_2 0.023218460428974384 0.017148648874722033 -1.022947495599138e-08
+  hidden angularVelocity_2 -0.9348338390518739 1.2629182794963612 1.1118527485043301
+  translation -0.5751182547936478 -0.5070476807853965 -7.063555632953397e-05
+  rotation -0.00023008864444660037 0.0006972066634706234 -0.9999997304810058 -0.6559529115731344
   controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
@@ -67,22 +77,22 @@ DEF ob7 PipeSection {
   radius 0.1
 }
 DEF ob8 PipeSection {
-  translation 0.6 0.3 0
+  translation 0.6 0.29 0
   name "pipe section(9)"
   radius 0.1
 }
 DEF ob9 PipeSection {
-  translation -0.7 0.6 0
+  translation -0.71 0.6 0
   name "pipe section(10)"
   radius 0.1
 }
 DEF ob10 PipeSection {
-  translation -0.5 -0.65 0
+  translation -0.5 -0.66 0
   name "pipe section(8)"
   radius 0.1
 }
 DEF ob11 PipeSection {
-  translation 0.4 -0.7 0
+  translation 0.4 -0.71 0
   name "pipe section(11)"
   radius 0.1
 }

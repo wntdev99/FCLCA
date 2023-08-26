@@ -1,5 +1,5 @@
-CL_MODEL = "Curriculum No ob train 5000_2"
-CL_KIND = f"{CL_MODEL}_Test_heterogeineous_pipe_1"
+CL_MODEL = "Curriculum No ob train 5000_3"
+CL_KIND = f"{CL_MODEL}_Test_heterogeineous_pipe_test"
 TEST_COUNT = 100
 INPUT_SENSOR = 8
 INPUT_SIZE = 10

@@ -1,6 +1,6 @@
 INPUT_SIZE = 30
 ACTION_SIZE = 6
-LEARNING_RATE = 1e-5
+LEARNING_RATE = 1e-6
 EPSILION = 1e-2
 GAMMA = 0.95
 MODEL_NAME = 'Curriculum Yes new model_1_0'

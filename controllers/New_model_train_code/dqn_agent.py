@@ -1,9 +1,9 @@
 INPUT_SIZE = 30
 ACTION_SIZE = 6
-LEARNING_RATE = 1e-2
+LEARNING_RATE = 1e-5
 EPSILION = 1e-2
 GAMMA = 0.95
-MODEL_NAME = 'Curriculum No ob train 5000_3'
+MODEL_NAME = 'Curriculum Yes new model_1_0'
 
 import tensorflow as tf
 import numpy as np

@@ -1,5 +1,5 @@
 CL_MODEL = "Curriculum Yes new model_1_0"
-CL_KIND = f"{CL_MODEL}_Test_heterogeineous_pipe_0"
+CL_KIND = f"{CL_MODEL}_Test_heterogeineous_pipe_2"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10

@@ -125,7 +125,7 @@ def Action(action):
         right_motor.setVelocity(-MAX_SPEED)
 
         
-# 2-4. Reward structure
+#  2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
     total = 0
@@ -141,19 +141,12 @@ def Reward(state,next_state):
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 200
-            elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
-                print("1")
-            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 0.8 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 50
-                print("2")
-            elif COLLISION_R - 2.5  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 1  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
-                print("2.5")
-
-
-            
-
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         if (action == 4
@@ -168,6 +161,7 @@ def Reward(state,next_state):
 
 
     return total
+ 
  
 # 2.5. Done check
 def Done():

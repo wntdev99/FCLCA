@@ -15,7 +15,7 @@ MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 12
 MODIFY_NUM = 0
-MODEL_NAME = "Curriculum Yes new model_1"
+MODEL_NAME = "Curriculum Yes new model_2"
 
 import os
 import math
@@ -136,17 +136,20 @@ def Reward(state,next_state):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
             total += 100
         else:
-            total -= 0.01
+            total -= 1
             
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 200
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
+                print("1")
             elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 50
-            elif COLLISION_R - 3  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                print("2")
+            elif COLLISION_R - 2.5  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
+                print("2.5")
 
 
             

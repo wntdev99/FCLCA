@@ -10,7 +10,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
-  position -6.580007388083588e-06 -6.580025995092406e-06 3.4015542738552664
+  position -8.445551691538657e-06 -8.445575573872891e-06 2.7417989657960895
 }
 TexturedBackground {
 }
@@ -22,9 +22,11 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  translation -0.00425504 0.240766 -0.000316032
-  rotation 5.1069157376798424e-05 -0.000599733649736116 -0.999999818855729 2.9694253335106335
-  controller "CL_TEST_8_action 5"
+  hidden rotation_1 0 -1 0 1.4235380396899706
+  hidden rotation_2 0 -0.9999999999999999 0 0.17797561401117626
+  translation -0.21361717456713478 -0.8322224322566881 -0.0025879218606628066
+  rotation 0.005918961084986146 -0.007587638406809381 0.9999536957494991 1.9150009830635264
+  controller "New_model_train_code_3"
   supervisor TRUE
 }
 DEF ob0 PipeSection {
@@ -100,4 +102,49 @@ DEF ob14 PipeSection {
   translation 0 -0.3 0
   name "pipe section(14)"
   radius 0.1
+}
+DEF ob15 PipeSection {
+  translation -0.7 -0.04 0
+  name "pipe section(15)"
+  radius 0.05
+}
+DEF ob16 PipeSection {
+  translation 0.6 0.045 0
+  name "pipe section(16)"
+  radius 0.05
+}
+DEF ob17 PipeSection {
+  translation 0.06 0.3 0
+  name "pipe section(17)"
+  radius 0.05
+}
+DEF ob18 PipeSection {
+  translation -0.13 0.3 0
+  name "pipe section(18)"
+  radius 0.05
+}
+DEF ob19 PipeSection {
+  translation -0.22 -0.19 0
+  name "pipe section(19)"
+  radius 0.05
+}
+DEF ob20 PipeSection {
+  translation -0.55 0.39 0
+  name "pipe section(23)"
+  radius 0.05
+}
+DEF ob20 PipeSection {
+  translation 0.24 0.6 0
+  name "pipe section(20)"
+  radius 0.05
+}
+DEF ob21 PipeSection {
+  translation 0.29 0.03 0
+  name "pipe section(21)"
+  radius 0.05
+}
+DEF ob22 PipeSection {
+  translation -0.36 -0.04 0
+  name "pipe section(22)"
+  radius 0.05
 }

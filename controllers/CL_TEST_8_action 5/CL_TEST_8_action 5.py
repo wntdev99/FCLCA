@@ -1,12 +1,12 @@
-CL_MODEL = "Curriculum Yes new model_2_0"
-CL_KIND = f"{CL_MODEL}_Test_heterogeineous_pipe_2"
+CL_MODEL = "Curriculum Yes new model_3_2"
+CL_KIND = f"{CL_MODEL}_Test_heterogeineous_pipe_3"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
 MAX_SPEED = 1.57
 COLLISION_R = 6
-Time_Out = 3000
+Time_Out = 1000
 
 from controller import Supervisor
 import matplotlib.pyplot as plt
@@ -25,7 +25,7 @@ robot = Supervisor()
 Dqn_model = tf.keras.models.load_model(CL_MODEL)
 # 1-1. model detail
 # new_model.summary()
-# 1-2. 현재 world timestep
+# 1-2. 현재 world timesteps
 timestep = int(robot.getBasicTimeStep())
 # 1-3. 로봇 모터 정보
 left_motor = robot.getDevice('left wheel motor')

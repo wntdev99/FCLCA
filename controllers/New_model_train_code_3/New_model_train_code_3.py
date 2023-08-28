@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 200
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -13,9 +13,9 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
-OBSTACLE_COUNT = 12
-MODIFY_NUM = 0
-MODEL_NAME = "Curriculum Yes new model_2"
+OBSTACLE_COUNT = 20
+MODIFY_NUM = 2
+MODEL_NAME = "Curriculum Yes new model_3"
 
 import os
 import math
@@ -125,7 +125,7 @@ def Action(action):
         right_motor.setVelocity(-MAX_SPEED)
 
         
-# 2-4. Reward structure
+#  2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
     total = 0
@@ -134,33 +134,38 @@ def Reward(state,next_state):
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
-            total += 100
+            total += 300
         else:
             total -= 1
             
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 200
-            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
-            elif COLLISION_R - 0.8 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 50
-            elif COLLISION_R - 1  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
+            elif COLLISION_R - 0.8 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 5
+            elif COLLISION_R - 1  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 1
+                
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         if (action == 4
         or action == 5):
             break
         for k in range(2,2 + INPUT_SENSOR):
+            if (k == 5
+            or k == 6):
+                continue
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-                total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 4000
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 5000
+            total += 0.5
         Dangerous_state = 1    
 
 
-    return totalss
+    return total
  
  
 # 2.5. Done check

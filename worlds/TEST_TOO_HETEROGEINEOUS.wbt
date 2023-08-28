@@ -1,0 +1,152 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/pipes/protos/PipeSection.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5796959467155841 0.5833303852885187 0.5689272984843242 2.1016993667085453
+  position 0.00039798628888809695 0.06307904602329617 5.561782303972168
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  translation 0.11018614173087728 -0.12772388387626815 -6.468414642631613e-05
+  rotation -0.0006195550461917488 -0.0006662463115259463 0.999999586133613 -1.56421804476083
+  controller "CL_TEST_8_action 5"
+  supervisor TRUE
+}
+Wall {
+  translation -0.2 0.33 0
+  size 0.07 0.07 0.4
+}
+Wall {
+  translation -0.47 0.09 0
+  name "wall(7)"
+  size 0.09 0.09 0.4
+}
+Wall {
+  translation -0.13 -0.09 0
+  name "wall(8)"
+  size 0.04 0.12 0.4
+}
+Wall {
+  translation -0.05 0.71 0
+  name "wall(6)"
+  size 0.15 0.05 0.4
+}
+Wall {
+  translation 0.56 0.33 0
+  name "wall(1)"
+  size 0.05 0.09 0.4
+}
+Wall {
+  translation 0.44 0.08 0
+  name "wall(2)"
+  size 0.07 0.05 0.4
+}
+Wall {
+  translation -0.02 0.24 0
+  name "wall(9)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.29 0.66 0
+  name "wall(10)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation -0.67 0.66 0
+  name "wall(11)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation -0.67 -0.32 0
+  name "wall(12)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation -0.4 -0.71 0
+  name "wall(13)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.3 -0.45 0
+  name "wall(3)"
+  size 0.05 0.1 0.4
+}
+Wall {
+  translation 0.3 -0.45 0
+  name "wall(4)"
+  size 0.05 0.15 0.4
+}
+Wall {
+  translation -0.22 -0.45 0
+  name "wall(5)"
+  size 0.15 0.1 0.4
+}
+DEF ob0 PipeSection {
+  translation -0.61 0.35 0
+  height 0.2
+  radius 0.1
+}
+DEF ob0 PipeSection {
+  translation 0.57 0.63 0
+  name "pipe section(1)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.57 -0.52 0
+  name "pipe section(3)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.58 -0.52 0
+  name "pipe section(4)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.07 -0.7 0
+  name "pipe section(8)"
+  height 0.2
+  radius 0.07
+}
+DEF ob0 PipeSection {
+  translation 0.43 -0.17 0
+  name "pipe section(5)"
+  height 0.2
+  radius 0.07
+}
+DEF ob0 PipeSection {
+  translation -0.43 -0.17 0
+  name "pipe section(6)"
+  height 0.2
+  radius 0.09
+}
+DEF ob0 PipeSection {
+  translation -0.42 0.63 0
+  name "pipe section(2)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.19 0.47 0
+  name "pipe section(7)"
+  height 0.2
+  radius 0.12
+}

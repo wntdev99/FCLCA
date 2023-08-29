@@ -22,6 +22,8 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
+  hidden rotation_1 0 -1 0 1.423538039689971
+  hidden rotation_2 0 -1 0 0.17797561401117626
   translation 0.0990318 -0.714114 -5.87897e-05
   rotation -6.036125576791395e-06 2.367053487828924e-06 0.9999999999789813 2.3182115501096767
   controller "CL_TEST_8_action 5"

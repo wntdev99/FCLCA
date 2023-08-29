@@ -1,12 +1,12 @@
-CL_MODEL = "Curriculum Yes new model_3_2"
-CL_KIND = f"{CL_MODEL}_TEST_HETEROGEINEOUS_OB_1"
+CL_MODEL = "Curriculum Yes Origin model_2"
+CL_KIND = f"{CL_MODEL}_TEST_HETEROGEINEOUS_TOO_HARD"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
 MAX_SPEED = 1.57
-COLLISION_R = 6
-Time_Out = 3000
+COLLISION_R = 12
+Time_Out = 1000
 
 from controller import Supervisor
 import matplotlib.pyplot as plt

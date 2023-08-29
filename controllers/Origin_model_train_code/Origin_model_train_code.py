@@ -4,7 +4,7 @@ COLLISION_R = 6
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 500
+MAX_EPISODE = 100
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -13,8 +13,8 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
-OBSTACLE_COUNT = 23
-MODIFY_NUM = 0
+OBSTACLE_COUNT = 8
+MODIFY_NUM = 2
 MODEL_NAME = "Curriculum Yes Origin model"
 
 import os
@@ -161,7 +161,7 @@ def Reward(state,next_state):
                 Dangerous_state = 0
         if Dangerous_state:
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 5000
-            total += 0.5
+            total += 2
         Dangerous_state = 1    
 
 

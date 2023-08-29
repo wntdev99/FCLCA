@@ -3,7 +3,7 @@ ACTION_SIZE = 6
 LEARNING_RATE = 1e-3
 EPSILION = 1e-2
 GAMMA = 0.95
-DECLINE_LIMIT = 0.5
+DECLINE_LIMIT = 0.3
 MODEL_NAME = 'Initialize model 6'
 
 import tensorflow as tf

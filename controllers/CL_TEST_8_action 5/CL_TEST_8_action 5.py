@@ -1,12 +1,12 @@
-CL_MODEL = "Curriculum Yes Origin model_2"
-CL_KIND = f"{CL_MODEL}_TEST_GAP_8"
+CL_MODEL = "Curriculum Yes ob 0_0"
+CL_KIND = f"{CL_MODEL}_TEST_TRAIN"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
 MAX_SPEED = 1.57
-COLLISION_R = 12
-Time_Out = 1000
+COLLISION_R = 8
+Time_Out = 3000
 
 from controller import Supervisor
 import matplotlib.pyplot as plt
@@ -159,25 +159,26 @@ def Action(action):
     # Trun Right
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(4)
+        right_motor.setVelocity(-MAX_SPEED)
     # Trun Left
     elif action == 1:
-        left_motor.setVelocity(4)
+        left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
     elif action == 2:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/2)
+        right_motor.setVelocity(MAX_SPEED/1.3)
         
     elif action == 3:
-        left_motor.setVelocity(MAX_SPEED/2)
+        left_motor.setVelocity(MAX_SPEED/1.3)
         right_motor.setVelocity(MAX_SPEED)
     elif action == 4:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
-    elif action == 5:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED/4)
+        
+    elif action == 5:
+        left_motor.setVelocity(MAX_SPEED/4)
+        right_motor.setVelocity(MAX_SPEED)
 
         
 # 0.3925

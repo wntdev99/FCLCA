@@ -33,7 +33,7 @@ class DqnAgent:
     # policy or random select
     def collect_policy(self,max_episodes, episode_cnt, state):
         # heuristics set 0.01 , 10 , 0.8 ㆍㆍㆍ
-        epsilon = EPSILION + (1 - EPSILION) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.1)
+        epsilon = EPSILION + (1 - EPSILION) * np.exp(-(10 * (episode_cnt) / max_episodes) * 0.5)
         if np.random.random() < epsilon:                                                                       
             return self.random_policy(state)
         return self.policy(state)

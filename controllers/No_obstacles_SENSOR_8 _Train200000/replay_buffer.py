@@ -1,6 +1,6 @@
 REPALY_MEMORY = 100000000
 MIN_BATCH_SIZE = 1024
-CL_NAME = "Curriculum No ob train 5000_4"
+CL_NAME = "Curriculum Yes ob 0"
 CL_LOAD_NAME = "0"
 
 import random

@@ -1,9 +1,9 @@
 INPUT_SIZE = 30
 ACTION_SIZE = 6
-LEARNING_RATE = 1e-3
+LEARNING_RATE = 1e-6
 EPSILION = 1e-2
 GAMMA = 0.95
-DECLINE_LIMIT = 0.5
+DECLINE_LIMIT = 0.3
 MODEL_NAME = 'Curriculum Yes new model_2_0'
 
 import tensorflow as tf

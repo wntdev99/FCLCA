@@ -1,10 +1,10 @@
 INPUT_SIZE = 30
 ACTION_SIZE = 6
-LEARNING_RATE = 1e-6
+LEARNING_RATE = 1e-3
 EPSILION = 1e-2
 GAMMA = 0.95
-DECLINE_LIMIT = 0.1
-MODEL_NAME = 'Curriculum No ob train 5000_4'
+DECLINE_LIMIT = 0.3
+MODEL_NAME = 'Curriculum Yes ob 0_0'
 
 import tensorflow as tf
 import numpy as np

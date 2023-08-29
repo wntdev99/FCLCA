@@ -4,7 +4,7 @@ COLLISION_R = 12
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 100
+MAX_EPISODE = 200
 INPUT_SENSOR = 8
 REPLAY_CYCLE = 1000
 INPUT_ONE_FRAME = 10
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 20
-MODIFY_NUM = 3
+MODIFY_NUM = 4
 MODEL_NAME = "Curriculum Yes new model_3"
 
 import os
@@ -104,10 +104,10 @@ def Action(action):
     # Trun Right
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(4)
+        right_motor.setVelocity(MAX_SPEED/4)
     # Trun Left
     elif action == 1:
-        left_motor.setVelocity(4)
+        left_motor.setVelocity(MAX_SPEED/4)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
     elif action == 2:
@@ -140,13 +140,15 @@ def Reward(state,next_state):
             
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 100
-            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
-            elif COLLISION_R - 0.8 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 5
-            elif COLLISION_R - 1  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 50
+            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 10
+            elif COLLISION_R - 3 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 1
+                
+                
                 
     # Target Approaching
     for j in range(MAX_FRAME - 1):
@@ -160,8 +162,7 @@ def Reward(state,next_state):
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 5000
-            total += 0.5
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 4000
         Dangerous_state = 1    
 
 

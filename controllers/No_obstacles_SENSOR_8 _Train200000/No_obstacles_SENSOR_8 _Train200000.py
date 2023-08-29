@@ -1,6 +1,6 @@
 GOAL_X = 0
 GOAL_Y = 0 
-COLLISION_R = 6
+COLLISION_R = 8
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
@@ -14,8 +14,8 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 8
-MODIFY_NUM = 4
-MODEL_NAME = "Curriculum No ob train 5000"
+MODIFY_NUM = 0
+MODEL_NAME = "Curriculum Yes ob 0"
 
 import os
 import math
@@ -104,25 +104,26 @@ def Action(action):
     # Trun Right
     if action == 0:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(4)
+        right_motor.setVelocity(-MAX_SPEED)
     # Trun Left
     elif action == 1:
-        left_motor.setVelocity(4)
+        left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
     # Trun Right
     elif action == 2:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/2)
+        right_motor.setVelocity(MAX_SPEED/1.3)
         
     elif action == 3:
-        left_motor.setVelocity(MAX_SPEED/2)
+        left_motor.setVelocity(MAX_SPEED/1.3)
         right_motor.setVelocity(MAX_SPEED)
     elif action == 4:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
-    elif action == 5:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED/4)
+        
+    elif action == 5:
+        left_motor.setVelocity(MAX_SPEED/4)
+        right_motor.setVelocity(MAX_SPEED)
 
         
         
@@ -141,23 +142,24 @@ def Reward(state,next_state):
             
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 200
-            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
-            elif COLLISION_R - 0.8 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 50
-            elif COLLISION_R - 1  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+            elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
+            elif COLLISION_R - 2  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 1
     # Target Approaching
     for j in range(MAX_FRAME - 1):
-        if (action == 4
-        or action == 5):
+        if (action == 0
+        or action == 1):
             break
         for k in range(2,2 + INPUT_SENSOR):
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-                total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 4000
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
+            total += 1
         Dangerous_state = 1    
 
 

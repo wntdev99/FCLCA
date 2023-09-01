@@ -1,6 +1,6 @@
 GOAL_X = 0
 GOAL_Y = 0 
-COLLISION_R = 8
+COLLISION_R = 15
 MAX_SPEED = 1.57
 MAX_FRAME = 3
 STATE_SIZE = 30
@@ -13,8 +13,8 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.30
 NORMALIZATION_SENSOR = 100 
-OBSTACLE_COUNT = 12
-MODIFY_NUM = 0
+OBSTACLE_COUNT = 23
+MODIFY_NUM = 1
 MODEL_NAME = "Curriculum Yes ob 1"
 
 import os
@@ -135,7 +135,7 @@ def Reward(state,next_state):
     # Target reaching
     for i in range(MAX_FRAME):
         if next_state[i * INPUT_ONE_FRAME] < ARRIVE_STANDARD:
-            total += 200
+            total += 100
         else:
             total -= 1
             
@@ -143,11 +143,70 @@ def Reward(state,next_state):
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
             elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 50
+                total -= 800
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 10
+                total -= 50
             elif COLLISION_R - 2  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 1
+                total -= 10
+                
+        if (state[i * INPUT_ONE_FRAME + 4] > 0.8
+        and state[i * INPUT_ONE_FRAME + 4] < 4
+        and state[i * INPUT_ONE_FRAME + 7] > 0.8
+        and state[i * INPUT_ONE_FRAME + 7] < 4
+        and state[i * INPUT_ONE_FRAME + 2] < 0.8
+        and state[i * INPUT_ONE_FRAME + 3] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            total += 3
+            if state[i * INPUT_ONE_FRAME + 4] < state[i * INPUT_ONE_FRAME + 7]:
+                if (action == 4):
+                    total += 2
+                else:
+                    total -= 1
+            elif state[i * INPUT_ONE_FRAME + 4] > state[i * INPUT_ONE_FRAME + 7]:
+                if (action == 5):
+                    total += 2
+                else:
+                    total -= 1
+                    
+        if (state[i * INPUT_ONE_FRAME + 4] > 0.8
+        and state[i * INPUT_ONE_FRAME + 4] < 4
+        and state[i * INPUT_ONE_FRAME + 7] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 5):
+                total += 1
+            else:
+                total -= 2
+        if (state[i * INPUT_ONE_FRAME + 7] > 0.8
+        and state[i * INPUT_ONE_FRAME + 7] < 4
+        and state[i * INPUT_ONE_FRAME + 4] < 0.8
+        and state[i * INPUT_ONE_FRAME + 8] < 0.8
+        and state[i * INPUT_ONE_FRAME + 9] < 0.8
+        ):
+            if (action == 4):
+                total += 1
+            else:
+                total -= 2
+                    
+                    
+        if (state[i * INPUT_ONE_FRAME + 3] > 0.8
+        or state[i * INPUT_ONE_FRAME + 4] > 0.8
+        or state[i * INPUT_ONE_FRAME + 7] > 0.8
+        or state[i * INPUT_ONE_FRAME + 8] > 0.8
+        ):
+            if (next_state[i * INPUT_ONE_FRAME + 2] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 3] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 4] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 7] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 8] < 0.8
+            and next_state[i * INPUT_ONE_FRAME + 9] < 0.8
+            ):
+                total += 5
+                
+                
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         if (action == 0
@@ -157,8 +216,7 @@ def Reward(state,next_state):
             if state[(j + 1) * INPUT_ONE_FRAME + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 4000
-            total += 1
+            total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
         Dangerous_state = 1    
 
 

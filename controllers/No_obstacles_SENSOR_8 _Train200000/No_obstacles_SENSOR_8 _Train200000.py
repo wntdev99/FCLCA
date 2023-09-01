@@ -1,19 +1,19 @@
 GOAL_X = 0
 GOAL_Y = 0 
 COLLISION_R = 8
-MAX_SPEED = 1.57
+MAX_SPEED = 6.28
 MAX_FRAME = 3
 STATE_SIZE = 30
-MAX_EPISODE = 1000
+MAX_EPISODE = 200
 INPUT_SENSOR = 8
-REPLAY_CYCLE = 1000
+REPLAY_CYCLE = 2000
 INPUT_ONE_FRAME = 10
 ARRIVE_STANDARD = 0.1
 TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
-MIN_DISTANCE = 0.30
+MIN_DISTANCE = 0.20
 NORMALIZATION_SENSOR = 100 
-OBSTACLE_COUNT = 8
+OBSTACLE_COUNT = 11
 MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Yes ob 0"
 
@@ -103,29 +103,28 @@ def collect_experiences(state,next_state,action,reward,done,buffer):
 def Action(action):
     # Trun Right
     if action == 0:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
+        left_motor.setVelocity(MAX_SPEED/4)
+        right_motor.setVelocity(-MAX_SPEED/4)
     # Trun Left
     elif action == 1:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
+        left_motor.setVelocity(-MAX_SPEED/4)
+        right_motor.setVelocity(MAX_SPEED/4)
     # Trun Right
     elif action == 2:
         left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/1.3)
+        right_motor.setVelocity(MAX_SPEED)
         
     elif action == 3:
-        left_motor.setVelocity(MAX_SPEED/1.3)
-        right_motor.setVelocity(MAX_SPEED)
-    elif action == 4:
-        left_motor.setVelocity(MAX_SPEED)
+        left_motor.setVelocity(MAX_SPEED/4)
         right_motor.setVelocity(MAX_SPEED/4)
         
-    elif action == 5:
-        left_motor.setVelocity(MAX_SPEED/4)
-        right_motor.setVelocity(MAX_SPEED)
-
+    elif action == 4:
+        left_motor.setVelocity(MAX_SPEED/8)
+        right_motor.setVelocity(MAX_SPEED/8)
         
+    elif action == 5:
+        left_motor.setVelocity(MAX_SPEED/16)
+        right_motor.setVelocity(MAX_SPEED/16)
         
 # 2-4. Reward structure
 def Reward(state,next_state):
@@ -143,12 +142,11 @@ def Reward(state,next_state):
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 100
-            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 50
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 50
+            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
                 total -= 10
-            elif COLLISION_R - 2  < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 1
+                
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         if (action == 0
@@ -159,9 +157,7 @@ def Reward(state,next_state):
                 Dangerous_state = 0
         if Dangerous_state:
             total += (next_state[j * INPUT_ONE_FRAME] - next_state[(j + 1) * INPUT_ONE_FRAME]) * 2000
-            total += 1
-        Dangerous_state = 1    
-
+        Dangerous_state = 1
 
     return total
     

@@ -24,7 +24,7 @@ RectangleArena {
 DEF e-puck E-puck {
   translation 0 0.9 -3.11861e-05
   rotation 0.002173240107841979 -0.004717918181844075 0.9999865090467286 1.0778609538319992
-  controller "CL_TEST_8_action 5"
+  controller "No_obstacles_SENSOR_8 _Train200000"
   supervisor TRUE
 }
 DEF ob0 PipeSection {
@@ -32,115 +32,115 @@ DEF ob0 PipeSection {
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob1 PipeSection {
   translation -0.33 0.55 0
   name "pipe section(4)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob2 PipeSection {
   translation -0.55 0.55 0
   name "pipe section(5)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob3 PipeSection {
   translation -0.55 0.33 0
   name "pipe section(6)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob4 PipeSection {
   translation -0.55 0.11 0
   name "pipe section(7)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob5 PipeSection {
   translation -0.55 -0.11 0
   name "pipe section(8)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob6 PipeSection {
   translation -0.55 -0.33 0
   name "pipe section(9)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob7 PipeSection {
   translation -0.55 -0.55 0
   name "pipe section(10)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob8 PipeSection {
   translation -0.33 -0.55 0
   name "pipe section(11)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob9 PipeSection {
   translation -0.11 -0.55 0
   name "pipe section(12)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob10 PipeSection {
   translation 0.11 -0.55 0
   name "pipe section(13)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob11 PipeSection {
   translation 0.33 -0.55 0
   name "pipe section(14)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob12 PipeSection {
   translation 0.55 -0.55 0
   name "pipe section(15)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob13 PipeSection {
   translation 0.55 -0.33 0
   name "pipe section(16)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob14 PipeSection {
   translation 0.55 -0.11 0
   name "pipe section(17)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob15 PipeSection {
   translation 0.55 0.11 0
   name "pipe section(18)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob16 PipeSection {
   translation 0.55 0.33 0
   name "pipe section(19)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob17 PipeSection {
   translation 0.11 0.55 0
   name "pipe section(1)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob18 PipeSection {
   translation 0.33 0.55 0
   name "pipe section(2)"
   height 0.2
   radius 0.05
 }
-DEF ob0 PipeSection {
+DEF ob19 PipeSection {
   translation 0.55 0.55 0
   name "pipe section(3)"
   height 0.2

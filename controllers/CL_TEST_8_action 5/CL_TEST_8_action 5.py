@@ -1,10 +1,10 @@
-CL_MODEL = "Curriculum Yes ob 0_0"
-CL_KIND = f"{CL_MODEL}_TEST_TRAIN"
+CL_MODEL = "TRY_AGAIN_1_0"
+CL_KIND = f"{CL_MODEL}_TEST_GAP_9"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
-MAX_SPEED = 1.57
+MAX_SPEED = 6.28
 COLLISION_R = 8
 Time_Out = 3000
 
@@ -133,52 +133,30 @@ def rotated_point(orientation):
     return heading_degrees
 # 2-3. select action 
 def Action(action):
-    """
-    # Go straight
-    if action == 0:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
-    # Trun Right
-    elif action == 1:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/3)
-    # Trun Left
-    elif action == 2:
-        left_motor.setVelocity(MAX_SPEED/3)
-        right_motor.setVelocity(MAX_SPEED)
-    # Trun Right
-    elif action == 3:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
-    # Trun Left
-    elif action == 4:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
-        
-    """
     # Trun Right
     if action == 0:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED)
+        left_motor.setVelocity(MAX_SPEED/4)
+        right_motor.setVelocity(-MAX_SPEED/4)
     # Trun Left
     elif action == 1:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED)
-    # Trun Right
-    elif action == 2:
-        left_motor.setVelocity(MAX_SPEED)
-        right_motor.setVelocity(MAX_SPEED/1.3)
-        
-    elif action == 3:
-        left_motor.setVelocity(MAX_SPEED/1.3)
-        right_motor.setVelocity(MAX_SPEED)
-    elif action == 4:
-        left_motor.setVelocity(MAX_SPEED)
+        left_motor.setVelocity(-MAX_SPEED/4)
         right_motor.setVelocity(MAX_SPEED/4)
+    # Trun Right
+    elif action == 2:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(0)
+        
+    elif action == 3:
+        left_motor.setVelocity(0)
+        right_motor.setVelocity(MAX_SPEED)
+        
+    elif action == 4:
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
         
     elif action == 5:
-        left_motor.setVelocity(MAX_SPEED/4)
-        right_motor.setVelocity(MAX_SPEED)
+        left_motor.setVelocity(MAX_SPEED/16)
+        right_motor.setVelocity(MAX_SPEED/16)
 
         
 # 0.3925

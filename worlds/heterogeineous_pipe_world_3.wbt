@@ -26,7 +26,7 @@ DEF e-puck E-puck {
   hidden rotation_2 0 -0.9999999999999999 0 0.17797561401117626
   translation -0.21361717456713478 -0.8322224322566881 -0.0025879218606628066
   rotation 0.005918961084986146 -0.007587638406809381 0.9999536957494991 1.9150009830635264
-  controller "New_model_train_code_3"
+  controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
 DEF ob0 PipeSection {

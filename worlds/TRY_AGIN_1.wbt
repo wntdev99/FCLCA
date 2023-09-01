@@ -1,0 +1,63 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/pipes/protos/PipeSection.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.577809759113985 0.5814323883386291 0.5727759248287906 2.0958755368857083
+  position -2.9955596661705236e-05 -0.004737708502441655 4.050508707001135
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  hidden linearVelocity_0 -3.9637185294470184e-05 3.64828103619967e-05 -5.399394217766104e-06
+  hidden angularVelocity_0 0.00023867952303016963 0.00021342377842905615 0.001759664697979629
+  hidden translation_1 0 0.02599999999999399 0.02
+  hidden rotation_1 0 0.9999999999999999 0 6.072585178777491
+  hidden linearVelocity_1 -0.0007771941373601961 0.0003054007898516509 1.8146639884779507e-05
+  hidden angularVelocity_1 0.9040626924877274 -6.214333529489732 -0.04528564503431196
+  hidden translation_2 0 -0.025999999999994264 0.02
+  hidden rotation_2 0 -0.9999999999999999 0 1.7419651042986264
+  hidden linearVelocity_2 7.37323442779447e-06 -0.00033407907536769666 1.3604598275821293e-06
+  hidden angularVelocity_2 0.00023870057150049417 0.0002134568367236617 0.001759677163914185
+  translation 0.8132680095328996 -0.7829234959902586 -0.00010958648343602391
+  rotation -6.258725581732914e-05 0.0009936696506295428 -0.9999995043516076 2.9954688984466658
+  controller "TRY_AGAIN_1"
+  supervisor TRUE
+}
+DEF ob0 PipeSection {
+  translation 0 0.52 0
+  name "pipe section(4)"
+  height 0.2
+  radius 0.1
+}
+DEF ob1 PipeSection {
+  translation 0 -0.52 0
+  name "pipe section(10)"
+  height 0.2
+  radius 0.15
+}
+DEF ob2 PipeSection {
+  translation -0.52 0 0
+  name "pipe section(13)"
+  height 0.2
+  radius 0.2
+}
+DEF ob3 PipeSection {
+  translation 0.52 0 0
+  name "pipe section(15)"
+  height 0.2
+  radius 0.09
+}

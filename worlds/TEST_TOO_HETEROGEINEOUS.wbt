@@ -23,7 +23,7 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  translation 0.11018614173087728 -0.12772388387626815 -6.468414642631613e-05
+  translation 0.108801 0.0822718 0.000204474
   rotation -0.0006195550461917488 -0.0006662463115259463 0.999999586133613 -1.56421804476083
   controller "CL_TEST_8_action 5"
   supervisor TRUE
@@ -38,6 +38,11 @@ Wall {
   size 0.09 0.09 0.4
 }
 Wall {
+  translation 0.04 -0.42 0
+  name "wall(14)"
+  size 0.09 0.09 0.4
+}
+Wall {
   translation -0.13 -0.09 0
   name "wall(8)"
   size 0.04 0.12 0.4
@@ -48,18 +53,38 @@ Wall {
   size 0.15 0.05 0.4
 }
 Wall {
+  translation 0.59 0.08 0
+  name "wall(18)"
+  size 0.15 0.05 0.4
+}
+Wall {
+  translation -0.66 -0.72 0
+  name "wall(24)"
+  size 0.15 0.05 0.4
+}
+Wall {
   translation 0.56 0.33 0
   name "wall(1)"
   size 0.05 0.09 0.4
 }
 Wall {
-  translation 0.44 0.08 0
+  translation -0.73 0.09 0
+  name "wall(23)"
+  size 0.05 0.09 0.4
+}
+Wall {
+  translation 0.35 0.19 0
   name "wall(2)"
   size 0.07 0.05 0.4
 }
 Wall {
-  translation -0.02 0.24 0
+  translation -0.21 0.11 0
   name "wall(9)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation -0.02 0.24 0
+  name "wall(15)"
   size 0.05 0.05 0.4
 }
 Wall {
@@ -80,6 +105,41 @@ Wall {
 Wall {
   translation -0.4 -0.71 0
   name "wall(13)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.43 -0.71 0
+  name "wall(16)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.15 -0.23 0
+  name "wall(25)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.72 -0.68 0
+  name "wall(19)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.72 0.49 0
+  name "wall(20)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.72 0.77 0
+  name "wall(21)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation -0.12 0.51 0
+  name "wall(22)"
+  size 0.05 0.05 0.4
+}
+Wall {
+  translation 0.69 -0.08 0
+  name "wall(17)"
   size 0.05 0.05 0.4
 }
 Wall {
@@ -111,6 +171,12 @@ DEF ob0 PipeSection {
 DEF ob0 PipeSection {
   translation 0.57 -0.52 0
   name "pipe section(3)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.69 -0.32 0
+  name "pipe section(9)"
   height 0.2
   radius 0.05
 }

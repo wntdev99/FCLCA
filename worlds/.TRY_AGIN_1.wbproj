@@ -5,6 +5,6 @@ sceneTreePerspectives: 000000ff00000001000000030000001c000000c0000000fa010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/TRY_AGAIN_1/TRY_AGAIN_1.py" "controllers/TRY_AGAIN_1/dqn_agent.py" "controllers/TRY_AGAIN_1/replay_buffer.py" "controllers/CL_TEST_8_action 5/CL_TEST_8_action 5.py"
+textFiles: 0 "controllers/NO_CL_1/NO_CL_1.py" "controllers/NO_CL_1/dqn_agent.py" "controllers/NO_CL_1/replay_buffer.py"
 consoles: Console:All:All
 renderingDevicePerspectives: e-puck:camera;1;1;0;0

@@ -1,12 +1,12 @@
-CL_MODEL = "TRY_AGAIN_3_0"
-CL_KIND = f"{CL_MODEL}_TEST_TOO_HETEROGEINEOUS"
-TEST_COUNT = 10
+CL_MODEL = "NO_CL_0_0"
+CL_KIND = f"{CL_MODEL}_TEST_HARD"
+TEST_COUNT = 100
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
 MAX_SPEED = 6.28
 COLLISION_R = 15
-Time_Out = 3000
+Time_Out = 2000
 
 from controller import Supervisor
 import matplotlib.pyplot as plt
@@ -200,8 +200,8 @@ def collision_check():
     global trajectory
     for j in range(3):
         for i in range(2,INPUT_SENSOR + 2):
-            if (action == 4
-            or action == 5
+            if (action == 0
+            or action == 1
             or i == 5
             or i == 6):
                 continue

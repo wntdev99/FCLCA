@@ -1,6 +1,6 @@
 GOAL_X = 0
 GOAL_Y = 0 
-COLLISION_R = 8
+COLLISION_R = 6
 MAX_SPEED = 6.28
 MAX_FRAME = 3
 STATE_SIZE = 30
@@ -141,11 +141,11 @@ def Reward(state,next_state):
             
         for j in range(INPUT_SENSOR):            
             if COLLISION_R < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 10
+                total -= 100
+            elif COLLISION_R - 0.5 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
+                total -= 50
             elif COLLISION_R - 1 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 5
-            elif COLLISION_R - 2 < next_state[i * INPUT_ONE_FRAME + 2 + j]:
-                total -= 1
+                total -= 10
                 
     # Target Approaching
     for j in range(MAX_FRAME - 1):

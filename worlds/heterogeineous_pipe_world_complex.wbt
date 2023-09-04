@@ -27,7 +27,7 @@ DEF e-puck E-puck {
   controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
-DEF ob1 PipeSection {
+DEF ob35 PipeSection {
   translation -0.7 -0.7 0
   name "pipe section(1)"
   radius 0.08

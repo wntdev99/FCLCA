@@ -1,12 +1,12 @@
-CL_MODEL = "NO_CL_0_0"
-CL_KIND = f"{CL_MODEL}_TEST_HARD"
+CL_MODEL = "NO_CL_3_0"
+CL_KIND = f"{CL_MODEL}_TEST_HETEROGENEOUS_GAP"
 TEST_COUNT = 100
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
 MAX_SPEED = 6.28
 COLLISION_R = 15
-Time_Out = 2000
+Time_Out = 4000
 
 from controller import Supervisor
 import matplotlib.pyplot as plt

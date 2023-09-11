@@ -12,8 +12,8 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-OBSTACLE_COUNT = 12
-MODIFY_NUM = 3
+OBSTACLE_COUNT = 0
+MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Collision Aoivdance 0"
 
 import os
@@ -107,8 +107,8 @@ def environment():
     # 2-1-5. radius get ep 
     goal_radius = math.sqrt(pow(goal[0] - ep[0],2) + pow(goal[1] - ep[1],2))
     # 2-1-6. radius get ob
-    storage.append(goal_radius)
-    storage.append(math.radians(theta))
+    storage.append(0)
+    storage.append(0)
     # 2-1-6-1. sensor value
     for i in range(INPUT_SENSOR):
         storage.append(ps[i].value/NORMALIZATION_SIZE)
@@ -295,6 +295,8 @@ for episode_cnt in range(1,max_episodes):
         count_state += 1  
         environment()
         # 3-3. 3개 프레임 가져오기
+        print("state : ",state)
+        print("next_state : ",state)
         if count_state == MAX_FRAME:
             # setiing 하게 되면 초기화 버그 해결
             if set_count == 1:

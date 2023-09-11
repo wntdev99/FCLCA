@@ -3,7 +3,7 @@ MAX_SPEED = 0.785
 MAX_EPISODE = 70
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
-MIN_DISTANCE = 0.35
+MIN_DISTANCE = 0.1
 INPUT_ONE_FRAME = 8
 NORMALIZATION_SIZE = 100
 ARRIVE_STANDARD = 0.1
@@ -11,7 +11,7 @@ REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-OBSTACLE_COUNT = 13
+OBSTACLE_COUNT = 0
 MODIFY_NUM = 10
 MODEL_NAME = "Current model"
 
@@ -106,8 +106,8 @@ def environment():
     # 2-1-5. radius get ep 
     goal_radius = math.sqrt(pow(goal[0] - ep[0],2) + pow(goal[1] - ep[1],2))
     # 2-1-6. radius get ob
-    storage.append(goal_radius)
-    storage.append(math.radians(theta))
+    storage.append(0)
+    storage.append(0)
     # 2-1-6-1. sensor value
     storage.append((ps[0].value)/100)
     storage.append((ps[1].value)/100)
@@ -374,6 +374,8 @@ for episode_cnt in range(1,max_episodes):
         environment()
         # 3-3. 3개 프레임 가져오기
         if count_state == MAX_FRAME:
+            print("state : ",state)
+            print("next_state : ",next_state)
             # setiing 하게 되면 초기화 버그 해결
             if set_count == 1:
                 next_state = np.array(storage)

@@ -9,8 +9,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.577809759113985 0.5814323883386291 0.5727759248287906 2.0958755368857083
-  position 1.1803863976568076e-06 1.1803897352999116e-06 4.59191887849646
+  orientation 0.5773502691896258 -0.5773502691896258 -0.5773502691896258 4.188785307179587
+  position -7.910623472143102e-06 -7.91064578144403e-06 5.3373527171491615
 }
 TexturedBackground {
 }
@@ -24,7 +24,7 @@ RectangleArena {
 DEF e-puck E-puck {
   translation 0 0.9 -3.11861e-05
   rotation 0.002173240107841979 -0.004717918181844075 0.9999865090467286 1.0778609538319992
-  controller "No_obstacles_SENSOR_8 _Train200000"
+  controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
 DEF ob0 PipeSection {

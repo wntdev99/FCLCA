@@ -4,7 +4,7 @@ LEARNING_RATE = 1e-3
 EPSILION = 1e-2
 GAMMA = 0.95
 EPSILON_RATE = 0.1
-MODEL_NAME = 'Initialize model 6'
+MODEL_NAME = 'NO_CL_1_1'
 
 import tensorflow as tf
 import numpy as np

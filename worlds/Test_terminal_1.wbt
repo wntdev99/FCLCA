@@ -9,8 +9,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5792651744253933 0.5735012940505969 0.5792651581272688 2.100183093120571
-  position -0.003263322376053923 0.002721220868771912 4.843152912795586
+  orientation -0.5694969136918759 0.5694969794284487 0.5927448487480101 2.071462014924353
+  position -0.012881047779494226 -0.20599726237586757 5.039985391535933
 }
 TexturedBackground {
 }
@@ -22,77 +22,211 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  translation -0.0948516 -0.0858709 -0.000141585
-  rotation 0.00014195107619245788 8.22478956039904e-05 -0.9999999865425878 1.2883914580359914
+  translation 0.0864692 0.0812799 -0.000104638
+  rotation 0.00021775999312820314 -0.00012527599604669718 0.9999999684432547 0.806004
   controller "CL_TEST_8_action 5"
   supervisor TRUE
 }
 Wall {
-  translation 0 0.5 0
-  size 0.05 0.6 0.2
+  translation -0.065 0.5 0
+  size 0.04 0.6 0.2
 }
 Wall {
-  translation 0 -0.6 0
-  name "wall(11)"
-  size 0.01 0.4 0.2
-}
-Wall {
-  translation -0.240212 0.4 0
-  rotation 0 0 1 0.3926996938995747
-  name "wall(2)"
-  size 0.05 0.6 0.2
-}
-Wall {
-  translation -0.424058 0.216652 0
+  translation -0.383214 0.379034 0
   rotation 0 0 1 0.7853996938995746
-  name "wall(3)"
-  size 0.05 0.6 0.2
-}
-Wall {
-  translation -0.52356 -0.0235582 0
-  rotation 0 0 1 1.1780996938995747
-  name "wall(6)"
-  size 0.05 0.6 0.2
-}
-Wall {
-  translation -0.52356 -0.283558 0
-  rotation 0 0 1 1.5707996938995747
   name "wall(8)"
-  size 0.05 0.6 0.2
+  size 0.04 0.6 0.2
 }
 Wall {
-  translation -0.328745 -0.537445 0
-  rotation 0 0 1 2.2252996938995744
+  translation -0.397356 -0.393176 0
+  rotation 0 0 1 2.3562003061004253
   name "wall(10)"
-  size 0.03 0.6 0.2
+  size 0.04 0.6 0.2
 }
 Wall {
-  translation 0.240212 0.4 0
-  rotation 0 0 1 -0.3926996938995747
-  name "wall(1)"
-  size 0.05 0.6 0.2
+  translation -0.358332 -0.532772 0
+  rotation 0 0 1 2.3562003061004253
+  name "wall(12)"
+  size 0.04 0.4 0.2
 }
 Wall {
-  translation 0.424058 0.216652 0
+  translation -0.358332 0.532772 0
+  rotation 0 0 1 0.7853996938995746
+  name "wall(33)"
+  size 0.04 0.4 0.2
+}
+Wall {
+  translation 0.358332 -0.532772 0
+  rotation 0 0 1 0.7853996938995746
+  name "wall(20)"
+  size 0.04 0.4 0.2
+}
+Wall {
+  translation 0.358332 0.532772 0
+  rotation 0 0 1 -0.7854003061004253
+  name "wall(27)"
+  size 0.04 0.4 0.2
+}
+Wall {
+  translation -0.535107 -0.355997 0
+  rotation 0 0 1 2.3562003061004253
+  name "wall(13)"
+  size 0.04 0.4 0.2
+}
+Wall {
+  translation -0.535107 0.355997 0
+  rotation 0 0 1 0.7853996938995746
+  name "wall(32)"
+  size 0.04 0.4 0.2
+}
+Wall {
+  translation 0.535107 -0.355997 0
+  rotation 0 0 1 0.7853903061004254
+  name "wall(19)"
+  size 0.04 0.4 0.2
+}
+Wall {
+  translation 0.535107 0.355997 0
+  rotation 0 0 1 -0.7854003061004253
+  name "wall(26)"
+  size 0.04 0.4 0.2
+}
+Wall {
+  translation -0.655314 -0.292358 0
+  rotation 0 0 1 2.3562003061004253
+  name "wall(15)"
+  size 0.04 0.3 0.2
+}
+Wall {
+  translation -0.655314 0.292358 0
+  rotation 0 0 1 0.7854003061004253
+  name "wall(31)"
+  size 0.04 0.3 0.2
+}
+Wall {
+  translation 0.655314 -0.292358 0
+  rotation 0 0 1 0.7854003061004253
+  name "wall(18)"
+  size 0.04 0.3 0.2
+}
+Wall {
+  translation 0.655314 0.292358 0
+  rotation 0 0 1 -0.7854003061004253
+  name "wall(25)"
+  size 0.04 0.3 0.2
+}
+Wall {
+  translation -0.294693 -0.652979 0
+  rotation 0 0 1 2.3562003061004253
+  name "wall(16)"
+  size 0.04 0.3 0.2
+}
+Wall {
+  translation -0.294693 0.652979 0
+  rotation 0 0 1 0.7854003061004253
+  name "wall(34)"
+  size 0.04 0.3 0.2
+}
+Wall {
+  translation 0.294693 -0.652979 0
+  rotation 0 0 1 0.7854003061004253
+  name "wall(21)"
+  size 0.04 0.3 0.2
+}
+Wall {
+  translation 0.294693 0.652979 0
   rotation 0 0 1 -0.7853996938995746
-  name "wall(4)"
-  size 0.05 0.6 0.2
+  name "wall(28)"
+  size 0.04 0.3 0.2
 }
 Wall {
-  translation 0.52356 -0.0255822 0
-  rotation 0 0 1 -1.1780996938995747
-  name "wall(5)"
-  size 0.05 0.6 0.2
+  translation -0.765817 -0.182861 0
+  rotation 0 0 1 1.5708003061004252
+  name "wall(14)"
+  size 0.04 0.1 0.2
 }
 Wall {
-  translation 0.52356 -0.283558 0
-  rotation 0 0 1 -1.5707996938995747
-  name "wall(7)"
-  size 0.05 0.6 0.2
+  translation -0.765817 0.182861 0
+  rotation 0 0 1 1.5708003061004252
+  name "wall(30)"
+  size 0.04 0.1 0.2
 }
 Wall {
-  translation 0.328745 -0.537445 0
-  rotation 0 0 1 -2.2252996938995744
+  translation -0.195817 0.772861 0
+  name "wall(22)"
+  size 0.04 0.1 0.2
+}
+Wall {
+  translation -0.195817 -0.772861 0
+  name "wall(35)"
+  size 0.04 0.1 0.2
+}
+Wall {
+  translation 0.194183 -0.772861 0
+  name "wall(23)"
+  size 0.04 0.1 0.2
+}
+Wall {
+  translation 0.194183 0.772861 0
+  name "wall(29)"
+  size 0.04 0.1 0.2
+}
+Wall {
+  translation 0.765817 -0.182861 0
+  rotation 0 0 1 1.5708003061004252
+  name "wall(17)"
+  size 0.04 0.1 0.2
+}
+Wall {
+  translation 0.765817 0.187139 0
+  rotation 0 0 1 1.5708003061004252
+  name "wall(24)"
+  size 0.04 0.1 0.2
+}
+Wall {
+  translation 0.383214 0.379034 0
+  rotation 0 0 1 -0.7853996938995746
   name "wall(9)"
-  size 0.03 0.6 0.2
+  size 0.04 0.6 0.2
+}
+Wall {
+  translation 0.397356 -0.393176 0
+  rotation 0 0 1 0.7854003061004253
+  name "wall(11)"
+  size 0.04 0.6 0.2
+}
+Wall {
+  translation 0.5 -0.065 0
+  name "wall(4)"
+  size 0.6 0.04 0.2
+}
+Wall {
+  translation -0.5 -0.065 0
+  name "wall(7)"
+  size 0.6 0.04 0.2
+}
+Wall {
+  translation 0.5 0.065 0
+  name "wall(5)"
+  size 0.6 0.04 0.2
+}
+Wall {
+  translation -0.5 0.065 0
+  name "wall(6)"
+  size 0.6 0.04 0.2
+}
+Wall {
+  translation -0.065 -0.5 0
+  name "wall(2)"
+  size 0.04 0.6 0.2
+}
+Wall {
+  translation 0.065 0.5 0
+  name "wall(1)"
+  size 0.04 0.6 0.2
+}
+Wall {
+  translation 0.065 -0.5 0
+  name "wall(3)"
+  size 0.04 0.6 0.2
 }

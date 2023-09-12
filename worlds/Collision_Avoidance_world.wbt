@@ -10,7 +10,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
-  position 1.4736997937583503e-05 1.4737039610835809e-05 9.108704493057173
+  position -2.6121702474948975e-07 -2.6121776296093303e-07 3.8045410301549465
 }
 TexturedBackground {
 }
@@ -18,28 +18,83 @@ TexturedBackgroundLight {
   castShadows FALSE
 }
 RectangleArena {
-  floorSize 3 3
+  floorSize 2 2
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  hidden position_0_0 1.8978538382473245
-  hidden position_0_1 1.897853835320102
-  hidden linearVelocity_0 -0.007699601718380184 1.2357313032436622e-05 -2.5772225730709946e-07
-  hidden angularVelocity_0 1.608422827601141e-05 0.010026294472503737 1.8585479174787923e-08
-  hidden rotation_1 0 -1 0 5.055891617943227
-  hidden linearVelocity_1 -0.007649464459771123 1.2272957640887266e-05 -2.548406576685389e-07
-  hidden angularVelocity_1 -0.0006136507183609433 -0.3824732003662612 3.0062092254289076e-08
-  hidden rotation_2 0 1 0 2.7187029450754037
-  hidden linearVelocity_2 -0.007649464467746048 1.2273034684531901e-05 -2.549482804561266e-07
-  hidden angularVelocity_2 -0.0006136488237108254 -0.3824732003696245 5.463559672545432e-09
-  translation -0.9224988654023935 3.611907063464009e-05 -6.392831126597436e-05
-  rotation -0.0004785255044201913 3.8333333068206745e-07 0.9999998855065908 3.1399882339271956
-  controller "TEST_CODE"
+  hidden position_0_0 27856.759731344446
+  hidden position_0_1 -27821.777823180793
+  hidden linearVelocity_0 8.446808323033253e-11 -4.0669686914801515e-11 -0.00016201081378801083
+  hidden angularVelocity_0 2.7295918844602004e-09 5.669151061331273e-09 2.4271527245869602e-08
+  hidden translation_1 0 0.02599999999999336 0.02
+  hidden rotation_1 0 1 0 2.728704468327943
+  hidden linearVelocity_1 0.0012651040832388767 -0.001674699074914878 0.0004075666012805049
+  hidden angularVelocity_1 -5.676711452025952 2.6872615492167573 -0.047544851843560505
+  hidden translation_2 0 -0.025999999999992515 0.02
+  hidden rotation_2 0 1 0 0.9875661201708746
+  hidden linearVelocity_2 -0.001265103864058023 0.0016746989673785161 0.0004075662765498623
+  hidden angularVelocity_2 5.6767114574871425 -2.6872615381066973 -0.04754483897673587
+  translation -0.8995497636594467 -0.8987801842827984 -0.00014204937800276797
+  rotation 6.414123203555352e-10 3.936875052535596e-10 -1 -1.1429337374190345
+  controller "CA_TEST"
   supervisor TRUE
 }
-PipeSection {
-  translation -1.135 0 0
-  height 2
+DEF ob0 PipeSection {
+  translation 0 0 0
   radius 0.1
-  subdivision 65
+}
+DEF ob1 PipeSection {
+  translation -0.45 0 0
+  name "pipe section(1)"
+  radius 0.1
+}
+DEF ob2 PipeSection {
+  translation 0.51 0 0
+  name "pipe section(2)"
+  radius 0.1
+}
+DEF ob3 PipeSection {
+  translation 0 0 0
+  name "pipe section(11)"
+  radius 0.1
+}
+DEF ob4 PipeSection {
+  translation -0.69 0.59 0
+  name "pipe section(3)"
+  radius 0.1
+}
+DEF ob5 PipeSection {
+  translation -0.7 -0.49 0
+  name "pipe section(4)"
+  radius 0.1
+}
+DEF ob6 PipeSection {
+  translation 0 -0.54 0
+  name "pipe section(5)"
+  radius 0.1
+}
+DEF ob7 PipeSection {
+  translation 0.45 -0.49 0
+  name "pipe section(6)"
+  radius 0.1
+}
+DEF ob8 PipeSection {
+  translation 0 0.01 0
+  name "pipe section(7)"
+  radius 0.1
+}
+DEF ob9 PipeSection {
+  translation 0 0.54 0
+  name "pipe section(8)"
+  radius 0.1
+}
+DEF ob10 PipeSection {
+  translation 0.46 0.64 0
+  name "pipe section(9)"
+  radius 0.1
+}
+DEF ob11 PipeSection {
+  translation 0.37 0.19 0
+  name "pipe section(10)"
+  radius 0.1
 }

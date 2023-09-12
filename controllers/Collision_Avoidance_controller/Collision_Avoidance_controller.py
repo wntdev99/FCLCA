@@ -1,18 +1,18 @@
 STATE_SIZE = 30
 MAX_SPEED = 6.28
-MAX_EPISODE = 50
+MAX_EPISODE = 200
 MAX_FRAME = 3
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.35
 INPUT_ONE_FRAME = 10
 INPUT_SENSOR = 8
 NORMALIZATION_SIZE = 100
-ARRIVE_STANDARD = 0.1
+ARRIVE_STANDARD = -1
 REPLAY_CYCLE = 2000
 TARGET_NETWORK_CYCLE = 5
 GOAL_X = 0
 GOAL_Y = 0 
-OBSTACLE_COUNT = 0
+OBSTACLE_COUNT = 10
 MODIFY_NUM = 0
 MODEL_NAME = "Curriculum Collision Aoivdance 0"
 
@@ -133,12 +133,12 @@ def Action(action):
         right_motor.setVelocity(MAX_SPEED)
     # Trun Left
     elif action == 3:
-        left_motor.setVelocity(-MAX_SPEED)
-        right_motor.setVelocity(-MAX_SPEED/3)
+        left_motor.setVelocity(MAX_SPEED)
+        right_motor.setVelocity(-MAX_SPEED)
     # Trun Left
     elif action == 4:
-        left_motor.setVelocity(-MAX_SPEED/3)
-        right_motor.setVelocity(-MAX_SPEED)
+        left_motor.setVelocity(-MAX_SPEED)
+        right_motor.setVelocity(MAX_SPEED)
 
 # 2-4. Reward structure
 def Reward(state,next_state):
@@ -146,18 +146,16 @@ def Reward(state,next_state):
     total = 0
     Dangerous_state = 1
     
-    # Target reaching
-    for i in range(MAX_FRAME):                                          # 각 프레임에 대해 모두 진행
-        if next_state[i * input] < ARRIVE_STANDARD:
-            total += 10
-    
     # Target Approaching
     for j in range(MAX_FRAME - 1):
         for k in range(2,2 + INPUT_SENSOR):
             if state[(j + 1) * input + k] > 0.8:
                 Dangerous_state = 0
         if Dangerous_state:
-            pass
+            if action == 0:
+                total += 1
+        else:
+            total -= 1
         Dangerous_state = 1
     
     # Collision Avoidance 
@@ -166,12 +164,12 @@ def Reward(state,next_state):
             if state[(j + 1) * input + k] > 0.8:
                 total += (next_state[j * input + k] - next_state[(j + 1) * input + k])
     for i in range(MAX_FRAME):
-        if (state[i * input + 2] > 1
-        or state[i * input + 3] > 1
-        or state[i * input + 5] > 1
-        or state[i * input + 6] > 1
-        or state[i * input + 8] > 1
-        or state[i * input + 9] > 1
+        if (state[i * input + 2] > 0.8
+        or state[i * input + 3] > 0.8
+        or state[i * input + 5] > 0.8
+        or state[i * input + 6] > 0.8
+        or state[i * input + 8] > 0.8
+        or state[i * input + 9] > 0.8
         ):
             if (next_state[i * input + 2] < 0.8
             and next_state[i * input + 3] < 0.8
@@ -181,6 +179,9 @@ def Reward(state,next_state):
             and next_state[i * input + 9] < 0.8
             ):
                 total += 1
+    for i in range(INPUT_SENSOR):
+        if 6 < next_state[j * input + 2 + i]:
+            total -= 10
     
     return total
     
@@ -295,8 +296,6 @@ for episode_cnt in range(1,max_episodes):
         count_state += 1  
         environment()
         # 3-3. 3개 프레임 가져오기
-        print("state : ",state)
-        print("next_state : ",state)
         if count_state == MAX_FRAME:
             # setiing 하게 되면 초기화 버그 해결
             if set_count == 1:

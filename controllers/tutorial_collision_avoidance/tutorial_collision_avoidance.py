@@ -1,8 +1,8 @@
 from controller import Robot, DistanceSensor, Motor
 
 # time in [ms] of a simulation step
-TIME_STEP = 32
-TARGET_SENSOR = 500
+TIME_STEP = 256
+TARGET_SENSOR = 78
 MAX_SPEED = 3.14
 # create the Robot instance.
 robot = Robot()
@@ -52,4 +52,3 @@ while robot.step(TIME_STEP) != -1:
     # write actuators inputs
     leftMotor.setVelocity(leftSpeed)
     rightMotor.setVelocity(rightSpeed)
-    

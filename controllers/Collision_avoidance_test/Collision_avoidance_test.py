@@ -1,7 +1,7 @@
 GOAL_X = 0
 GOAL_Y = 0 
 COLLISION_R = 6
-MAX_SPEED = 1.57
+MAX_SPEED = 6.28
 MAX_FRAME = 3
 STATE_SIZE = 30
 MAX_EPISODE = 100
@@ -13,7 +13,7 @@ TARGET_NETWORK_CYCLE = 5
 MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.20
 NORMALIZATION_SENSOR = 100
-OBSTACLE_COUNT = 12
+OBSTACLE_COUNT = 10
 MODIFY_NUM = 0
 MODEL_NAME = "CA_test"
 
@@ -98,8 +98,7 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-        
-    print(state)
+
 # 2-4. Reward structure
 def Reward(state,next_state):
     # Initialization
@@ -113,7 +112,7 @@ def Reward(state,next_state):
                 Dangerous_state = 0
         if Dangerous_state:
             if action == 0:
-                total += 1
+                total += 10
         Dangerous_state = 1
     
     # Collision Avoidance _ 1

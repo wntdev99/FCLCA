@@ -3,7 +3,7 @@ ACTION_SIZE = 5
 LEARNING_RATE = 1e-2
 EPSILION = 1e-2
 GAMMA = 0.95
-MODEL_NAME = 'Curriculum No ob_20'
+MODEL_NAME = 'Initialize model 5'
 
 import tensorflow as tf
 import numpy as np

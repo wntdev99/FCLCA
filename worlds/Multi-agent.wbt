@@ -8,8 +8,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.5754161189814871 0.5754161353340279 0.5811992439891288 2.0886361518864818
-  position -3.507300531224722e-06 -0.04440965223496185 4.443820200840539
+  orientation -0.574939211847883 0.5763783759416388 0.5807175478893453 2.0871837556441757
+  position -1.3678540543075865e-06 -0.05189908425870491 5.192950279304399
 }
 TexturedBackground {
 }
@@ -21,133 +21,538 @@ RectangleArena {
   floorTileSize 4 4
 }
 DEF e-puck E-puck {
-  translation 0.262241 -0.715915 -0.000809346
-  rotation -0.0007822162212285237 -0.00032605654875374716 0.9999996409123906 -2.395857769542348
-  controller "CL_TEST_8_action 5"
+  hidden translation_1 0 0.025999999999999017 0.02
+  hidden rotation_1 0 -0.9999999999999999 0 5.376077521193666
+  hidden translation_2 0 -0.025999999999999152 0.02
+  hidden rotation_2 0 -1 0 4.513741876372678
+  translation -0.058500538409621126 0.4320828810747682 -6.666436019888561e-05
+  rotation 0.006322502355599113 0.005434442465132776 0.9999652457956011 -1.7218719346941889
+  controller "Journal_model_multi_agent"
+  supervisor TRUE
+}
+DEF ob0 E-puck {
+  hidden translation_1 0 0.02599999999999891 0.02
+  hidden rotation_1 0 1 0 5.219548742265131
+  hidden translation_2 0 -0.02599999999999943 0.02
+  hidden rotation_2 0 -1 0 6.2594791555073686
+  translation -0.7391741189506138 0.6627185836555876 -5.6637535466317127e-05
+  rotation 0.0033369154170873167 0.005940599835109511 0.9999767868651243 -0.9867669913051227
+  name "e-puck(1)"
+  controller "tutorial_collision_avoidance"
   supervisor TRUE
   version "2"
 }
-E-puck {
-  translation -0.47 0 0
-  name "e-puck(1)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation -0.37 -0.25 0.1
-  name "e-puck(21)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation -0.08 0 0.1
-  rotation 0 0 1 -1.5707953071795862
-  name "e-puck(5)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation 0.65 0 0.1
-  rotation 0 0 1 1.5708
+DEF ob1 E-puck {
+  hidden translation_1 0 0.025999999999999083 0.02
+  hidden rotation_1 0 -1 0 3.9799738300164336
+  hidden translation_2 0 -0.02599999999999879 0.02
+  hidden rotation_2 0 -1 0 4.72920453491328
+  translation 0.05525835740898428 -0.4792215851052805 -5.599127448713097e-05
+  rotation -0.00036145291750734235 -0.0003042617674529336 -0.9999998883882764 1.741859820409762
   name "e-puck(2)"
   controller "tutorial_collision_avoidance"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation 0.01 0.59 0.2
-  rotation 0 0 1 -2.617985307179586
+DEF ob2 E-puck {
+  hidden translation_1 0 0.02599999999999891 0.02
+  hidden rotation_1 0 1 0 2.1126687877054118
+  hidden translation_2 0 -0.02599999999999879 0.02
+  hidden rotation_2 0 0.9999999999999999 0 3.772675665941345
+  translation 0.15373367569400637 -0.06904493385743068 -5.594464775644098e-05
+  rotation -0.0005669691672557032 0.005256360068750265 -0.9999860245147384 -0.21490208387208298
   name "e-puck(3)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_1"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation 0.158339 -0.513695 0.3
-  rotation 0 0 1 -3.1415853071795863
+DEF ob3 E-puck {
+  hidden translation_1 0 0.025999999999998965 0.02
+  hidden rotation_1 0 -0.9999999999999999 0 1.0146058478188078
+  hidden translation_2 0 -0.02599999999999913 0.02
+  hidden rotation_2 0 0.9999999999999999 0 5.432101661431414
+  translation -0.05814512342524734 0.23971324711188513 -5.594001824491511e-05
+  rotation 0.0006681418433634005 -0.0008986029941324025 0.9999993730493715 1.2786981395440955
   name "e-puck(4)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_2"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation -0.431661 -0.513695 0.4
-  rotation 0 0 -1 -1.8326053071795858
+DEF ob4 E-puck {
+  hidden translation_1 0 0.025999999999998743 0.02
+  hidden rotation_1 0 -1 0 1.9789111216207047
+  hidden translation_2 0 -0.025999999999999038 0.02
+  hidden rotation_2 0 1 0 1.087526664588997
+  translation -0.847281921289412 0.25561924609251746 -5.593351661819547e-05
+  rotation 0.0007852651982825232 -0.00080029407937572 -0.9999993714437799 -1.5518404378431638
+  name "e-puck(5)"
+  controller "tutorial_collision_avoidance_3"
+  supervisor TRUE
+  version "2"
+}
+DEF ob5 E-puck {
+  hidden translation_1 0 0.025999999999998812 0.02
+  hidden rotation_1 0 1 0 3.0858063346026823
+  hidden translation_2 0 -0.025999999999998965 0.02
+  hidden rotation_2 0 1 0 0.9234717261640055
+  translation 0.8068182940597172 -0.5153351784347824 -5.5927572533674e-05
+  rotation -0.0008660661171265388 -0.010577981158703833 -0.9999436765358771 0.16339293624345538
   name "e-puck(6)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_4"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation -0.331661 -0.513695 0.5
-  rotation 0 0 1 -2.0943853071795866
-  name "e-puck(15)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation -0.23166099999999998 -0.513695 0.6
-  rotation 0 0 1 -1.8325853071795866
-  name "e-puck(16)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation -0.13166099999999997 -0.513695 0.7
-  rotation 0 0 1 2.618
-  name "e-puck(17)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation 0.332065 -0.723695 0.8
-  rotation 0 0 1 2.618
-  name "e-puck(18)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation -0.211661 -0.305852 0.5
-  rotation 0 0 -1 -2.094405307179586
+DEF ob6 E-puck {
+  hidden translation_1 0 0.02599999999999911 0.02
+  hidden rotation_1 0 -1 0 4.1474525972499725
+  hidden translation_2 0 -0.025999999999998864 0.02
+  hidden rotation_2 0 -1 0 4.892102090912819
+  translation -0.6751858216222937 0.9061928630405803 -5.5959011409209905e-05
+  rotation -0.00013584099881058047 -3.5469101612385026e-05 -0.999999990144583 2.6307560295991537
   name "e-puck(7)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_5"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation 0.228334 0.283047 0.6
-  rotation 0 0 -1 -0.7854053071795866
+DEF ob7 E-puck {
+  hidden translation_1 0 0.025999999999999922 0.02
+  hidden rotation_1 0 1 0 1.354854782128286
+  hidden translation_2 0 -0.025999999999999777 0.02
+  hidden rotation_2 0 -1 0 5.41510125038198
+  translation 0.08030173742755177 -0.8854448506420342 -5.5957303540805914e-05
+  rotation 0.00015278182381383076 4.9845336611573645e-05 0.9999999870865783 -2.5108704526145784
   name "e-puck(8)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_1"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation 0.203336 0.0665458 0.7
-  rotation 0 0 1 -1.5707853071795865
+DEF ob8 E-puck {
+  hidden translation_1 0 0.025999999999999076 0.02
+  hidden rotation_1 0 -1 0 5.998952561901473
+  hidden translation_2 0 -0.025999999999998757 0.02
+  hidden rotation_2 0 1 0 2.7651950445577524
+  translation -0.9351773434817345 -0.13094742240203655 -6.255567029986135e-05
+  rotation 0.00040899602098011024 -0.000471893412865276 0.9999998050194119 1.3684836257370825
   name "e-puck(9)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_2"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation 0.303337 -0.433454 0.8
-  rotation 0 0 1 -1.5707853071795865
-  name "e-puck(19)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation 0.303336 -0.233454 0.8
-  rotation 0 0 1 2.8798
+DEF ob9 E-puck {
+  hidden translation_1 0 0.025999999999998993 0.02
+  hidden rotation_1 0 1 0 0.8945465016014041
+  hidden translation_2 0 -0.0259999999999991 0.02
+  hidden rotation_2 0 0.9999999999999999 0 1.4849394152411504
+  translation 0.7796218823641411 -0.6714964342979325 -5.5937463885456784e-05
+  rotation 0.0007214546218968492 0.0003884439207785812 -0.9999996643072182 2.1537771002578197
   name "e-puck(10)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_3"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation -0.538925 0.422764 0.9
-  rotation 0 0 -1 -2.094405307179586
+DEF ob10 E-puck {
+  hidden translation_1 0 0.025999999999998837 0.02
+  hidden rotation_1 0 -1 0 1.370345975232775
+  hidden translation_2 0 -0.025999999999998472 0.02
+  hidden rotation_2 0 0.9999999999999999 0 2.5432023592446975
+  translation -0.1996715283108998 -0.3609459531217791 -5.592687381741901e-05
+  rotation -0.000876855060933539 0.001062898600637829 -0.9999990506854328 -1.3795612850196308
   name "e-puck(11)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_4"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation -0.291705 0.507764 1
-  rotation 0 0 1 -1.0471853071795865
+DEF ob11 E-puck {
+  hidden translation_1 0 0.02599999999999948 0.02
+  hidden rotation_1 0 1 0 2.349535941746573
+  hidden translation_2 0 -0.025999999999999492 0.02
+  hidden rotation_2 0 -1 0 4.500969652018273
+  translation -0.13357590653592935 -0.6791309174911381 -5.5926055117103135e-05
+  rotation -0.0008901108889369268 0.000264856087267556 -0.999999568776836 -2.5631717547328225
   name "e-puck(12)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_5"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation -0.051703 0.265282 1.1
-  rotation 0 0 1 -2.356185307179586
+DEF ob12 E-puck {
+  hidden position_0_0 2357.371815226597
+  hidden position_0_1 2461.0324512134066
+  hidden translation_1 0 0.02599999999999988 0.02
+  hidden rotation_1 0 -1 0 5.105860272927579
+  hidden translation_2 0 -0.025999999999999714 0.02
+  hidden rotation_2 0 -0.9999999999999999 0 1.9761892009912962
+  translation 0.27899363492811596 0.5352831086857408 -5.594967062380954e-05
+  rotation 0.0004452251289507533 -0.0026774013930105315 -0.999996316641399 -0.3295692140395161
   name "e-puck(13)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_6"
+  supervisor TRUE
+  version "2"
 }
-E-puck {
-  translation 0.592766 -0.279185 1.2
-  rotation 0 0 1 -2.356185307179586
-  name "e-puck(20)"
-  controller "tutorial_collision_avoidance"
-}
-E-puck {
-  translation 0.324066 0.541051 1.2
-  rotation 0 0 -1 0.785389
+DEF ob13 E-puck {
+  hidden position_0_0 2357.371815226597
+  hidden position_0_1 2461.0324512134066
+  hidden translation_1 0 0.025999999999999374 0.02
+  hidden rotation_1 0 -1 0 5.105860272927579
+  hidden translation_2 0 -0.02599999999999922 0.02
+  hidden rotation_2 0 -0.9999999999999999 0 1.9761892009912962
+  translation 0.8203460015227108 0.41419725523565587 -6.022324471366067e-05
+  rotation -0.0007112268446914489 -0.0009196402894648841 -0.9999993242088282 1.3363388933254468
   name "e-puck(14)"
-  controller "tutorial_collision_avoidance"
+  controller "tutorial_collision_avoidance_7"
+  supervisor TRUE
+  version "2"
+}
+DEF ob14 E-puck {
+  hidden position_0_0 2357.371815226597
+  hidden position_0_1 2461.0324512134066
+  hidden translation_1 0 0.025999999999999194 0.02
+  hidden rotation_1 0 -1 0 5.105860272927579
+  hidden translation_2 0 -0.02599999999999918 0.02
+  hidden rotation_2 0 -0.9999999999999999 0 1.9761892009912962
+  translation -0.04322190618935273 -0.7090547510682195 -5.593456811471553e-05
+  rotation 0.0007688228516698287 -0.00016307390266695772 -0.9999996911591149 -2.7235693231162488
+  name "e-puck(15)"
+  controller "tutorial_collision_avoidance_8"
+  supervisor TRUE
+  version "2"
+}
+DEF ob15 E-puck {
+  hidden position_0_0 2357.371815226597
+  hidden position_0_1 2461.0324512134066
+  hidden translation_1 0 0.025999999999999034 0.02
+  hidden rotation_1 0 -1 0 5.105860272927579
+  hidden translation_2 0 -0.025999999999999013 0.02
+  hidden rotation_2 0 -0.9999999999999999 0 1.9761892009912962
+  translation -0.08424371781120066 0.11785143582391913 -5.592574529534461e-05
+  rotation -0.0008967732188995 0.0011840177384402828 0.999998896949286 1.296440911071076
+  name "e-puck(16)"
+  controller "tutorial_collision_avoidance_9"
+  supervisor TRUE
+  version "2"
+}
+DEF ob16 E-puck {
+  hidden translation_1 0 0.025999999999999284 0.02
+  hidden rotation_1 0 -1 0 0.7871779235091168
+  hidden translation_2 0 -0.025999999999998788 0.02
+  hidden rotation_2 0 1 0 1.1535753954492522
+  translation 0.7621464817313697 -0.423757198725203 -5.595349248955529e-05
+  rotation -0.00034564263086943895 -0.006178622565287222 0.9999808523938684 -0.11176494847069662
+  name "e-puck(17)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob17 E-puck {
+  hidden translation_1 0 0.025999999999999333 0.02
+  hidden rotation_1 0 -0.9999999999999999 0 0.22256725246461337
+  hidden translation_2 0 -0.02599999999999941 0.02
+  hidden rotation_2 0 1 0 6.005819296627728
+  translation 0.6784515876874931 0.08374661059355927 -5.59292269201872e-05
+  rotation -0.000848398495010673 0.0004968923054291519 0.9999995166588983 2.0819449692491934
+  name "e-puck(18)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob18 E-puck {
+  hidden translation_1 0 0.02599999999999955 0.02
+  hidden rotation_1 0 1 0 0.683512660797274
+  hidden translation_2 0 -0.025999999999999152 0.02
+  hidden rotation_2 0 -1 0 0.46982783991632776
+  translation 0.7671230702540047 -0.8200182673500255 -5.593524888283276e-05
+  rotation -0.0007434792471728853 -0.0015757084046573997 0.9999984821896645 -0.8817290821573929
+  name "e-puck(19)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob19 E-puck {
+  hidden translation_1 0 0.02599999999999989 0.02
+  hidden rotation_1 0 -1 0 4.66073555246961
+  hidden translation_2 0 -0.0259999999999992 0.02
+  hidden rotation_2 0 1 0 2.9878263468789132
+  translation 0.40784269707857007 0.02660265765382201 -5.592920736244983e-05
+  rotation -0.0008415508072097161 0.00044920984654311447 -0.9999995450012727 -2.160971994274731
+  name "e-puck(20)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob20 E-puck {
+  hidden translation_1 0 0.02599999999999947 0.02
+  hidden rotation_1 0 1 0 4.269301014669509
+  hidden translation_2 0 -0.025999999999999374 0.02
+  hidden rotation_2 0 0.9999999999999999 0 1.585437562342573
+  translation -0.3924152980193779 0.37336750354664106 -5.592634365688548e-05
+  rotation 0.0008865875900294655 0.00018281675322156214 -0.999999590270156 2.7348884316776183
+  name "e-puck(21)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob21 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.02599999999999966 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999763 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation 0.26022900537228055 -0.7054074473556003 -5.595693846663016e-05
+  rotation -0.0001615385875513403 2.0354859190849766e-05 0.9999999867454821 2.890891759191484
+  name "e-puck(22)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob22 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.02599999999999966 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999763 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.8079720595201069 0.7360659051350612 -5.5996069993990635e-05
+  rotation 4.476978042654006e-05 2.1464448286670432e-05 0.9999999987674721 -2.2448653777494476
+  name "e-puck(23)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob23 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.02599999999999966 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999763 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation 0.3820109064677534 -0.4636535504028449 -5.595725614504325e-05
+  rotation -0.00015798284753687624 0.0003083068049199937 0.9999999399941651 0.9470691319650564
+  name "e-puck(24)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob24 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.02599999999999966 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999763 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation 0.30462526088236747 -0.6221719967444536 -5.593604847656253e-05
+  rotation 0.0007320342794859345 -0.00010496325945624436 -0.9999997265542265 -2.856765280700029
+  name "e-puck(25)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob25 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999576 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999513 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.06582295522517871 -0.13323344869232168 -5.5957804507214895e-05
+  rotation 3.46732890685394e-05 -1.5552092663468623e-05 -0.9999999992779478 -2.298338080609655
+  name "e-puck(26)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob26 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.02599999999999936 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.02599999999999961 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.10451693746191898 -0.42617713038415983 -5.594983370985768e-05
+  rotation 0.0004414851525672351 -0.0007145090816939089 -0.999999647283754 -1.106936332490731
+  name "e-puck(27)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob27 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999825 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999367 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.28012611346150706 -0.7998744325896635 -5.595474628489715e-05
+  rotation 0.00030095420756098937 -8.725988527499849e-05 0.9999999509061375 2.5771756528842285
+  name "e-puck(28)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob28 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999638 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999846 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.16202662363766857 -0.8376113502969204 -5.595110662171866e-05
+  rotation -0.00040655666203158225 6.513441555448301e-05 -0.9999999152345908 -2.823871393310199
+  name "e-puck(29)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob29 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999236 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999367 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation 0.5335511641038476 0.6388689036711144 -5.594073544171012e-05
+  rotation -0.0006634186378094254 0.0028753062495425244 -0.9999956462353634 -0.45352357413477584
+  name "e-puck(30)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob30 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999353 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999763 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.20444357714855835 0.2563649644894046 -5.592709956192543e-05
+  rotation -0.000877292264085741 0.0011322439615868672 0.9999989741904213 1.3184025156184982
+  name "e-puck(31)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob31 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999458 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999374 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.6165136584281339 -0.04971799435681082 -5.59460817562505e-05
+  rotation -0.0005364665949787095 0.00031609537251080276 -0.999999806143635 -2.076689637940545
+  name "e-puck(32)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob32 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999513 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999513 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation 0.10674508061567295 -0.2731598126313262 -5.5940962154410814e-05
+  rotation 0.0006592084818030184 -0.002026887262626551 0.9999977285835214 0.628885321253576
+  name "e-puck(33)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob33 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999895 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.02599999999999979 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.5220052772978624 -0.41595976171635557 -5.593522391720944e-05
+  rotation 0.0007439250227991048 -0.0002112034908615346 -0.9999997009842783 -2.588342182874075
+  name "e-puck(34)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob34 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999922 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.0259999999999999 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation 0.896373995508556 0.6776676371182386 -5.5957159073886584e-05
+  rotation 0.00016100482703657875 0.00010124912739567722 0.99999998191303 -2.0188592691542357
+  name "e-puck(35)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob35 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999964 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.026000000000000027 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.4212679214571673 0.7034335243714643 -5.5926309048326406e-05
+  rotation -0.0008861606239573154 -0.0015556133438752178 0.9999983973919522 -1.0356154172044993
+  name "e-puck(36)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob36 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.02599999999999988 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.02599999999999995 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation 0.045035081758508254 0.32362519373549853 -5.5948102872573416e-05
+  rotation 0.0004741430397794317 -0.0010443011834806479 0.9999993423114916 0.8523984374237344
+  name "e-puck(37)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob37 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999916 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999735 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.4246480727135935 0.06644728599042156 -5.595799270335933e-05
+  rotation -7.382822093151978e-05 4.4639897852439245e-05 0.9999999962783366 2.0539195487800757
+  name "e-puck(38)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob38 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.0259999999999999 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.02599999999999997 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.6542286878450465 0.7334132681846298 -5.596523480730538e-05
+  rotation 4.9499049808745786e-05 0.0008280770063616103 -0.9999996559190986 0.11934400913435446
+  name "e-puck(39)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
+}
+DEF ob39 E-puck {
+  hidden position_0_0 3043.4053633117232
+  hidden position_0_1 2915.8430061004346
+  hidden translation_1 0 0.025999999999999832 0.02
+  hidden rotation_1 0 1 0 2.3436746368033945
+  hidden translation_2 0 -0.025999999999999992 0.02
+  hidden rotation_2 0 0.9999999999999999 0 0.44502356910652424
+  translation -0.5349329260006822 -0.8666859410282095 -5.595083387787553e-05
+  rotation -0.00043511248843233844 0.002277530473409153 0.999997311762419 0.37754192355201704
+  name "e-puck(40)"
+  controller "tutorial_collision_avoidance_10"
+  supervisor TRUE
+  version "2"
 }

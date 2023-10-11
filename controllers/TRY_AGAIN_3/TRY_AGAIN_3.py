@@ -1,6 +1,6 @@
 GOAL_X = 0
 GOAL_Y = 0 
-COLLISION_R = 15
+COLLISION_R = 20
 MAX_SPEED = 6.28
 MAX_FRAME = 3
 STATE_SIZE = 30
@@ -14,7 +14,7 @@ MAX_LENGHT = 0.9
 MIN_DISTANCE = 0.20
 NORMALIZATION_SENSOR = 100 
 OBSTACLE_COUNT = 20
-MODIFY_NUM = 0
+MODIFY_NUM = 11
 MODEL_NAME = "TRY_AGAIN_3"
 
 import os
@@ -26,6 +26,7 @@ import matplotlib.pyplot as plt
 from dqn_agent import DqnAgent
 from replay_buffer import ReplayBuffer
 from controller import Supervisor
+import openpyxl
 
 # 1. 초기 세팅
 robot = Supervisor()
@@ -71,7 +72,7 @@ DAY_NUM = str(datetime.date.today())
 goal = [GOAL_X,GOAL_Y,0]
 
 # 2. 함수    
-# 2-1. one frame get
+# 2-1. one frame get1
 def environment():
     # 2-1-1. location get
     ep = translation_field.value
@@ -185,8 +186,8 @@ def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):            
-            if (action == 4
-            or action == 5
+            if (action == 0
+            or action == 1
             or i == 3
             or i == 4):
                 continue
@@ -277,6 +278,17 @@ def createDirectory(directory):
         print("Error: Failed to create the directory.")
         
         
+def reward_data_save():
+    global reward_data
+    # 엑셀 워크북 생성
+    workbook = openpyxl.Workbook()
+    # 워크북의 첫 번째 시트 선택 (기본 시트)
+    sheet = workbook.active
+    for name in reward_data:
+        sheet.append([name])
+    workbook.save(f"data/{DAY_NUM}/reward_data.xlsx")
+    
+        
 # 3. Train
 for episode_cnt in range(1,MAX_EPISODE):
     # 3-1. one experience
@@ -338,17 +350,18 @@ for episode_cnt in range(1,MAX_EPISODE):
                 if episode_cnt % TARGET_NETWORK_CYCLE == 0:
                     agent.update_target_network()
                 break
-                
+
 # 4. 결과 저장
 createDirectory(f"data")
 createDirectory(f"data/{DAY_NUM}")
 buffer.save_replay_memory()
+reward_data_save()
 
 # 4-1. loss graph
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
 loss_max = np.max(loss_data)
-plt.ylim([loss_min-0.01, 4 + 0.01])
+plt.ylim([loss_min-0.01, loss_max + 0.01])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")

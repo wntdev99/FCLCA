@@ -1,0 +1,334 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/pipes/protos/PipeSection.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.5773502691896258 -0.5773502691896258 -0.5773502691896258 4.188785307179587
+  position -7.912668424694677e-06 -7.912690792938124e-06 4.98421946504625
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  translation -0.80571 -0.895536 -0.000340516
+  rotation 0.001298336141112797 -0.0016252123667122385 0.9999978365016736 1.3982290455650674
+  controller "CL_TEST_8_action 5"
+  supervisor TRUE
+}
+Wall {
+  translation 0 -0.45 0
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0 0.45 0
+  name "wall(14)"
+  size 0.1 0.6 0.2
+}
+PipeSection {
+  translation -0.76 -0.75 0
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.76 -0.16 0
+  name "pipe section(9)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.57 -0.16 0
+  name "pipe section(10)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.38 -0.16 0
+  name "pipe section(11)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.19 -0.16 0
+  name "pipe section(12)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0 -0.16 0
+  name "pipe section(13)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.19 -0.16 0
+  name "pipe section(14)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.38 -0.16 0
+  name "pipe section(15)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.57 -0.16 0
+  name "pipe section(16)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.76 -0.16 0
+  name "pipe section(17)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.76 0.15 0
+  name "pipe section(18)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.57 0.15 0
+  name "pipe section(19)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.38 0.15 0
+  name "pipe section(20)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.19 0.15 0
+  name "pipe section(21)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0 0.15 0
+  name "pipe section(22)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.19 0.15 0
+  name "pipe section(23)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.38 0.15 0
+  name "pipe section(24)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.57 0.15 0
+  name "pipe section(25)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.76 0.15 0
+  name "pipe section(26)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.76 0.75 0
+  name "pipe section(27)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.57 0.75 0
+  name "pipe section(28)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.19 0.75 0
+  name "pipe section(30)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0 0.75 0
+  name "pipe section(31)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.19 0.75 0
+  name "pipe section(32)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.38 0.75 0
+  name "pipe section(33)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.57 0.75 0
+  name "pipe section(34)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.76 0.75 0
+  name "pipe section(35)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.38 0.75 0
+  name "pipe section(29)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.57 -0.75 0
+  name "pipe section(1)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.38 -0.75 0
+  name "pipe section(2)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation -0.19 -0.75 0
+  name "pipe section(3)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0 -0.75 0
+  name "pipe section(4)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.19 -0.75 0
+  name "pipe section(5)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.38 -0.75 0
+  name "pipe section(6)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.57 -0.75 0
+  name "pipe section(7)"
+  height 0.4
+  radius 0.05
+}
+PipeSection {
+  translation 0.76 -0.75 0
+  name "pipe section(8)"
+  height 0.4
+  radius 0.05
+}
+Wall {
+  translation 0.19 -0.45 0
+  name "wall(1)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0.19 0.45 0
+  name "wall(9)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.19 -0.45 0
+  name "wall(5)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.19 0.45 0
+  name "wall(10)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0.38 -0.45 0
+  name "wall(2)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0.38 0.45 0
+  name "wall(11)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.38 -0.45 0
+  name "wall(6)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.38 0.45 0
+  name "wall(12)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.57 -0.45 0
+  name "wall(3)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.57 0.45 0
+  name "wall(13)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0.57 -0.45 0
+  name "wall(7)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0.57 0.45 0
+  name "wall(15)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.76 -0.45 0
+  name "wall(4)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation -0.76 0.45 0
+  name "wall(17)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0.76 -0.45 0
+  name "wall(8)"
+  size 0.1 0.6 0.2
+}
+Wall {
+  translation 0.76 0.45 0
+  name "wall(16)"
+  size 0.1 0.6 0.2
+}

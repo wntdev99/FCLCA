@@ -179,8 +179,8 @@ def collision_check():
     global set_count 
     for j in range(MAX_FRAME):
         for i in range(INPUT_SENSOR):            
-            if (action == 4
-            or action == 5
+            if (action == 0
+            or action == 1
             or i == 3
             or i == 4):
                 continue
@@ -342,7 +342,7 @@ buffer.save_replay_memory()
 x_data = list(range(len(loss_data)))
 loss_min = np.min(loss_data)
 loss_max = np.max(loss_data)
-plt.ylim([loss_min-0.01, 4 + 0.01])
+plt.ylim([loss_min-0.01, loss_max + 0.01])
 plt.xlabel('Epoche')
 plt.ylabel('Loss')
 plt.plot(x_data,loss_data,c='red',label = "loss")

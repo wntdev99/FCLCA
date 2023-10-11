@@ -1,12 +1,13 @@
-CL_MODEL = "TRY_AGAIN_0_0"
-CL_KIND = f"{CL_MODEL}_TEST_EASY"
-TEST_COUNT = 10
+CL_MODEL = "NO_CL_1_0"
+CL_KIND = f"{CL_MODEL}_TEST_GAP_8"
+TEST_COUNT = 100
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
 NORMALIZATION_SENSOR = 100
 MAX_SPEED = 6.28
-COLLISION_R = 10
-Time_Out = 1000
+COLLISION_R = 20
+Time_Out = 3000
+TARGET_D = 0.1
 
 from controller import Supervisor
 import matplotlib.pyplot as plt
@@ -280,7 +281,7 @@ while robot.step(timestep) != -1:
         collision_check()
         trajectory.append(list(translation_field.value[0:2]))
         for i in range(3):
-            if state[i * INPUT_SIZE] < 0.1:
+            if state[i * INPUT_SIZE] < TARGET_D:
                 trajectories.append(np.array(trajectory))
                 trajectory = []
                 result_done.append(1)

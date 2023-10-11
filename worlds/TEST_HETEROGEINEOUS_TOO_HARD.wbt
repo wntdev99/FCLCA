@@ -1,0 +1,436 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/pipes/protos/PipeSection.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.5773502691896258 -0.5773502691896258 -0.5773502691896258 4.188785307179587
+  position -8.422559928694805e-06 -8.422583750833143e-06 4.908469437684223
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 4 4
+}
+DEF e-puck E-puck {
+  hidden position_0_0 37195.839750813924
+  hidden position_0_1 36216.95523504655
+  hidden linearVelocity_0 -0.0009876044696071479 -0.0004601675465231436 0.0003560588435040095
+  hidden angularVelocity_0 0.005369172830426086 0.01666835890058319 0.012242460548353318
+  hidden translation_1 0 0.025999999999999225 0.02
+  hidden rotation_1 0 1 0 0.32723283634377753
+  hidden linearVelocity_1 0.0006955802981409203 0.00018163395963455026 0.0005256260761790152
+  hidden angularVelocity_1 -0.008481331738206487 0.034281246509196 0.005135873755174991
+  hidden translation_2 0 -0.025999999999998673 0.02
+  hidden rotation_2 0 1 0 5.632941379374875
+  hidden linearVelocity_2 -0.0011625195062007765 -0.00282514901615899 0.0007515442691714703
+  hidden angularVelocity_2 -4.856975608835834 -3.959550943535017 0.059527290282498146
+  translation 0.2501583803458815 0.22003087402713986 -0.00016149696642645157
+  rotation -0.0009434160585672593 0.0011240370238050329 0.9999989232528751 2.2373304999027823
+  controller "CL_TEST_8_action 5"
+  supervisor TRUE
+}
+DEF ob0 PipeSection {
+  translation -0.09 0.45 0
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.55 0.51 0
+  name "pipe section(4)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.28 0.7 0
+  name "pipe section(1)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.59 0.02 0
+  name "pipe section(2)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.34 0.29 0
+  name "pipe section(3)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.57 0.47 0
+  name "pipe section(5)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.36 0.51 0
+  name "pipe section(34)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.36 0.08 0
+  name "pipe section(35)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.18 0.13 0
+  name "pipe section(64)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.07 -0.49 0
+  name "pipe section(36)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.05 -0.77 0
+  name "pipe section(37)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.4 0.81 0
+  name "pipe section(38)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.77 0.41 0
+  name "pipe section(59)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.63 0.69 0
+  name "pipe section(39)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.57 0.86 0
+  name "pipe section(65)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.39 0.61 0
+  name "pipe section(58)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.36 0.16 0
+  name "pipe section(6)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.14 0.05 0
+  name "pipe section(60)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.59 -0.23 0
+  name "pipe section(7)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.49 0.33 0
+  name "pipe section(8)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.7 0.36 0
+  name "pipe section(57)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.81 0.15 0
+  name "pipe section(40)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.81 0.78 0
+  name "pipe section(41)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.1 0.84 0
+  name "pipe section(42)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.16 0.84 0
+  name "pipe section(43)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.43 0.84 0
+  name "pipe section(44)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.82 0.84 0
+  name "pipe section(45)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.82 0.59 0
+  name "pipe section(46)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.82 0.04 0
+  name "pipe section(47)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.82 -0.39 0
+  name "pipe section(48)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.82 -0.7 0
+  name "pipe section(49)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.59 -0.8 0
+  name "pipe section(50)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.24 -0.85 0
+  name "pipe section(51)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.33 -0.76 0
+  name "pipe section(52)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.63 -0.75 0
+  name "pipe section(53)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.81 -0.64 0
+  name "pipe section(54)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.81 -0.36 0
+  name "pipe section(56)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.81 -0.13 0
+  name "pipe section(55)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.29 -0.48 0
+  name "pipe section(9)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.29 -0.09 0
+  name "pipe section(10)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.08 -0.34 0
+  name "pipe section(11)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.06 -0.15 0
+  name "pipe section(63)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.4 -0.48 0
+  name "pipe section(12)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.28 -0.13 0
+  name "pipe section(13)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.2 0.68 0
+  name "pipe section(14)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.16 -0.59 0
+  name "pipe section(15)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.63 -0.21 0
+  name "pipe section(16)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.84 -0.17 0
+  name "pipe section(62)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.41 -0.27 0
+  name "pipe section(17)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.16 0.49 0
+  name "pipe section(18)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.03 0.7 0
+  name "pipe section(19)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.59 0.7 0
+  name "pipe section(20)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.67 0.24 0
+  name "pipe section(21)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.67 -0.55 0
+  name "pipe section(22)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.41 -0.7 0
+  name "pipe section(23)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.14 -0.7 0
+  name "pipe section(24)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.47 -0.6 0
+  name "pipe section(25)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.59 0.15 0
+  name "pipe section(26)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.53 -0.04 0
+  name "pipe section(61)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.81 0.56 0
+  name "pipe section(27)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.64 -0.47 0
+  name "pipe section(28)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.38 -0.28 0
+  name "pipe section(29)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.29 0.43 0
+  name "pipe section(30)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.15 0.25 0
+  name "pipe section(31)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation 0.07 0.28 0
+  name "pipe section(32)"
+  height 0.2
+  radius 0.05
+}
+DEF ob0 PipeSection {
+  translation -0.15 -0.25 0
+  name "pipe section(33)"
+  height 0.2
+  radius 0.05
+}

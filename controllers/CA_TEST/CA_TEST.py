@@ -3,9 +3,9 @@ CL_KIND = f"{CL_MODEL}_TEST_EASY"
 TEST_COUNT = 10
 INPUT_SENSOR = 8
 INPUT_SIZE = 10
-NORMALIZATION_SENSOR = 1
+NORMALIZATION_SENSOR = 100
 MAX_SPEED = 6.28
-COLLISION_R = 600
+COLLISION_R = 6
 Time_Out = 100000
 
 from controller import Supervisor
@@ -144,7 +144,7 @@ def Action(action):
     elif action == 2:
         left_motor.setVelocity(-MAX_SPEED)
         right_motor.setVelocity(MAX_SPEED)
-
+    
         
 # 0.3925
 # 2-4. state get
@@ -240,6 +240,7 @@ while robot.step(timestep) != -1:
         count_state = 0  
         # 현 state 가져오기.    
         state = np.array(storage)
+
         #print("state : ",state)
         # storage 초기화 하고
         storage = []
